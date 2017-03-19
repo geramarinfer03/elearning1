@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/principalLTE.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('css/_all-skins.css')}}">
@@ -34,12 +34,39 @@
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Navegación</span>
-          </a>
-          <!-- Navbar Right Menu -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          @if (1 === 1) <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          @endif
+          <a class="navbar-brand" href="#">E learning</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
@@ -47,9 +74,7 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <small class="bg-red">Conectado</small>
-
-                  <!-- El nombre de usuario se pasa por parametro-->
+                                  <!-- El nombre de usuario se pasa por parametro-->
                   <span class="hidden-xs">Nombre Usuario</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -75,9 +100,22 @@
             </ul>
           </div>
 
-        </nav>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+      
+
+
+
+
       </header>
+
+      <div>
       <!-- Left side column. contains the logo and sidebar -->
+     @if (1 === 1)
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -149,14 +187,15 @@
         </section>
         <!-- /.sidebar -->
       </aside>
-
+      @endif
 
 
 
 
        <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+
+      <div @if (1 === 1) class="content-wrapper" @else class="contenido2" @endif>
         
         <!-- Main content -->
         <section class="content">
@@ -174,16 +213,16 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <div class="row">
-                      <div class="col-md-12">
-                              <!--Contenido-->
+                  	<div class="row">
+	                  	<div class="col-md-12">
+		                          <!--Contenido-->
                               @yield('contenido')
-                              <!--Fin Contenido-->
+		                          <!--Fin Contenido-->
                            </div>
                         </div>
-                        
-                      </div>
-                    </div><!-- /.row -->
+		                    
+                  		</div>
+                  	</div><!-- /.row -->
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
@@ -192,7 +231,12 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <!--Fin-Contenido-->
-      <footer class="main-footer">
+
+      <footer class= @if (1 === 1) "main-footer" 
+                    @else
+                                   "main-footer" 
+
+      @endif>
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0.0
         </div>

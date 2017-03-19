@@ -1,5 +1,61 @@
-@extends('layouts.admin')
+@extends('layouts.principal')
 
-@section('content')
-	<h2>hola </h2>
+@section('contenido')
+	<p>lalalala</p>
+	<h2>hola</h2>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<br>
+	<br>
+	<br>
+		<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	<br>
+	<br>
+	<br>
+		<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	<br>
+	<br>
+	<br>
+		<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	<br>
+	<br>
+	<br>
+		<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	<br>
+	<br>
+	<br>
 @endsection

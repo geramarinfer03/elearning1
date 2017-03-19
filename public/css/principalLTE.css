@@ -2,7 +2,7 @@
 /*!
  *   AdminLTE v2.3.0
  *   Author: Almsaeed Studio
- *   Website: Almsaeed Studio <http://almsaeedstudio.com>
+ *	 Website: Almsaeed Studio <http://almsaeedstudio.com>
  *   License: Open source - MIT
  *           Please visit http://opensource.org/licenses/MIT for more information
 !*/
@@ -25,6 +25,9 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
+}
+.principalW{
+  width: 100%;
 }
 /* Layout */
 .wrapper {
@@ -55,8 +58,7 @@ body {
  * ```.right-side has been deprecated as of v2.0.0 in favor of .content-wrapper  ```
  */
 .content-wrapper,
-.right-side,
-.main-footer {
+.right-side{
   -webkit-transition: -webkit-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
   -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
   -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
@@ -64,13 +66,26 @@ body {
   margin-left: 230px;
   z-index: 820;
 }
+
+.main-footer{
+    -webkit-transition: -webkit-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  margin-left: 50px;
+
+  z-index: 820;
+
+} 
 .layout-top-nav .content-wrapper,
+.layout-top-nav .contenido2,
 .layout-top-nav .right-side,
 .layout-top-nav .main-footer {
   margin-left: 0;
 }
 @media (max-width: 767px) {
   .content-wrapper,
+  .contenido2,
   .right-side,
   .main-footer {
     margin-left: 0;
@@ -78,6 +93,7 @@ body {
 }
 @media (min-width: 768px) {
   .sidebar-collapse .content-wrapper,
+  .sidebar-collapse .contenido2,
   .sidebar-collapse .right-side,
   .sidebar-collapse .main-footer {
     margin-left: 0;
@@ -85,6 +101,7 @@ body {
 }
 @media (max-width: 767px) {
   .sidebar-open .content-wrapper,
+  .sidebar-open .contenido2,
   .sidebar-open .right-side,
   .sidebar-open .main-footer {
     -webkit-transform: translate(230px, 0);
@@ -94,10 +111,12 @@ body {
   }
 }
 .content-wrapper,
+.contenido2,
 .right-side {
   min-height: 100%;
   background-color: #ecf0f5;
   z-index: 800;
+  margin-top: 50px;
 }
 .main-footer {
   background: #fff;
@@ -117,11 +136,13 @@ body {
   left: 0;
 }
 .fixed .content-wrapper,
+.fixed .contenido2,
 .fixed .right-side {
   padding-top: 50px;
 }
 @media (max-width: 767px) {
   .fixed .content-wrapper,
+  .fixed .contenido2,
   .fixed .right-side {
     padding-top: 100px;
   }
@@ -130,6 +151,7 @@ body {
   max-width: 100%;
 }
 body.hold-transition .content-wrapper,
+body.hold-transition .contenido2,
 body.hold-transition .right-side,
 body.hold-transition .main-footer,
 body.hold-transition .main-sidebar,
@@ -299,6 +321,7 @@ a:focus {
   padding: 0 15px;
   font-weight: 300;
   overflow: hidden;
+      position: fixed;
 }
 .main-header .logo .logo-lg {
   display: block;
@@ -417,11 +440,11 @@ a:focus {
  
 .main-sidebar,
 .left-side {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   padding-top: 50px;
-  min-height: 100%;
+  /*min-height: 100%;*/
   width: 230px;
   z-index: 810;
   -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
@@ -584,6 +607,7 @@ a:focus {
  */
 @media (min-width: 768px) {
   .sidebar-mini.sidebar-collapse .content-wrapper,
+  .sidebar-mini.sidebar-collapse .contenido2,
   .sidebar-mini.sidebar-collapse .right-side,
   .sidebar-mini.sidebar-collapse .main-footer {
     margin-left: 50px!important;
@@ -719,9 +743,10 @@ a:focus {
 }
 @media (min-width: 768px) {
   .control-sidebar-open .content-wrapper,
+  .control-sidebar-open .contenido2,
   .control-sidebar-open .right-side,
   .control-sidebar-open .main-footer {
-    margin-right: 230px;
+    margin-right: 0px;
   }
 }
 .nav-tabs.control-sidebar-tabs > li:first-of-type > a,
@@ -1223,6 +1248,10 @@ a:focus {
   }
   .navbar-custom-menu > .navbar-nav > li {
     position: static;
+        width: 50px;
+       height: 50px;
+       margin-bottom: 5px;
+        background-image: url(../img/perfil_mini.png);
   }
   .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
     position: absolute;
@@ -4698,6 +4727,7 @@ table.text-center th {
     display: none!important;
   }
   .content-wrapper,
+  .contenido2,
   .right-side,
   .main-footer {
     margin-left: 0!important;
@@ -4708,6 +4738,7 @@ table.text-center th {
     transform: translate(0, 0) !important;
   }
   .fixed .content-wrapper,
+  .fixed .contenido2,
   .fixed .right-side {
     padding-top: 0!important;
   }
