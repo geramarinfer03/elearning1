@@ -36,7 +36,7 @@
         <!-- Header Navbar: style can be found in header.less -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+      <div class="container1">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -44,7 +44,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          @if (1 === 1) <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          @if (1 === 2) <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
           @endif
           <a class="navbar-brand" href="#">E learning</a>
         </div>
@@ -115,7 +115,7 @@
 
       <div>
       <!-- Left side column. contains the logo and sidebar -->
-     @if (1 === 1)
+     @if (1 === 2)
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -195,7 +195,7 @@
        <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
 
-      <div @if (1 === 1) class="content-wrapper" @else class="contenido2" @endif>
+      <div @if (1 === 2) class="content-wrapper" @else class="contenido2" @endif>
         
         <!-- Main content -->
         <section class="content">
@@ -205,11 +205,11 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">Titulo 1</h3>
-                  <div class="box-tools pull-right">
+                 <!-- <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
+                  </div> -->
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

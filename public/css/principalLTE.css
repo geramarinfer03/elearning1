@@ -1245,6 +1245,7 @@ a:focus {
 @media (max-width: 991px) {
   .navbar-custom-menu > .navbar-nav {
     float: right;
+    font-size: 0px;
   }
   .navbar-custom-menu > .navbar-nav > li {
     position: static;
