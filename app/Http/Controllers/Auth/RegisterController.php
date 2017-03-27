@@ -7,6 +7,10 @@ use elearning1\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
+use Session;
+
 class RegisterController extends Controller
 {
     /*
@@ -34,10 +38,62 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('guest');
     }
+    */
+    public function __construct(Guard $auth){
+        $this->auth = $auth;
+        $this->middleware('guest', ['except' => 'getLogout']);
+      
+    }
+
+
+    protected function showRegistrationForm(){
+        return view("registro");
+    }
+
+    protected function register(Request $request){
+       // dd($request->all());
+        $this->validate($request, [
+            'nombre' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+
+        $data = $request;
+
+
+        $user=new User;
+        $user->nombre         =$data['nombre'];
+        $user->email          =$data['email'];
+        $user->password       =bcrypt($data['password']);
+        $user->genero         =$data['genero'];
+        $user->rol            =5;  
+        $user->pais           =$data['pais'];
+        $user->ip             =$data['ip'];
+        $user->os             =$data['os'];
+        $user->navegador      =$data['navegador'];
+        $user->lenguaje       =$data['lenguaje'];
+
+
+
+        if($user->save()){
+
+             return "se ha registrado correctamente el usuario";
+               
+        }
+
+        return "EROOR ERROR ERROR BIP BIP BIP BIP";
+   
+
+   
+
+    }
+
+
 
     /**
      * Get a validator for an incoming registration request.

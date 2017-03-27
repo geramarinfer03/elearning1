@@ -163,7 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 	    Collective\Html\HtmlServiceProvider::class,
-
+        CountryList\CountryListServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -229,7 +229,7 @@ return [
 		'Form' => Collective\Html\FormFacad::class,
 		'Html' => Collective\Html\HtmlFacad::class,
 		'Input' => Iluminate\Support\Facades\Input::class,
-
+        'CountryList' => CountryList\Facades\CountryListFacade::class,
 
     ],
 

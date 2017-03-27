@@ -67,10 +67,17 @@
             </li>
           </ul>
 
+
           <div class="navbar-custom-menu">
+
+
+
+  
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
-              
+ @if (1 === 2)        
+
+             
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -96,10 +103,24 @@
                   </li>
                 </ul>
               </li>
-              
+ @endif   <!-- este bloque hace lo de la caja de usurio -- >
+
+             <!-- BLOQUE LOGIN Y REGISTRO -->   
+                
+                <li>
+                <a href="login">Login</a>
+                </li>
+
+                <li>
+                <a href="registrarse">Registrarse</a>
+                </li>
+
+
             </ul>
           </div>
 
+
+  
 
         </div><!--/.nav-collapse -->
       </div>
