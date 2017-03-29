@@ -2,8 +2,14 @@
 
 namespace elearning1\Http\Controllers\Auth;
 
+use elearning1\User;
+use Validator;
 use elearning1\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
+use Session;
 
 class LoginController extends Controller
 {
@@ -32,8 +38,42 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest', ['except' => 'logout']);
+    
+    public function __construct(Guard $auth){
+        $this->auth = $auth;
+        $this->middleware('guest', ['except' => 'getLogout']);
+        return view('/');
+      
     }
+
+    protected function showLoginForm(){
+        return view("login");
+    }
+
+       
+
+    public function login(Request $request){
+        //dd($request->all());
+
+        $this->validate($request, [
+        'email' => 'required',
+        'password' => 'required',
+         ]);
+
+        $credentials = $request->only('email', 'password');
+
+   
+
+        if ($this->auth->attempt($credentials, $request->has('remember')))
+        {
+            $usuarioactual=\Auth::user();
+          /* return view('/principal/index')->with("usuario",  $usuarioactual);*/
+           return "credenciales CORRECTAS";
+        }
+
+        return "credenciales incorrectas";
+
+        }
+        
+
 }
