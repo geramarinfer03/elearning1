@@ -42,7 +42,7 @@ class LoginController extends Controller
     public function __construct(Guard $auth){
         $this->auth = $auth;
         $this->middleware('guest', ['except' => 'getLogout']);
-        return view('/');
+        return view('/home');
       
     }
 
@@ -68,7 +68,7 @@ class LoginController extends Controller
         {
             $usuarioactual=\Auth::user();
           /* return view('/principal/index')->with("usuario",  $usuarioactual);*/
-           return "credenciales CORRECTAS";
+           return view('/home');
         }
 
         return "credenciales incorrectas";

@@ -41,7 +41,12 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
 
-	Route::get('/', 'PagesController@home');
+	Route::get('/home', 'PagesController@home');
 
 
 });
+
+/* ------ Cursos rutas ------------------- */
+Route::get('cursos', 'CursoController@index');
+Route::get('cursos_create', 'CursoController@create');
+Route::post('cursos_store', 'CursoController@store');
