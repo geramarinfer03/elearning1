@@ -71,7 +71,7 @@
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li> -->
-            <li><a href="#about">Cursos</a></li>
+            <li><a href="/cursos">Cursos</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             

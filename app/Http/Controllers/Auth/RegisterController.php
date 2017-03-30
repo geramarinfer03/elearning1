@@ -107,7 +107,7 @@ class RegisterController extends Controller
 
             /*Auth::user() = $user;*/
            /* return $user;*/
-            return view('/login');
+            return view('/auth.login');
 
                
         }
