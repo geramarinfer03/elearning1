@@ -49,23 +49,44 @@ class RegisterController extends Controller
       
     }
 
+        /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(Request $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:Usuario',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+
+    }
 
     protected function showRegistrationForm(){
         return view("registro");
     }
 
-    protected function register(Request $request){
-       // dd($request->all());
-        $this->validate($request, [
+    protected function register(Request $data){
+
+
+ 
+
+    /*protected function register(Request $request){
+       // dd($request->all());*/
+        $this->validate($data, [
             'nombre' => 'required',
             'email' => 'required',
             'password' => 'required',
         ]);
 
 
-        $data = $request;
+        /*$data = $request;
 
-
+*/
         $user=new User;
         $user->nombre         =$data['nombre'];
         $user->email          =$data['email'];
@@ -82,7 +103,12 @@ class RegisterController extends Controller
 
         if($user->save()){
 
-             return "se ha registrado correctamente el usuario";
+             //$user=\Auth::user();
+
+            /*Auth::user() = $user;*/
+           /* return $user;*/
+            return view('/login');
+
                
         }
 
@@ -95,20 +121,6 @@ class RegisterController extends Controller
 
 
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -116,12 +128,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    /*protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-    }
+    }*/
 }

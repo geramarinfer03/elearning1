@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/principalLTE.css')}}">
-    <link rel="stylesheet" href="{{asset('css/user_style.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('css/_all-skins.css')}}">
@@ -22,10 +21,7 @@
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
 
   </head>
-  <!--@php
-    $usuario = Auth::user();
-  @endphp -->
-  <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition skin-blue sidebar-mini">
 
 
     <div class="wrapper">
@@ -52,13 +48,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          @if (1 === 1) <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          @endif
-          <a class="navbar-brand" href="#">E learning</a>
+                    <a class="navbar-brand" href="#">E learning</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li class="active"><a href="">HOMEEEEE</a></li>
             <!--<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -84,38 +78,7 @@
 
   
             <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
-@unless (!Auth::check())
-             
-              <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                  <!-- El nombre de usuario se pasa por parametro-->
 
-                  <span class="hidden-xs">
-                  {{$usuario->email or 'Default'}}
-                  </span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    
-                    <p>
-                      Información del Usuario o algo ..
-                      <!--<small>mensaje pequeño</small> -->
-                    </p>
-                  </li>
-                  
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    
-                    <div class="pull-right">
-                      <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Desconectar</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
- @endunless   <!-- este bloque hace lo de la caja de usurio -- >
 
              <!-- BLOQUE LOGIN Y REGISTRO -->   
                 @unless (Auth::check())
@@ -149,12 +112,7 @@
       </header>
 
       <!-- Left side column. contains the logo and sidebar -->
-     <section>
-     @if ($usuario != null && $usuario->rol == 1)
-        @include('menus.menuAdmin');
-      @endif
-    </section>
-
+     
 
 
 
@@ -162,7 +120,7 @@
       <!-- Content Wrapper. Contains page content -->
 
       <!--<div @if (1 === 2) class="content-wrapper" @else class="contenido2" @endif> -->
-      <div @if (Auth::user() != null && $usuario->rol < 5) class="content-wrapper" @else class="contenido2" @endif>
+      <div class="contenido2">
         
         <!-- Main content -->
         <section class="content">
@@ -180,16 +138,16 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                  	<div class="row">
-	                  	<div class="col-md-12">
-		                          <!--Contenido-->
+                    <div class="row">
+                      <div class="col-md-12">
+                              <!--Contenido-->
                               @yield('contenido')
-		                          <!--Fin Contenido-->
+                              <!--Fin Contenido-->
                            </div>
                         </div>
-		                    
-                  		</div>
-                  	</div><!-- /.row -->
+                        
+                      </div>
+                    </div><!-- /.row -->
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
@@ -199,11 +157,7 @@
       </div><!-- /.content-wrapper -->
       <!--Fin-Contenido-->
 
-      <footer class= @if (1 === 1) "main-footer" 
-                    @else
-                                   "main-footer" 
-
-      @endif>
+      <footer class= "main-footer">
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0.0
         </div>

@@ -13,6 +13,7 @@
 html,
 body {
   min-height: 100%;
+  height: 100%;
 }
 .layout-boxed html,
 .layout-boxed body {
@@ -33,7 +34,8 @@ body {
 .wrapper {
   min-height: 100%;
   position: static;
-  overflow: hidden;
+  overflow: auto;
+  height: 100%;
 }
 .wrapper:before,
 .wrapper:after {
@@ -114,7 +116,8 @@ body {
 .contenido2,
 .right-side {
   min-height: 100%;
-  background-color: #ecf0f5;
+  /*background-color: #ecf0f5;*/
+  background-color: #ffffff;
   z-index: 800;
   margin-top: 50px;
 }
@@ -1551,11 +1554,12 @@ a:focus {
 .box {
   position: relative;
   border-radius: 3px;
+  height: 100%;
   background: #ffffff;
   border-top: 3px solid #d2d6de;
   margin-bottom: 20px;
   width: 100%;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);*/
 }
 .box.box-primary {
   border-top-color: #3c8dbc;

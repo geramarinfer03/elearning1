@@ -2,7 +2,10 @@
 
 namespace elearning1\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+
+use elearning1\User;
+
 
 class PagesController extends Controller
 {
@@ -11,8 +14,5 @@ class PagesController extends Controller
     	return view('principal.index');
     }
 
-     public function home(){
 
-    	return view('home');
-    }
 }

@@ -11,6 +11,9 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Session;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 class LoginController extends Controller
 {
     /*
@@ -31,8 +34,10 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
+
+    protected $redirectAfterLogout = '/';
     /**
      * Create a new controller instance.
      *
@@ -40,40 +45,94 @@ class LoginController extends Controller
      */
     
     public function __construct(Guard $auth){
-        $this->auth = $auth;
-        $this->middleware('guest', ['except' => 'getLogout']);
-        return view('/home');
+        //$usuarioactual= null;
+        //$usuarioactual=\Auth::user();
+        //$this->auth = $auth;
+        $this->middleware('guest', ['except' => 'logout']);
+        //return view('/home');
+    //   return view('/home')->with("usuario",$usuarioactual);
       
     }
 
-    protected function showLoginForm(){
-        return view("login");
+
+    public function username()
+    {
+        return 'email';
     }
+
+
+   //login
+
+       protected function showLoginForm()
+    {
+        return view("auth.login");
+    }
+
 
        
 
-    public function login(Request $request){
-        //dd($request->all());
+    /*public function login(Request $request){
 
-        $this->validate($request, [
-        'email' => 'required',
-        'password' => 'required',
-         ]);
 
-        $credentials = $request->only('email', 'password');
+      $credentials = $request->only('email', 'password');
 
-   
+       if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
 
-        if ($this->auth->attempt($credentials, $request->has('remember')))
-        {
-            $usuarioactual=\Auth::user();
-          /* return view('/principal/index')->with("usuario",  $usuarioactual);*/
-           return view('/home');
+            return $this->sendLockoutResponse($request);
         }
 
-        return "credenciales incorrectas";
 
-        }
+
+        if ($this->guard()->attempt($credentials, $request->has('remember')))
+    {
+
+        $usuarioactual=\Auth::user();
+       return view('home')->with("usuario",  $usuarioactual);
+    }
+       
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
+*/
+
+
+    /*$credentials = $request->only('email', 'password');
+
+    if ($this->auth->attempt($credentials, $request->has('remember')))
+    {
+
+        $usuarioactual=\Auth::user();
+       return view('home')->with("usuario",  $usuarioactual);
+    }
+
+    return "credenciales incorrectas";*/
+/*
+    }
+/*
+
+//login
+
+    /*protected function logout(){
+      /* $user = Auth::user(); 
+        Log::info('User Logged Out. ', [$user]);
+        Auth::logout();
+        Session::flush();
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');*/
+        /* $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/');
+       // return redirect('login');
+    }*/
+
         
-
+    
 }

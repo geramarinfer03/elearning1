@@ -39,9 +39,12 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('registrarse', ['as' => 'registrarse', 'uses' => 'Auth\RegisterController@register']);
 });
 
+// Authentication Routes
+//Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
-	Route::get('/home', 'PagesController@home');
+	Route::get('/home', 'IndexController@home');
+	Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
 
 });
