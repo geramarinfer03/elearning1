@@ -76,6 +76,12 @@
           </div>
 
           <div class="form-group has-feedback">
+                <label>Confirmar contraseña</label>
+            <input type="password" class="form-control" name="password_confirmation" required="required" >
+            <span class="fa fa-lock form-control-feedback"></span>
+          </div>
+
+          <div class="form-group has-feedback">
                 <label>Genero</label>
                 <select class="form-control" name="genero">
                   <option value="Masculino">Masculino</option>
@@ -115,6 +121,10 @@
               <button type="submit" class="btn btn-primary btn-block btn-flat">Registrar</button>
             </div><!-- /.col -->
           </div>
+
+          
+            @include('layouts.errors')
+ 
 
         </form>
 

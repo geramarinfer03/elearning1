@@ -52,7 +52,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          @if (1 === 1) <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          @if ($usuario != null && $usuario->rol->id_rol > 1)
+           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
           @endif
           <a class="navbar-brand" href="#">E learning</a>
         </div>
@@ -80,7 +81,7 @@
 
           <div class="navbar-custom-menu">
 
-
+          
 
   
             <ul class="nav navbar-nav">
@@ -101,7 +102,7 @@
                   <li class="user-header">
                     
                     <p>
-                      Información del Usuario o algo ..
+                     {{$usuario->rol->nombre or 'Default'}}
                       <!--<small>mensaje pequeño</small> -->
                     </p>
                   </li>
@@ -150,7 +151,7 @@
 
       <!-- Left side column. contains the logo and sidebar -->
      <section>
-     @if ($usuario != null && $usuario->rol == 1)
+     @if ($usuario != null && $usuario->rol->id_rol == 1)
         @include('menus.menuAdmin');
       @endif
     </section>
@@ -162,7 +163,7 @@
       <!-- Content Wrapper. Contains page content -->
 
       <!--<div @if (1 === 2) class="content-wrapper" @else class="contenido2" @endif> -->
-      <div @if (Auth::user() != null && $usuario->rol < 5) class="content-wrapper" @else class="contenido2" @endif>
+      <div @if (Auth::check() != null && $usuario->rol_id_rol < 5) class="content-wrapper" @else class="contenido2" @endif>
         
         <!-- Main content -->
         <section class="content">

@@ -43,7 +43,7 @@ Route::group(['middleware' => 'guest'], function () {
 //Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
-	Route::get('/home', 'IndexController@home');
+	Route::get('/home', 'IndexController@home')->name('home');
 	Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
 

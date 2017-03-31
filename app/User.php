@@ -4,6 +4,7 @@ namespace elearning1;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use elearning1\Rol;
 
 class User extends Authenticatable
 {
@@ -18,7 +19,7 @@ class User extends Authenticatable
    // protected $primaryKey = 'username';
     
     protected $fillable = [
-        'nombre', 'email', 'password', 'rol', 'genero', 'pais',
+        'nombre', 'email', 'password', 'id_rol', 'genero', 'pais',
     ];
 
     /**
@@ -29,4 +30,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'ip', 'os', 'navegador', 'lenguaje', 'fecha_ultimo_ingreso' 
     ];
+
+    public function rol(){
+        return $this->belongsTo(Rol::class, 'id');
+    }
+   /* public function rol(){
+        return $this->hasOne(Rol::class);
+    }*/
 }

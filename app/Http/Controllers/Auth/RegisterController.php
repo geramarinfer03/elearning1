@@ -79,8 +79,8 @@ class RegisterController extends Controller
        // dd($request->all());*/
         $this->validate($data, [
             'nombre' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
         ]);
 
 
@@ -92,7 +92,7 @@ class RegisterController extends Controller
         $user->email          =$data['email'];
         $user->password       =bcrypt($data['password']);
         $user->genero         =$data['genero'];
-        $user->rol            =5;  
+        $user->id_rol            =5;  
         $user->pais           =$data['pais'];
         $user->ip             =$data['ip'];
         $user->os             =$data['os'];
@@ -107,7 +107,9 @@ class RegisterController extends Controller
 
             /*Auth::user() = $user;*/
            /* return $user;*/
-            return view('/auth.login');
+           auth()->login($user);
+          //  return view('/home'); si sirve
+           return redirect()->home(); //probar este..
 
                
         }
