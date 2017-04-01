@@ -226,8 +226,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-		'Form' => Collective\Html\FormFacad::class,
-		'Html' => Collective\Html\HtmlFacad::class,
+		'Form' => Collective\Html\FormFacade::class,
+		'Html' => Collective\Html\HtmlFacade::class,
 		'Input' => Iluminate\Support\Facades\Input::class,
         'CountryList' => CountryList\Facades\CountryListFacade::class,
 
