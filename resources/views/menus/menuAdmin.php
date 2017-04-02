@@ -9,12 +9,12 @@
             
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>Opcion 1</span>
+                <i class="fa fa-users"></i>
+                <span>Usuarios</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="carpeta/docphp"><i class="fa fa-circle-o"></i> Sub 1</a></li>
+                <li><a href="usuarios"><i class="fa fa-circle-o"></i> Listar </a></li>
                 <li><a href=""><i class="fa fa-circle-o"></i> Sub 2</a></li>
               </ul>
             </li>

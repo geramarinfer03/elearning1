@@ -52,7 +52,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          @if ($usuario != null && $usuario->rol->id_rol > 1)
+          @if ($usuario != null && $usuario->rol->id_rol < 5)
            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
           @endif
           <a class="navbar-brand" href="#">E learning</a>
@@ -163,7 +163,7 @@
       <!-- Content Wrapper. Contains page content -->
 
       <!--<div @if (1 === 2) class="content-wrapper" @else class="contenido2" @endif> -->
-      <div @if (Auth::check() != null && $usuario->rol_id_rol < 5) class="content-wrapper" @else class="contenido2" @endif>
+      <div @if (Auth::check() != null && $usuario->rol->id_rol < 5) class="content-wrapper" @else class="contenido2" @endif>
         
         <!-- Main content -->
         <section class="content">
@@ -219,6 +219,8 @@
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>
+
+     <script src="{{asset('js/scripts.js')}}"></script>
     
   </body>
 </html>

@@ -8,7 +8,7 @@ use elearning1\User;
 class Rol extends Model
 {
      protected $fillable = [
-        'nombre'
+        'id_rol','nombre'
     ];
 
     protected $hidden = [
