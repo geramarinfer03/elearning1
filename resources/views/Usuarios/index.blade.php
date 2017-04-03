@@ -7,7 +7,7 @@
 <div class="box box-primary">
 
 <div class="box-header">
- <h4 class="box-title">Buscar Usuarios</h4>
+ <!--<h4 class="box-title">Buscar Usuarios</h4>
         <div class="input-group input-group-sm">
                             <input type="text" class="form-control" id="dato_buscado">
                             <span class="input-group-btn">
@@ -26,7 +26,7 @@
                
         </div>
 
-        
+       --> 
 
                  
 </div>
@@ -37,7 +37,7 @@
 @if( count($usuarios) >0)
 
 
-<table id="tabla_pacientes" class="display table table-hover" cellspacing="0" width="100%">
+<table id="tabla_usuarios" class="display table table-hover" cellspacing="0" width="100%">
        
         <thead>
             <tr>
@@ -82,10 +82,10 @@
 		    </td>
 	    
 		    <td>{{$usuario->fecha_ultimo_ingreso}}</td>
-		    <td> {{$usuario->pais}}</td>
-		    <td> {{$usuario->pais}}</td>
-		    <td> {{$usuario->pais}}</td>
-		    <td> {{$usuario->pais}}</td>
+		    <td> {{$usuario->ip}}</td>
+		    <td> {{$usuario->os}}</td>
+		    <td> {{$usuario->navegador}}</td>
+		    <td> {{$usuario->lenguaje}}</td>
 		    <td><button class="btn  btn-success btn-xs" onclick="mostrarficha();" ><i class="fa fa-fw fa-eye"></i>Ver</button></td>
 		</tr>
 
@@ -94,6 +94,9 @@
 
   
 </table>
+@php
+echo str_replace('/?', '?', $usuarios->render() )  ;
+@endphp
 
 @endif
 </div>

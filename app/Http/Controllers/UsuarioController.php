@@ -22,4 +22,14 @@ class UsuarioController extends Controller
        $usuarios  = User::all();
        return view('Usuarios.index',['usuarios'=>$usuarios]);  
    	}
+
+   	public function listado_usuarios(){
+       $usuarioactual=\Auth::user();
+       $usuarios= User::paginate(12);  
+       $paises = app('countrylist')->all('es_CR');
+       return view('Usuarios.index')
+       //->with("paises", $paises )
+       ->with("usuarios", $usuarios )
+       ->with("usuario_actual", $usuarioactual );     
+	}
 }

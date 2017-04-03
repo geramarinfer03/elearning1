@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 /* ------ Cursos rutas ------------------- */
 Route::group( ['middleware'=>['auth','admin']], function() {
 
-	Route::get('usuarios', 'UsuarioController@index');
+	Route::get('usuarios', 'UsuarioController@listado_usuarios');
 	/*Route::get('cursos', 'CursoController@index');
 	Route::get('cursos_create', 'CursoController@create');
 	Route::post('cursos_store', 'CursoController@store');*/
