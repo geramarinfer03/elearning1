@@ -1,34 +1,65 @@
 @extends('layouts.principal') @section('contenido')
 
 <!-- TO DO List -->
-<div class="box box-primary">
-    <div class="box-header">
-        <i class="ion ion-clipboard"></i>
 
-        <h3 class="box-title">Lista de Cursos</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <ul class="todo-list">
-         @foreach($cursos as $curso)
-            <li>
-                <!-- todo text -->
-                <span class="text">{{$curso -> nombre}}</span>
+<section class="content-header">
+  <h1>
+    Lista de Cursos
+</h1>
 
-                <!-- General tools such as edit or delete-->
+</section>
+
+<section class="content">
+    <div class="row">
+
+        @foreach($cursos as $curso)
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            @if ($curso->estado == 1)
+            <div class="small-box bg-green">
+            @endif
+
+            @if ($curso->estado == 0)
+            <div class="small-box ">
+            @endif
+
+              <div class="inner">
+                  <p>{{$curso -> nombre}}</p>
+              </div>
+              <br/>
+
+              <div class="icon">
+                <i class="fa fa-book"></i>
+            </div>
+            <div class="small-box-footer">
                 <div class="tools">
-                    <a href=""><i class="fa fa-eye"></i></a>
-                    <a href=""><i class="fa fa-edit"></i></a>
-                    <a href=""><i class="fa fa-trash-o"></i></a>
+                    <a style="color:blue; margin:5px;" href=""><i class="fa fa-eye"></i></a>
+                    <a style="color:#FFC107; margin:5px;"  href="{{ route('cursos.edit', $curso->id_curso) }}"><i class="fa fa-edit"></i></a>
+
+
+
                 </div>
-            </li>
-            @endforeach
-        </ul>
-    </div>
-    <!-- /.box-body -->
-    <div class="box-footer clearfix no-border">
-        <a href="cursos_create"><button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button></a>
-    </div>
+                <!--{!! Form::open(['method'=>'delete', 'route'=>['cursos.destroy', $curso->id_curso]]) !!}
+                {!! Form::button('<i class="fa fa-trash-o"></i>', ['type' => 'submit','class'=>'btn btn-danger btn-sm' ,  'onclick'=> 'return confirm("Do you want to delete blog?")'])!!}
+                {!! Form::close() !!}-->
+            </div>
+
+        </div>
+         
+    </div>    
+
+    @endforeach
+</div>
+</section>
+
+
+
+
+
+<!-- /.box-body -->
+<div class="box-footer clearfix no-border">
+    <a href="{{route('cursos.create')}}"><button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Agregar Curso</button></a>
+</div>
 </div>
 
 

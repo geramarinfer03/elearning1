@@ -14,6 +14,7 @@ class Curso extends Model
         'estado'
     ];
     
+    protected $primaryKey = 'id_curso';
     protected $table = "Curso";
     public $timestamps = false;
 }
