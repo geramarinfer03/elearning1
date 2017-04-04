@@ -28,7 +28,7 @@ function mostrarficha(id_usuario) {
   $("#capa_para_edicion").show();
 
   var url = "form_editar_usuario/"+id_usuario+"";
-  
+
   /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
   $.get(url,function(resul){
   $("#contenido_capa_edicion").html(resul);  //leccion 10
@@ -44,3 +44,7 @@ $(document).on("click",".div_modal",function(e){
  $("#contenido_capa_edicion").html("");  //leccion 10
 
 }) 
+
+function cambio_rol(id_matricula){
+  $('#btnMatriculaUsuarios_'+id_matricula).attr('class','btn_img');
+}

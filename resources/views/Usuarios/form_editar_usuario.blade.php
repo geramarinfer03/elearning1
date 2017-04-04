@@ -194,7 +194,7 @@
                           </select>
                         </td>
                         <td>
-                           <button type="submit" class="btn_inv"></button>
+                           <button id="btnMatriculaUsuarios_{{$mat->id_matricula}}" type="submit" class="btn_inv"></button>
                         </td>
                       </tr>
                       </form>
