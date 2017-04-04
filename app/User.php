@@ -37,4 +37,10 @@ class User extends Authenticatable
    /* public function rol(){
         return $this->hasOne(Rol::class);
     }*/
+
+    public function matricula(){
+
+        return $this->hasMany(Matricula::class, 'usuario');
+        //$this->belongsTo(Matricula::class, 'usuario');
+    }
 }

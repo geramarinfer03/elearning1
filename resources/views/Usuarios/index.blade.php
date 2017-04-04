@@ -69,7 +69,8 @@
 		 <tr role="row" class="odd">
 		    <td class="sorting_1">{{$usuario->id}}</td>
 		    <td class="mailbox-messages mailbox-name">
-		    	<a href="javascript:void(0);" onclick="mostrarficha(<?= $usuario->id; ?>);"  style="display:block">
+		    	<!-- <a href="javascript:void(0);" onclick="mostrarficha(<?= $usuario->id; ?>);"  style="display:block"> -->
+          <a href="form_editar_usuario/{{$usuario->id}}">
 		    	<i class="fa fa-user"></i>
 		    	&nbsp;&nbsp;{{$usuario->nombre}}
 		    	</a>

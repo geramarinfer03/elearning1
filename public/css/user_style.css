@@ -30,9 +30,25 @@
   right: 0;
   padding: 10px;
   position: absolute;
-  top: 10%;
+  top: -25px;
   width: auto;
   min-height: 90%;
   z-index: 830;
 }
 
+.label1{
+  font-size: 18px;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.btn_img{
+  background-image: url(/img/check.png);
+  border: none;
+  width: 34px;
+  height: 34px;
+}
+
+.btn_inv{
+  display: none;
+}

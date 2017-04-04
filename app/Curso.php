@@ -17,4 +17,8 @@ class Curso extends Model
     protected $primaryKey = 'id_curso';
     protected $table = "Curso";
     public $timestamps = false;
+
+    public function matr_user(){
+        return $this->hasMany(Matricula::class);
+    }
 }
