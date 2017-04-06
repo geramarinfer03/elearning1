@@ -21,4 +21,10 @@ class Curso extends Model
     public function matr_user(){
         return $this->hasMany(Matricula::class);
     }
+
+    public function matricula(){
+
+        return $this->hasMany(Matricula::class, 'curso');
+
+    }
 }

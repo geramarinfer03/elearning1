@@ -5,6 +5,7 @@ namespace elearning1\Http\Controllers;
 use elearning1\Curso;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Contracts\Auth\Guard;
 
 use DateTime;
 
@@ -19,8 +20,31 @@ class CursoController extends Controller
     public function index()
     {
 
-       $cursos  = Curso::all();
-       return view('Cursos.index',['cursos'=>$cursos]);  
+        //todos los cursos
+       //$cursos  = Curso::all();
+       $hoy = date('Y-m-d H:i:s');
+       $id =\Auth::user();
+
+       //Si es Administrador muestra todos los cursos. 
+       //si no lo es, muestra solo los cursos en los que no está matriculado y
+       // aquellos con estado en 1
+       if($id->id_rol == 1){
+        $mat_curso = Curso::all();
+
+       }else{
+
+          $mat_curso = Curso::distinct()->select('Curso.id_curso', 'Curso.nombre', 'Curso.duracion', 'Curso.fecha_inicio', 'Curso.fecha_final', 'Curso.estado')->where('Curso.fecha_final', '>', $hoy)->where('Curso.estado', '=', 1)->leftJoin('Matricula',  function($join) use($id, $hoy){
+          $join->on('Curso.id_curso', '=', 'Matricula.curso')->where('Matricula.usuario', '=', $id->id);
+          })->whereNull('Matricula.curso')->paginate(6);
+
+
+       }
+
+
+       //cursos que en los que no esta matriculado el usuario
+       
+
+       return view('Cursos.index',['cursos'=>$mat_curso]);  
    }
 
     /**

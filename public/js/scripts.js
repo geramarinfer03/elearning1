@@ -23,11 +23,11 @@ $('html, body').animate({scrollTop:0}, 300);
 function mostrarMatricula(id_usuario) {
   //funcion para mostrar y etditar la informacion del usuario
  
-  //$("#usuario_seleccionado").val(id_usuario);
+ // $("#usuario_seleccionado").val(id_usuario);
   $("#capa_modal").show();
   $("#capa_para_edicion").show();
 
-  var url = "matricularUsuario/"+id_usuario+"";
+  var url = "/matricularUsuario/"+id_usuario+"";
 
   /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
   $.get(url,function(resul){
@@ -45,6 +45,27 @@ $(document).on("click",".div_modal",function(e){
 
 }) 
 
+
+$(document).on("click",".pagination li a",function(e){
+//para que la pagina se cargen los elementos
+ e.preventDefault();
+ var url =$( this).attr("href");
+
+ $("#contenido_capa_edicion").html($("#cargador_empresa").html());
+  $.get(url,function(resul){
+  $("#contenido_capa_edicion").html(resul);
+  })
+
+})
+
+
 function cambio_rol(id_matricula){
   $('#btnMatriculaUsuarios_'+id_matricula).attr('class','btn_img');
 }
+
+function seleccionCursoMat(id){
+  $('#curso_mat').val(id);
+  //alert("Selecciono la fila" + id);
+}
+
+$

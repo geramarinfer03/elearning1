@@ -151,10 +151,12 @@
       <div class="box box-primary">
                       <div class="box-header">
                         <div class="row">
+                        <div class="col-md-12">
                           <h3 class="box-title">Cursos Matriculados</h3><hr>
                         </div>
+                        </div>
                         <div class="row">
-                          <div class="col-md-9">
+                          <div class="col-md-8">
                            <div class="input-group input-group-sm">
                               <input type="text" class="form-control" id="dato_buscado">
                               <span class="input-group-btn">
@@ -163,11 +165,11 @@
                               </span>
                           </div>
                           </div>
-                          <div class="col-md-3">
+                          <div class="col-md-4">
                             <button type="button" class="btn btn-primary" onclick="mostrarMatricula(<?= $usuario->id; ?>)" style="margin-bottom: 10px;">Matricular Curso</button>
                             <br>
                           </div>
-                        </div>
+                        
                       </div><!-- /.box-header -->
 
 
@@ -197,7 +199,7 @@
                         </td>
                         <td>
                           <select id="rol_curso{{$mat->id_matricula}}" onchange="cambio_rol({{$mat->id_matricula}})" name="rol_curso" class="form-control">
-                            @foreach($roles as $r){
+                            @foreach($rols_user as $r){
                               <option  value="{{$r->id_rol}}" 
                                 @if($r->id_rol == $mat->rol)
                                   selected

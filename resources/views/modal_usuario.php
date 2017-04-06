@@ -1,4 +1,4 @@
-  <section> 
+  <section id="contenido_principal"> 
                      <div id="capa_modal" class="div_modal" ></div>
                      <div id="capa_para_edicion" class="div_contenido" > 
                       <input type="hidden" id="usuario_seleccionado" value="0"  />

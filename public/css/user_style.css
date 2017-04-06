@@ -52,3 +52,7 @@
 .btn_inv{
   display: none;
 }
+
+#tabla_cursos_no_mat tr:hover td{
+  background: #9EE9F1;
+}

@@ -38,7 +38,9 @@ class UsuarioController extends Controller
   public function form_editar_usuario($id){
     //funcion para cargar los datos de cada usuario en la ficha
     $roles = Rol::all();
+
     $usuario=User::find($id);
+    $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->get();
     $contador=count($usuario);
     $mat = Matricula::where('usuario', '=' , $id)->paginate(7);
     //$tiposusuario=TipoUsuario::all();
@@ -46,6 +48,7 @@ class UsuarioController extends Controller
     if($contador>0){     
             return view("Usuarios.form_editar_usuario")->with("usuario",$usuario)
                                                        ->with("roles",$roles)
+                                                       ->with("rols_user", $rols_user)
                                                        ->with("matriculados", $mat);
     }
     else

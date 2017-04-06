@@ -64,7 +64,9 @@ Route::resource('cursos','CursoController');
  Route::get('form_editar_usuario/{id}', 'UsuarioController@form_editar_usuario');
  Route::post('editar_usuario', 'UsuarioController@editar_usuario');
  Route::post('editar_matricula', 'MatriculaController@update');
- Route::get('form_editar_usuario/matricularUsuario/{id}', 'MatriculaController@matriculaForm');
+ Route::get('matricularUsuario/{id}', 'MatriculaController@matriculaForm');
+ Route::post('crearMatricula', 'MatriculaController@store');
+ 
 
 
 /*Route::get('cursos', 'CursoController@index');

@@ -26,7 +26,7 @@
             @endif
 
             @if ($curso->estado == 0)
-            <div class="small-box ">
+            <div class="small-box">
             @endif
 
               <div class="inner">
