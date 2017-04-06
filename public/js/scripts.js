@@ -20,14 +20,14 @@ $('html, body').animate({scrollTop:0}, 300);
   })
 }*/
 
-function mostrarficha(id_usuario) {
+function mostrarMatricula(id_usuario) {
   //funcion para mostrar y etditar la informacion del usuario
  
-  $("#usuario_seleccionado").val(id_usuario); // leccion10
+  //$("#usuario_seleccionado").val(id_usuario);
   $("#capa_modal").show();
   $("#capa_para_edicion").show();
 
-  var url = "form_editar_usuario/"+id_usuario+"";
+  var url = "matricularUsuario/"+id_usuario+"";
 
   /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
   $.get(url,function(resul){

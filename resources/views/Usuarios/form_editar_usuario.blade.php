@@ -16,70 +16,70 @@
           <div class="box-body ">
             <div class="col-xs-12">
                 <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-md-3">
                     <label class="label1">Nombre: </label>
                   </div>
-                  <div class="form-group col-xs-9">
+                  <div class="form-group col-md-9">
                    <label><?=$usuario->nombre?></label>
                   </div>
                 </div>
             </div>
              <div class="col-xs-12">
                 <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-md-3">
                     <label class="label1">Email: </label>
                   </div>
-                  <div class="form-group col-xs-9">
+                  <div class="form-group col-md-9">
                    <label><?=$usuario->email?></label>
                   </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-md-3">
                     <label class="label1">Género: </label>
                   </div>
-                  <div class="form-group col-xs-9">
+                  <div class="form-group col-md-9">
                    <label><?=$usuario->genero?></label>
                   </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-md-3">
                     <label class="label1">Ingreso: </label>
                   </div>
-                  <div class="form-group col-xs-9">
+                  <div class="form-group col-md-9">
                    <label><?=$usuario->fecha_ultimo_ingreso?></label>
                   </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-md-3">
                     <label class="label1">IP: </label>
                   </div>
-                  <div class="form-group col-xs-9">
+                  <div class="form-group col-md-9">
                    <label><?=$usuario->ip?></label>
                   </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-md-3">
                     <label class="label1">SO: </label>
                   </div>
-                  <div class="form-group col-xs-9">
+                  <div class="form-group col-md-9">
                    <label><?=$usuario->os?></label>
                   </div>
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-md-3">
                     <label class="label1">Lenguaje: </label>
                   </div>
-                  <div class="form-group col-xs-9">
+                  <div class="form-group col-md-9">
                    <label><?=$usuario->lenguaje?></label>
                   </div>
                 </div>
@@ -91,10 +91,10 @@
 
             <div class="form-group col-xs-12">
              <div class="row">
-                  <div class="form-group col-xs-3">
+                  <div class="form-group col-md-3">
                       <label class="label1" for="pais">Pais</label>
                   </div>               
-                  <div class="form-group col-xs-9">   
+                  <div class="form-group col-md-9">   
                     @php
                     $countries = app('countrylist')->all('es_CR');
                     @endphp         
@@ -115,10 +115,10 @@
 
            <div class="col-xs-12">
              <div class="row">
-                  <div class="col-xs-3">
+                  <div class="col-md-3">
                       <label class="label1" for="rol_user">Rol</label>
                   </div>               
-                  <div class="col-xs-9">   
+                  <div class="col-md-9">   
                  
                     <select id="rol_user" name="rol_user" class="form-control">
                       @foreach($roles as $r){
@@ -150,14 +150,24 @@
 
       <div class="box box-primary">
                       <div class="box-header">
-                        <h3 class="box-title">Cursos Matriculados</h3>
-
-                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" id="dato_buscado">
-                            <span class="input-group-btn">
-                              <button class="btn btn-info btn-flat" type="button" onclick="buscarusuario();" >Buscar!</button>
-                            </span>
-        </div>
+                        <div class="row">
+                          <h3 class="box-title">Cursos Matriculados</h3><hr>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-9">
+                           <div class="input-group input-group-sm">
+                              <input type="text" class="form-control" id="dato_buscado">
+                              <span class="input-group-btn">
+                                <!--Al buscar se le envia el usuario por parametro -->
+                                <button class="btn btn-info btn-flat" type="button" onclick="buscarcurso();" >Buscar!</button>
+                              </span>
+                          </div>
+                          </div>
+                          <div class="col-md-3">
+                            <button type="button" class="btn btn-primary" onclick="mostrarMatricula(<?= $usuario->id; ?>)" style="margin-bottom: 10px;">Matricular Curso</button>
+                            <br>
+                          </div>
+                        </div>
                       </div><!-- /.box-header -->
 
 
@@ -173,17 +183,20 @@
                       </thead>
                     <tbody>
                     @foreach($matriculados as $mat)
-                     <form  id="editar_matri{{$mat->id_matricula}}"  method="post"  action="/editar_matricula/{{$mat->id_matricula}}">      
+                     <form  id="editar_matri{{$mat->id_matricula}}"  method="post"  action="/editar_matricula">      
+                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
+                     <input type="hidden" name="id_matricula" value="{{$mat->id_matricula}}">
+                     <input type="hidden" name="id_usuario" value="{{$usuario->id}}">     
                       <tr role="row" class="odd">
                         <td class="sorting_1">{{$mat->id_matricula}}</td>
-                        <td class="mailbox-messages mailbox-name">
-                          <a href="javascript:void(0);" onclick="mostrarficha(<?= $usuario->id; ?>);"  style="display:block">
+                        <td>
+                          <a href="cursos.curso">
                           <i class="fa fa-book"></i>
                           &nbsp;&nbsp;{{$mat->cursos->nombre}}
                           </a>
                         </td>
                         <td>
-                          <select id="rol_curso{{$mat->id_matricula}}" onchange="cambio_rol({{$mat->id_matricula}})" name="rol_user" class="form-control">
+                          <select id="rol_curso{{$mat->id_matricula}}" onchange="cambio_rol({{$mat->id_matricula}})" name="rol_curso" class="form-control">
                             @foreach($roles as $r){
                               <option  value="{{$r->id_rol}}" 
                                 @if($r->id_rol == $mat->rol)
@@ -205,6 +218,7 @@
                 echo str_replace('/?', '?', $matriculados->render() )  ;
               @endphp
       <hr>
+
       </div>
 
   </div>    <!-- end col mod 6 -->
@@ -213,6 +227,11 @@
 
 </div> <!-- end row -->
 </section>
+</div>
+@include('modal_usuario')
+</div>
+
+
 
 <script>
 /* function cargarpais(){

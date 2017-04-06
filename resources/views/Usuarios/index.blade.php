@@ -68,14 +68,14 @@
 
 		 <tr role="row" class="odd">
 		    <td class="sorting_1">{{$usuario->id}}</td>
-		    <td class="mailbox-messages mailbox-name">
+		    <td>
 		    	<!-- <a href="javascript:void(0);" onclick="mostrarficha(<?= $usuario->id; ?>);"  style="display:block"> -->
           <a href="form_editar_usuario/{{$usuario->id}}">
 		    	<i class="fa fa-user"></i>
 		    	&nbsp;&nbsp;{{$usuario->nombre}}
 		    	</a>
 		    </td>
-		    <td> {{$usuario->email}}</td>
+		    <td class="mailbox-messages mailbox-email"> {{$usuario->email}}</td>
 		    <td> {{$usuario->rol->nombre}}</td>
 		    <td> {{$usuario->genero}}</td>
 		    <td>
@@ -87,7 +87,10 @@
 		    <td> {{$usuario->os}}</td>
 		    <td> {{$usuario->navegador}}</td>
 		    <td> {{$usuario->lenguaje}}</td>
-		    <td><button class="btn  btn-success btn-xs" onclick="mostrarficha();" ><i class="fa fa-fw fa-eye"></i>Ver</button></td>
+		    <!--<td><button class="btn  btn-success btn-xs" onclick="mostrarficha();" ><i class="fa fa-fw fa-eye"></i>Ver</button></td> -->
+        <td><a href="form_editar_usuario/{{$usuario->id}}" class="btn  btn-success btn-xs">
+        <i class="fa fa-fw fa-eye"></i>Ver
+        </a></td>
 		</tr>
 
 	@endforeach
@@ -100,9 +103,5 @@ echo str_replace('/?', '?', $usuarios->render() )  ;
 @endphp
 
 @endif
-</div>
-@include('modal_usuario')
-</div>
-
 
  @endsection

@@ -40,7 +40,7 @@ class UsuarioController extends Controller
     $roles = Rol::all();
     $usuario=User::find($id);
     $contador=count($usuario);
-    $mat = Matricula::where('usuario', '=' , $id)->paginate(8);
+    $mat = Matricula::where('usuario', '=' , $id)->paginate(7);
     //$tiposusuario=TipoUsuario::all();
     
     if($contador>0){     
