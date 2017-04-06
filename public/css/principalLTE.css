@@ -116,8 +116,8 @@ body {
 .contenido2,
 .right-side {
   min-height: 100%;
-  /*background-color: #ecf0f5;*/
-  background-color: #ffffff;
+  background-color: #ecf0f5;
+ /* background-color: #ffffff;*/
   z-index: 800;
   margin-top: 50px;
 }

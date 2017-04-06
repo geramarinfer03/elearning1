@@ -8,9 +8,15 @@
 </h1>
 
 </section>
+<br/>
+<br/>
+
+<div class="box box-primary">
 
 <section class="content">
     <div class="row">
+
+
 
         @foreach($cursos as $curso)
         <div class="col-lg-3 col-xs-6">
@@ -24,7 +30,9 @@
             @endif
 
               <div class="inner">
-                  <p>{{$curso -> nombre}}</p>
+                  <p><b>{{$curso -> nombre}}</b></p>
+                  <p>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $curso->fecha_inicio)->format('d/m/Y')}}
+                   - {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $curso->fecha_final)->format('d/m/Y')}}</p>
               </div>
               <br/>
 
@@ -33,7 +41,7 @@
             </div>
             <div class="small-box-footer">
                 <div class="tools">
-                    <a style="color:blue; margin:5px;" href=""><i class="fa fa-eye"></i></a>
+                    <a style="color:blue; margin:5px;" href="{{ route('cursos.show', $curso->id_curso) }}"><i class="fa fa-eye"></i></a>
                     <a style="color:#FFC107; margin:5px;"  href="{{ route('cursos.edit', $curso->id_curso) }}"><i class="fa fa-edit"></i></a>
 
 
@@ -60,6 +68,7 @@
 <div class="box-footer clearfix no-border">
     <a href="{{route('cursos.create')}}"><button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Agregar Curso</button></a>
 </div>
+
 </div>
 
 

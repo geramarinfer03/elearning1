@@ -98,6 +98,8 @@ class CursoController extends Controller
     public function show($id)
     {
         //
+
+      return view('Cursos.detailAdmin');
     }
 
     /**
@@ -108,7 +110,10 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-         $curso = Curso::find($id);
+
+
+         $curso= Curso::find($id);
+
          return view('Cursos.edit', compact('curso'));
     }
 

@@ -52,9 +52,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          @if ($usuario != null && $usuario->rol->id_rol < 5)
+         @if ($usuario != null && $usuario->rol->id_rol < 5)
            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          @endif
+         @endif 
           <a class="navbar-brand" href="#">E learning</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
