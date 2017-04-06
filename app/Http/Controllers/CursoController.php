@@ -102,6 +102,12 @@ class CursoController extends Controller
           'estado' => $estado
         ]);
 
+        while($duracion > 0){
+          
+
+          $duracion = $duracion - 1;
+        }
+
 
 
            /*$curso = $request->all();

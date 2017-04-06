@@ -19,6 +19,7 @@
 
 
         @foreach($cursos as $curso)
+
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
             @if ($curso->estado == 1)
@@ -26,7 +27,7 @@
             @endif
 
             @if ($curso->estado == 0)
-            <div class="small-box">
+            <div class="small-box bg-gray">
             @endif
 
               <div class="inner">
@@ -46,6 +47,7 @@
 
 
 
+
                 </div>
                 <!--{!! Form::open(['method'=>'delete', 'route'=>['cursos.destroy', $curso->id_curso]]) !!}
                 {!! Form::button('<i class="fa fa-trash-o"></i>', ['type' => 'submit','class'=>'btn btn-danger btn-sm' ,  'onclick'=> 'return confirm("Do you want to delete blog?")'])!!}
@@ -55,7 +57,7 @@
         </div>
          
     </div>    
-
+  
     @endforeach
 </div>
 </section>
