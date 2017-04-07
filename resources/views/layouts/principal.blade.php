@@ -24,7 +24,10 @@
     <link rel="stylesheet" href="{{asset('css/_all-skins.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <script src="{{asset('js/scripts.js')}}"></script>
   
 
 

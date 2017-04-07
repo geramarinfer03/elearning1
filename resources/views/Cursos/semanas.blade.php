@@ -14,13 +14,38 @@
                     <div class="row">
                         <div class="col-md-12">
                           <!--Contenido-->
-                         <ul id="menu" style="width: 300px;">
+                         <!--<ul id="menu" style="width: 300px;">
                              
                           	@foreach($semana->recursos as $recurso)
                           		 <li style="list-style: none; padding: 5px;margin: 3px 0;background: #000;"><a style="color: #fff" href="#">{{$recurso->nombre}}</a></li>
                           	@endforeach
 
-                          </ul>
+                          </ul> -->
+
+       						<table id="main_table" class="display table table-hover" style="border: 1px dotted red;">
+
+       						<tbody id="sem{{$semana->id_semana}}_row0" class="main_table_seccion">
+
+       					
+
+         					@foreach($semana->recursos as $recurso)
+
+                          				@if($recurso->tipo_recurso == 3)
+											<script type="text/javascript">
+												tabular("<tr><td><h1>{{$recurso->notas}}</h2></td></tr>", {{$recurso->semana}}, {{$recurso->recurso_padre}});
+											</script>
+											
+                          				@endif
+
+                          				@if($recurso->tipo_recurso == 2)
+         									<script type="text/javascript">
+												tabular("<tr><td><table id=\"main_table{{$recurso->id_recurso}}\" class=\"display table table-hover conB\"><thead><tr><th>{{$recurso->notas}}</th></tr></thead><tbody id=\"sem{{$recurso->semana}}_row{{$recurso->id_recurso}}\" class=\"main_table_seccion\"></table></td></tr>",{{$recurso->semana}}, {{$recurso->recurso_padre}});                         					
+                          					</script>
+                          				@endif
+                          	
+                          	@endforeach
+                          	</table>
+                        
                           <!--Fin Contenido-->
                         </div>
                     </div>

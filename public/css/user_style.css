@@ -68,3 +68,9 @@
 .row_oscura{
   background: gray;
 }
+
+.conB{
+  margin: 3px 0px;
+  padding: 5px;
+  border: 1px solid black;
+}

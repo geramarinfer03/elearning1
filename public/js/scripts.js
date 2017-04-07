@@ -65,10 +65,20 @@ function cambio_rol(id_matricula){
 
 function seleccionCursoMat(id){
   $('#curso_mat').val(id);
-  //alert("Selecciono la fila" + id);
+}
+
+
+
+function tabular(html, semana ,recPadre){
+  //alert(html);
+  console.log(html);
+  console.log(semana);
+  console.log(recPadre);
+  console.log("#sem"+ semana + "_row" + recPadre);
+  
+  $("#sem"+ semana + "_row" + recPadre).append(html);
 }
 
 $(function(){
-  $('#menu').sortable();
-
+  $('.main_table_seccion').sortable();
 });
