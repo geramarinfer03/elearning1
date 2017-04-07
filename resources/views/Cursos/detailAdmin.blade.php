@@ -40,7 +40,15 @@
 
                     <hr>
                     @if($isMatriculated == 6)
-                     <button type="button" class="btn btn-block btn-info btn-lg" style="width: 100%; font-weight: bold;">Matricularme</button>
+                    <form action="/crearMatricula" method="post">
+                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
+                         @unless(!Auth::check())
+                         <input type="hidden" name="id_usuario" value="{{Auth::user()->id}}"> 
+                         @endunless
+                         <input type="hidden" name="curso_mat" value="{{$curso->id_curso}}"> 
+                         <input type="hidden" name="roles" value="5"> 
+                     <button type="submit" class="btn btn-block btn-info btn-lg" style="width: 100%; font-weight: bold;">Matricularme</button>
+                     </form>
                     @endif
                 </div>
                 <!-- /.box-body -->
@@ -68,25 +76,26 @@
 
                         </div> -->
 
-                        <div class="row">
+   <!-- <div class="row">
         <div class="col-md-12">
             <div class="box collapsed-box">
                 <div class="box-header with-border"> 
                   <input class="box-title inputS" type="text" value="Esto es un tema"/>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>                    
-                    <!--<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
-                  </div> 
+                    </div> 
                 </div>
-                                            <!-- /.box-header -->
+                                
                 <div style="display: none;" class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                          <!--Contenido-->
-                          <h2>LALA</h2>
-                          <h3>lolo</h3>
-                          <h4>lulu</h4>
-                          <!--Fin Contenido-->
+                        
+                          <ul id="menu2" style="width: 300px;">
+                              <li style="list-style: none; padding: 5px;margin: 3px 0;background: #000;"><a style="color: #fff" href="#">Hola</a></li>
+                             <li style="list-style: none; padding: 5px;margin: 3px 0;background: #000;"><a style="color: #fff" href="#">Hola2</a></li>
+                             <li style="list-style: none; padding: 5px;margin: 3px 0;background: #000;"><a style="color: #fff" href="#">Hola3</a></li>
+                          </ul>
+                        
                         </div>
                     </div>
                                     
@@ -94,7 +103,7 @@
             </div>
 
         </div>
-    </div> <!--FIN ROW  -->
+    </div> FIN ROW  -->
 
 
                         @foreach($semanas as $semana)

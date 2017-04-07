@@ -92,6 +92,7 @@ class MatriculaController extends Controller
 
        $trim = round($trim);
 
+
          $matricula=new Matricula;
 
          $matricula->usuario =$data['id_usuario'];
@@ -104,8 +105,10 @@ class MatriculaController extends Controller
 
          $result = $matricula->save();
 
-         if($result){       
-          return redirect('form_editar_usuario/'. $id_usuario);
+         if($result){
+          alert()->success('Matriculado en el curso:  '. $curso->nombre, 'Guardando!');       
+          return back();       
+          //return redirect('form_editar_usuario/'. $id_usuario);
          }else{
 
 

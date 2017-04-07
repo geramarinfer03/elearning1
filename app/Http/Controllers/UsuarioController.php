@@ -5,7 +5,7 @@ namespace elearning1\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Auth\Guard;
-
+use Alert;
 use elearning1\User;
 use elearning1\Rol;
 use elearning1\Matricula;
@@ -45,7 +45,8 @@ class UsuarioController extends Controller
     $mat = Matricula::where('usuario', '=' , $id)->paginate(7);
     //$tiposusuario=TipoUsuario::all();
     
-    if($contador>0){     
+    if($contador>0){  
+
             return view("Usuarios.form_editar_usuario")->with("usuario",$usuario)
                                                        ->with("roles",$roles)
                                                        ->with("rols_user", $rols_user)
@@ -67,11 +68,13 @@ class UsuarioController extends Controller
    
     $resul= $user->save();
 
-    if($resul){       
+    if($resul){   
+       alert()->success('Modificacion Correcta.', 'Guardando!');       
       return redirect('usuarios');
     }else{
 
-
+       alert()->error('Modificacion Incorrecta.', 'Regresando!');       
+      return redirect('usuarios');
     }      
 
   }

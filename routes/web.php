@@ -33,7 +33,7 @@ Route::get('/hola', function()	{
 Route::group(['middleware' => 'guest'], function () {
 	Route::get('/', 'PagesController@index');
 	Route::get('login', 'Auth\LoginController@showLoginForm');
-	Route::post('login', ['as' =>'login', 'uses' => 'Auth\LoginController@login']); 
+	Route::post('login','Auth\LoginController@login')->name('login'); 
 	// Registration routes...
 	Route::get('registrarse', 'Auth\RegisterController@showRegistrationForm');
 	Route::post('registrarse', ['as' => 'registrarse', 'uses' => 'Auth\RegisterController@register']);

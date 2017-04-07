@@ -14,7 +14,13 @@
                     <div class="row">
                         <div class="col-md-12">
                           <!--Contenido-->
-                          
+                         <ul id="menu" style="width: 300px;">
+                             
+                          	@foreach($semana->recursos as $recurso)
+                          		 <li style="list-style: none; padding: 5px;margin: 3px 0;background: #000;"><a style="color: #fff" href="#">{{$recurso->nombre}}</a></li>
+                          	@endforeach
+
+                          </ul>
                           <!--Fin Contenido-->
                         </div>
                     </div>

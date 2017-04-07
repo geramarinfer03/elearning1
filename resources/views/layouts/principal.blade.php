@@ -12,14 +12,21 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/principalLTE.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
     <link rel="stylesheet" href="{{asset('css/user_style.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('css/_all-skins.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
+
+  
+
 
   </head>
   <!--@php
@@ -222,7 +229,12 @@
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>
 
-     <script src="{{asset('js/scripts.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="{{asset('js/scripts.js')}}"></script>
+    <script src="{{asset('js/sweetalert.min.js')}}"></script>
+
+     @include('sweet::alert')
     
   </body>
 </html>

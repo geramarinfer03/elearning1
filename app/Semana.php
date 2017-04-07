@@ -18,4 +18,8 @@ class Semana extends Model
     	return $this->belongsTo(Curso::class,'curso');
     }
 
+    public function recursos(){
+    	return $this->hasMany(Recurso::class, 'semana');
+    }
+
 }

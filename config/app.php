@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 	    Collective\Html\HtmlServiceProvider::class,
         CountryList\CountryListServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -230,6 +231,7 @@ return [
 		'Html' => Collective\Html\HtmlFacade::class,
 		'Input' => Iluminate\Support\Facades\Input::class,
         'CountryList' => CountryList\Facades\CountryListFacade::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
 
     ],
 

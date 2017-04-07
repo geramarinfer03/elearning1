@@ -4,6 +4,7 @@ namespace elearning1\Http\Controllers;
 
 use elearning1\Curso;
 use elearning1\Semana;
+use Alert;
 use elearning1\Matricula;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -251,7 +252,9 @@ class CursoController extends Controller
 
 
         $mensaje = "Curso Modificado correctamente";
+
         return view('Cursos.success',['mensaje'=> $mensaje]);
+
     }
 
     /**

@@ -109,7 +109,7 @@
                  
 
                  <div class="col-md-4">
-                          <button  style="margin-top: 20px;" type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+                          <button  style="margin-top: 20px;" type="submit" class="btn btn-primary btn-block btn-flat">Matricular</button>
 
                 </form> 
 

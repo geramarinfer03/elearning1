@@ -68,4 +68,7 @@ function seleccionCursoMat(id){
   //alert("Selecciono la fila" + id);
 }
 
-$
+$(function(){
+  $('#menu').sortable();
+
+});

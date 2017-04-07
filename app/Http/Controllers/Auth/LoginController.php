@@ -3,6 +3,7 @@
 namespace elearning1\Http\Controllers\Auth;
 
 use elearning1\User;
+use Alert;
 use Validator;
 use elearning1\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
