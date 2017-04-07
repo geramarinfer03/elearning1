@@ -13,7 +13,7 @@
        {!! Form::text('nombre', null,  ['class'=>'form-control']) !!}
        <span class="fa fa-book form-control-feedback"></span>
        {!! $errors->has('nombre')?$errors->first('nombre'):'' !!}
-   </div>
+     </div>
 
    <!--div class="form-group has-feedback">
        {!! Form::label('duracion', 'Duración') !!}
@@ -31,17 +31,17 @@
    </div>
 
    <div class="form-group has-feedback">
-
        {!! Form::label('fecha_final', 'Fecha final') !!}
-       {!! Form::date('fecha_final', \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $curso->fecha_inicio)->format('Y-m-d'),  ['class'=>'form-control']) !!}
+       {!! Form::date('fecha_final', \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $curso->fecha_final)->format('Y-m-d'),  ['class'=>'form-control']) !!}
        <span class="fa fa-clock-o form-control-feedback"></span>
        {!! $errors->has('fecha_final')?$errors->first('fecha_final'):'' !!}
    </div>
 
+
    <div class="form-group has-feedback">
-       {!! Form::hidden('estado', '0') !!}
-       {!! Form::label('estado', 'Estado') !!}
-       {{ Form::checkbox('estado', 1, null, ['class' => 'field']) }}
+       {!! Form::hidden('estado', '1') !!}
+       {!! Form::label('estado', 'Activar') !!}
+       {{ Form::checkbox('estado', 'activo', true, ['class' => 'field']) }}
        {!! $errors->has('estado')?$errors->first('estado'):'' !!}
    </div>
 
@@ -52,7 +52,7 @@
         {!! Form::submit('Guardar',  ['class'=>'btn btn-primary btn-block btn-flat']) !!}
     </div>
     <!-- /.col -->
-</div>
+  </div>
 {!! Form::close() !!}
 
 
