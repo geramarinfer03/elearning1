@@ -42,9 +42,12 @@
             </div>
             <div class="small-box-footer">
                 <div class="tools">
-                    <a style="color:blue; margin:5px;" href="{{ route('cursos.show', $curso->id_curso) }}"><i class="fa fa-eye"></i></a>
-                    <a style="color:#FFC107; margin:5px;"  href="{{ route('cursos.edit', $curso->id_curso) }}"><i class="fa fa-edit"></i></a>
-
+                    <a style="color:white; margin:5px;" class="btn" href="{{ route('cursos.show', $curso->id_curso) }}"><i class="fa fa-eye"></i></a>
+                    @unless(!Auth::check())
+                      @if(Auth::user()->rol->id_rol < 5)
+                       <a style="color:blue; margin:5px;"  href="{{ route('cursos.edit', $curso->id_curso) }}"><i class="fa fa-edit"></i></a>
+                      @endif
+                    @endunless
 
 
 

@@ -56,3 +56,15 @@
 #tabla_cursos_no_mat tr:hover td{
   background: #9EE9F1;
 }
+
+.inputS{
+  border: none;
+}
+
+.inputS:disabled{
+  background: none;
+}
+
+.row_oscura{
+  background: gray;
+}

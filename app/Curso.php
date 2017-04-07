@@ -29,7 +29,7 @@ class Curso extends Model
     }
     public function semanas(){
 
-        return $this->hasMany(Semana::class);
+        return $this->hasMany(Semana::class, 'curso');
 
     }
 }

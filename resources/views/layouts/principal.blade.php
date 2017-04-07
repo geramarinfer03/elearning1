@@ -123,11 +123,11 @@
              <!-- BLOQUE LOGIN Y REGISTRO -->   
                 @unless (Auth::check())
                   <li>
-                  <a href="login">Login</a>
+                  <a href="/login">Login</a>
                   </li>
 
                   <li>
-                  <a href="registrarse">Registrarse</a>
+                  <a href="/registrarse">Registrarse</a>
                   </li>
                 @endunless
                 
@@ -193,8 +193,8 @@
 		                    
                   		</div>
                   	</div><!-- /.row -->
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
+            <!--    </div><!-- /.box-body -->
+          <!--    </div><!-- /.box -->
             </div><!-- /.col -->
          
 

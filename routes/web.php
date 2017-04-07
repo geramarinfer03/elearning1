@@ -58,6 +58,7 @@ Route::group( ['middleware'=>['auth','admin']], function() {
 	Route::post('cursos_store', 'CursoController@store');*/
 
 });
+
 Route::resource('cursos','CursoController');
 
 

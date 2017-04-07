@@ -4,6 +4,7 @@ namespace elearning1\Http\Controllers;
 
 use elearning1\Curso;
 use elearning1\Semana;
+use elearning1\Matricula;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Auth\Guard;
@@ -26,6 +27,11 @@ class CursoController extends Controller
        $hoy = date('Y-m-d H:i:s');
        $id =\Auth::user();
 
+       if($id == null){
+          $mat_curso = Curso::where('Curso.fecha_final', '>', $hoy)
+                            ->where('Curso.estado', '=', 1)->get();  
+
+       }else{
        //Si es Administrador muestra todos los cursos. 
        //si no lo es, muestra solo los cursos en los que no está matriculado y
        // aquellos con estado en 1
@@ -40,6 +46,7 @@ class CursoController extends Controller
 
 
        }
+     }
 
 
        //cursos que en los que no esta matriculado el usuario
@@ -49,12 +56,11 @@ class CursoController extends Controller
    }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new course.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
        return view('Cursos.create');
    }
 
@@ -119,7 +125,7 @@ class CursoController extends Controller
           $duracion = $duracion - 1;
            
             
-            $titulo = "Semana #".$contador;
+            $titulo = "Semana #".$contador. "Curso".$curso_id;
             
             Semana::create([
                 'tema' => $titulo,
@@ -150,11 +156,36 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id){
 
-      return view('Cursos.detailAdmin');
+      $curso= Curso::find($id);
+      $semanas = $curso->semanas;
+      $user = \Auth::user(); //Usuario puede ser NULL
+
+
+      $profes = Matricula::join('Usuario', 'Usuario.id', '=', 'Matricula.usuario')
+                         ->select('Usuario.nombre', 'Usuario.id', 'Matricula.rol')
+                         ->where('Matricula.rol','=', '3')
+                         ->where('Matricula.curso', '=', $id)->get();
+
+      //rol 6 -> guess
+      $miCurso = 6;
+
+      if($user != NULL){
+          $miCurso = Matricula::distinct()->where('Matricula.usuario', '=', $user->id)
+                                          ->where('Matricula.curso', '=', $curso->id_curso)->select('Matricula.rol')->get();
+          $rol = 6;
+          foreach ($miCurso as $mat) {
+            $rol = $mat->rol;
+          }
+          $miCurso = $rol;
+      }
+      
+      
+      return view('Cursos.detailAdmin')->with('curso', $curso)
+                                       ->with('semanas', $semanas)
+                                       ->with('profesores', $profes)
+                                       ->with('isMatriculated', $miCurso);
     }
 
     /**

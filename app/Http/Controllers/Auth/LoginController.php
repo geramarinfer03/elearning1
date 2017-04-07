@@ -70,8 +70,8 @@ class LoginController extends Controller
 
 
        
-
-    /*public function login(Request $request){
+/*
+    public function login(Request $request){
 
 
       $credentials = $request->only('email', 'password');
@@ -88,32 +88,32 @@ class LoginController extends Controller
     {
 
         $usuarioactual=\Auth::user();
-       return view('home')->with("usuario",  $usuarioactual);
+       return redirect()->back();
     }
-       
+       */
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
+    /*    $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
-*/
 
 
-    /*$credentials = $request->only('email', 'password');
+
+    $credentials = $request->only('email', 'password');
 
     if ($this->auth->attempt($credentials, $request->has('remember')))
     {
 
         $usuarioactual=\Auth::user();
-       return view('home')->with("usuario",  $usuarioactual);
-    }
+       return  redirect()->to()->back();//view('home')->with("usuario",  $usuarioactual);
+    }*/
 
-    return "credenciales incorrectas";*/
-/*
-    }
-/*
+  /*  return "credenciales incorrectas";
+
+    }*/
+
 
 //login
 

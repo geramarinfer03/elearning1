@@ -39,10 +39,10 @@
 
 
    <div class="form-group has-feedback">
-       {!! Form::hidden('estado', '1') !!}
-       {!! Form::label('estado', 'Activar') !!}
-       {{ Form::checkbox('estado', 'activo', true, ['class' => 'field']) }}
-       {!! $errors->has('estado')?$errors->first('estado'):'' !!}
+        {!! Form::hidden('estado', '0') !!}
+        {!! Form::label('estado', 'Estado') !!}
+        {{ Form::checkbox('estado', 1, true, ['class' => 'field']) }}
+        {!! $errors->has('estado')?$errors->first('estado'):'' !!}
    </div>
 
  
