@@ -4609,8 +4609,9 @@ table.text-center th {
 .user-block .description,
 .user-block .comment {
   display: block;
-  margin-left: 50px;
+  margin-left: 0px;
 }
+
 .user-block .username {
   font-size: 16px;
   font-weight: 600;

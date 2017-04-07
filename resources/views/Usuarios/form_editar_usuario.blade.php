@@ -229,7 +229,7 @@
 
 </div> <!-- end row -->
 </section>
-</div>
+<div>
 @include('modal_usuario')
 </div>
 

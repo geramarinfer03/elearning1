@@ -3,6 +3,7 @@
 namespace elearning1\Http\Controllers;
 
 use elearning1\Curso;
+use elearning1\Semana;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Auth\Guard;
@@ -64,6 +65,9 @@ class CursoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
+
+      
       $this->validate($request, [
         'nombre'=>'Required',
         //'duracion'=>'Required',
@@ -94,7 +98,7 @@ class CursoController extends Controller
 
 
 
-        Curso::create([
+       Curso::create([
           'nombre' => $nombre,
           'duracion' => $duracion,
           'fecha_inicio' => $finicial,
@@ -102,10 +106,31 @@ class CursoController extends Controller
           'estado' => $estado
         ]);
 
-        while($duracion > 0){
-          
 
+
+
+        
+        $curso_id = Curso::all()->last()-> id_curso;
+
+
+        $contador = 1;
+        
+        while($duracion > 0){
           $duracion = $duracion - 1;
+           
+            
+            $titulo = "Semana #".$contador;
+            
+            Semana::create([
+                'tema' => $titulo,
+                'visible'=> '1',
+                'estado' => '1',
+                'curso' => $curso_id,
+                'secuencia' => $contador
+            ]);
+            
+             $contador = $contador+1;
+            
         }
 
 

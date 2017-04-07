@@ -26,7 +26,7 @@ lenguaje VARCHAR(10),
 remember_token varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
 created_at timestamp NOT NULL DEFAULT now(),
 updated_at timestamp NOT NULL DEFAULT now(),
-FOREIGN KEY (rol) REFERENCES Rol(id_rol) 
+FOREIGN KEY (id_rol) REFERENCES Rol(id_rol) 
 );
 
 CREATE TABLE Tipo_Recurso (
@@ -163,7 +163,7 @@ values
 ('Moderador',1),
 ('Estudiante',1);
 
-insert into Usuario(nombre,email, password, rol, genero, pais,fecha_ultimo_ingreso,ip, os, navegador, lenguaje)
+insert into Usuario(nombre,email, password, id_rol, genero, pais,fecha_ultimo_ingreso,ip, os, navegador, lenguaje)
 values
 ('Dario Rios Navarro', 'admin', 'admin', 1, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Windows', 'Firefox', 'es'),
 ('Jose Marin Fernandez', 'geramarinfer', 'root', 2, 'masculino', 'Colombia', now(), '172.13.24.1', 'Linux', 'Chrome', 'es');
