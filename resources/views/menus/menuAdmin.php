@@ -27,7 +27,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="/cursos"><i class="fa fa-circle-o"></i>Listar</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i>Mis Cursos</a></li>
+                <li><a href="/mis_cursos"><i class="fa fa-circle-o"></i>Mis Cursos</a></li>
               </ul>
             </li>
             <li class="treeview">

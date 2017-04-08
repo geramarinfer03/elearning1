@@ -4,7 +4,7 @@
 
 <section class="content-header">
   <h1>
-    Lista de Cursos
+    {{$titulo}}
 </h1>
 
 </section>

@@ -20,8 +20,7 @@ class CursoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
 
         //todos los cursos
        //$cursos  = Curso::all();
@@ -47,14 +46,30 @@ class CursoController extends Controller
 
 
        }
-     }
-
-
-       //cursos que en los que no esta matriculado el usuario
-       
-
-       return view('Cursos.index',['cursos'=>$mat_curso]);  
+      }
+      $titulo = "Lista de Cursos";
+       //return view('Cursos.index',['cursos'=>$mat_curso]);  
+      return view('Cursos.index')->with('cursos', $mat_curso)
+                                 ->with('titulo', $titulo);
    }
+
+   public function misCursos(){
+
+    $titulo = "Mis Cursos";
+    $id =\Auth::user();
+
+    $mat_curso = Curso::distinct()->select('Curso.id_curso', 'Curso.nombre', 'Curso.duracion', 'Curso.fecha_inicio', 'Curso.fecha_final', 'Curso.estado')->join('Matricula', 'Matricula.curso', 'Curso.id_curso')
+                                         ->where('Matricula.usuario', '='. $id->id);
+
+
+
+     return view('Cursos.index')->with('cursos', $mat_curso)
+                                 ->with('titulo', $titulo);
+
+   }
+
+
+
 
     /**
      * Show the form for creating a new course.

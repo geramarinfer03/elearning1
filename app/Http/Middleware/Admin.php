@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Guard;
 
 use Closure;
 use Session;
+use Alert;
 class Admin
 {
     protected $auth;
@@ -24,7 +25,10 @@ class Admin
     {
        // dd($this->auth->user());
         if($this->auth->user()->rol->id_rol != 1){
-            return redirect()->to('PermisosError');
+
+            Alert::error('No cuenta con los permisos para realizar esta accción', 'Contacte con uno de los administradores del sitio')->persistent("Close this");
+            return redirect()->back()->with('errors', 'Usted no tiene permisos de Administrador')
+            //return redirect()->to('PermisosError');
         }
         return $next($request);
     }
