@@ -66,6 +66,16 @@
   background: none;
 }
 
+.inputN{
+   border: none;
+  font-size: 18px;
+    color: #9E9E9E;
+}
+
+.inputN:disabled{
+  background: none;
+}
+
 .row_oscura{
   background: gray;
 }
@@ -81,4 +91,14 @@
 .visibleclass{
   display: table;
 
+}
+
+
+.tituloP{
+    color: #039BE5;
+    font-size: 20px;
+}
+
+.notesP{
+    color: #9E9E9E;
 }

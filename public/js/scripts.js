@@ -84,15 +84,20 @@ $(function(){
 });
 
 
-function edicion(){
+/*function edicion(id){
+    
 
- if($('.inputS').prop('disabled')){
-    $('.hiddenclass').prop('class', 'visibleclass');
-    $('.inputS').prop('disabled', false);
+ if($('.inp'+id).prop('disabled')){
+    $('#label'+id).prop('class', 'visibleclass');
+    $('.inp'+id).prop('disabled', false);
+     
+    $('.inp'+id).focus();
+
     
   }else{
-     $('.inputS').prop('disabled', true);
+     $('#label'+id).prop('class', 'hiddenclass');
+     $('.inp'+id).prop('disabled', true);
   }
   
-}
+}*/
 
