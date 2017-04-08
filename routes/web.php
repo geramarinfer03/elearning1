@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-/* ------ Cursos rutas ------------------- */
+
 Route::group( ['middleware'=>['auth','admin']], function() {
 
 	Route::get('usuarios', 'UsuarioController@listado_usuarios')->name('usuarios');
@@ -59,7 +59,14 @@ Route::group( ['middleware'=>['auth','admin']], function() {
 
 });
 
+/* ------ Cursos rutas ------------------- */
 Route::resource('cursos','CursoController');
+
+/*------ Recursos rutas ----- */ 
+Route::get('editarRecurso/{id}','RecursoController@edit');
+Route::post('updatecurso','RecursoController@update');
+Route::get('createRecurso','RecursoController@create');
+Route::post('storeCurso','RecursoController@store');
 
 
  Route::get('form_editar_usuario/{id}', 'UsuarioController@form_editar_usuario');

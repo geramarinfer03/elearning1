@@ -84,6 +84,23 @@ $(function(){
 });
 
 
+function edicion(id_recurso) {
+  //funcion para mostrar y etditar la informacion del usuario
+ 
+ // $("#usuario_seleccionado").val(id_usuario);
+    
+  $("#capa_modal").show();
+  $("#capa_para_edicion").show();
+
+  var url = "/editarRecurso/"+id_recurso+"";
+
+  /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+  $.get(url,function(resul){
+  $("#contenido_capa_edicion").html(resul);  //leccion 10
+  })
+    irarriba();
+}
+
 /*function edicion(id){
     
 

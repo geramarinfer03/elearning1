@@ -5,32 +5,35 @@
 
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="box box-primary">
-                        <div class="box-header">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Cursos no matriculados</h4>
-                                </div>
-                            </div>
+                <div class="col-md-12">
+                    <div class="login-box-body">
+                        {!! Form::model($recurso) !!}
+                        <div class="form-group has-feedback">
+                            {!! Form::label('nombre', 'Nombre') !!} {!! Form::text('nombre', null, ['class'=>'form-control']) !!}
+                            <span class="fa fa-book form-control-feedback"></span> {!! $errors->has('nombre')?$errors->first('nombre'):'' !!}
                         </div>
+                        
+                        <div class="form-group has-feedback">
+                            {!! Form::label('notas', 'Notas') !!} {!! Form::text('notas', null, ['class'=>'form-control']) !!}
+                            <span class="fa fa-book form-control-feedback"></span> {!! $errors->has('notas')?$errors->first('url'):'' !!}
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            {!! Form::label('url', 'URL') !!} {!! Form::text('url', null, ['class'=>'form-control']) !!}
+                            <span class="fa fa-book form-control-feedback"></span> {!! $errors->has('notas')?$errors->first('url'):'' !!}
+                        </div>
+        
 
-                        <table id="tabla_cursos_no_mat" class="display table table-hover" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th style="width:50px">Id</th>
-                                    <th>Nombre</th>
-                                    <th>Duracion</th>
-                                    <th>Inicio</th>
-                                    <th>Termina</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             
 
-                            </tbody>
-                        </table>
-                       
+
+                        <div class="row">
+                            <div class="col-xs-4">
+                                {!! Form::submit('Guardar', ['class'=>'btn btn-primary btn-block btn-flat']) !!}
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        {!! Form::close() !!}
+
 
                     </div>
                 </div>

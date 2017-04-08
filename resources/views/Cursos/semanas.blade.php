@@ -57,15 +57,15 @@
 
                                 <tr>
                                     <td>
-                                        
-                                       
-                                        
-                                        <p class = "tituloP">{{$recurso->nombre}}</p>
-                                        <p class = "notesP">{{$recurso->notas}}</p>
+
+
+
+                                        <p class="tituloP">{{$recurso->nombre}}</p>
+                                        <p class="notesP">{{$recurso->notas}}</p>
                                     </td>
 
                                     <td>
-                                        <button id="btn_activar_edicion" style="color:blue; margin:5px;" onclick="edicion({{$recurso->id_recurso}})" class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                        <button id="btn_activar_edicion" style="color:blue; margin:5px;" onclick="edicion(<?= $recurso->id_recurso; ?>)" class="btn btn-default"><i class="fa fa-edit"></i></button>
                                         <!--button id="btn_activar_edicion" style="color:blue; margin:5px;" onclick="edicion()" class="btn btn-default"><i class="fa  fa-floppy-o"></i></button-->
                                     </td>
 
@@ -73,8 +73,8 @@
                                 </tr>
 
 
-                               @endif 
-                                
+                                @endif
+
                                 <!--@if($recurso->tipo_recurso == 2)
 
                                 <tr>
@@ -131,7 +131,7 @@
 
             </div>
         </div>
-
+        @include('modal_usuario')
     </div>
 </div>
 <!--FIN ROW  -->
