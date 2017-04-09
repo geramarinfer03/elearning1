@@ -79,20 +79,20 @@ function tabular(html, semana, recPadre) {
 
 
 
-function activarEdicion(){
-    if($('.inputS').prop('disabled')){
+function activarEdicion() {
+    if ($('.inputS').prop('disabled')) {
         $('.hiddenclass').prop('class', 'visibleclass');
         $('.inputS').prop('disabled', false);
         $(".main_table_seccion").sortable("enable");
-        
-     
-   }else{
-      
-      $('.inputS').prop('disabled', true);
-      $('.visibleclass').prop('class', 'hiddenclass');
-      $(".main_table_seccion").sortable("disable");
 
-  }
+
+    } else {
+
+        $('.inputS').prop('disabled', true);
+        $('.visibleclass').prop('class', 'hiddenclass');
+        $(".main_table_seccion").sortable("disable");
+
+    }
 
 }
 
@@ -117,11 +117,11 @@ function crearRecurso(id_padre) {
     $("#capa_modal").show();
     $("#capa_para_edicion").show();
 
-    var url = "/crearRecurso/" + id_padre + "";
+    var url = "/crearRecurso/" + id_padre;
 
 
     $.get(url, function (resul) {
-        $("#contenido_capa_edicion").html(resul); 
+        $("#contenido_capa_edicion").html(resul);
     })
     irarriba();
 }
@@ -144,79 +144,59 @@ function crearRecursoSemana(semana) {
 }
 
 
-function cambiarNombreSemana(idS){
-     $('#btnCnameSemana_' + idS).attr('class', 'btn_semanaNombre');   
+function cambiarNombreSemana(idS) {
+    $('#btnCnameSemana_' + idS).attr('class', 'btn_semanaNombre');
 }
 
 
 $(function () {
-   // var contador = 1;
+
+    /* var array = [];*/
+
     $('.main_table_seccion').sortable({
-        stop: function() {
-             var arrayPosition = Array();
-         
-            var datoSelect;
-            $.map($(this).find('tr'),function(el){
-             
-              var intemID = el.id;
+        stop: function () {
+            $.map($(this).find('tr'), function (el) {
+                var intemID = el.id;
+                var index = $(el).index();
 
-             // arrayR.push(intemID);
-            arrayPosition.push(intemID);
+                console.log(intemID);
+                console.log(index);
 
 
-             
-              //console.log(intemID);
-             //console.log(contador);
 
-              
-
-
-               //contador++;
-                /*$.ajax({
-                    url:'/updateDrag',
+                $.ajax({
+                    url: '/updateDrag',
                     type: 'POST',
                     dataType: 'json',
-                    data: {intemID:intemID, itemIndex:itemIndex}
-                })*/
-               
+                    data: {
+
+                        id: intemID,
+                        sec: index
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (er) {
+                        console.log('error');
+                    }
+                })
+
+
+
             })
-             
-           /* var myJsonString = JSON.stringify(arrayPosition);
-            console.log(myJsonString);
-    
-             $.ajax({
-                type: "post",
-                url: "/updateDrag",
-                dataType: 'json',
-                data:  myJsonString
-              });
-*/
 
-alert(arrayPosition);
 
-$.ajax(
-   {
-        url: "/updateDrag/"+arrayPosition,
-        type: "get",
-        data: arrayPosition,
-        dataType: 'json',
-        success: function(msg) {
-            alert(msg);
-        }
-    }
-);
 
-           
-           //var url = "/updateDrag/"+arrayPosition;
-
-//
-           // $.post(url, function (resul) {
-          //    $(this).html(resul); 
-          //  })
-
-           // contador = 1;
 
         }
     });
+
     $(".main_table_seccion").sortable("disable");
+});
+
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
 });

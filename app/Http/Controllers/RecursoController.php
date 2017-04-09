@@ -17,7 +17,7 @@ class RecursoController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -78,13 +78,18 @@ class RecursoController extends Controller
         
          $sem = Semana::find($semana);
         
-        $contador = $sem -> secuencia;
+         $contador = Recurso::where('Recurso.semana', '=', $semana)->max('secuencia');
+         $contador= $contador+1;
+        
+
+        
+       /* $contador = $sem -> secuencia;
         $contador= $contador +1;
         
         $result1= $sem->update([
             
             'secuencia' =>$contador
-        ]);
+        ]);*/
  
         
        $result = Recurso::create([
@@ -99,7 +104,7 @@ class RecursoController extends Controller
           'semana' => $semana
         ]);
         
-       if($result && $result1){
+       if($result){
              alert()->success('Recurso creado exitosamente ');
          }
         else{
@@ -229,7 +234,7 @@ class RecursoController extends Controller
 
 
     /*--------D R A G   A N D   D R O P*/
-    public function updateDrag($r){
+    /*public function updateDrag($r){
 
 
       
@@ -237,19 +242,45 @@ class RecursoController extends Controller
 
          
         /* $id = Input::get('id');
-         $sec = Input::get('sec');*/
+         $sec = Input::get('sec');
 
          
       
              
-       /*  $rec = Recurso::find($id);*/
+       /*  $rec = Recurso::find($id);
          
          alert()->success('Recurso creado exitosamente ');
         
           return view('home');
          
          
-   }
+   }*/
+    
+    public function updateDrag(Request $request){
 
+
+
+          $id = $request->input('id');
+          $sec = $request->input('sec');
+        
+          $rec = Recurso::find($id);
+        
+          $result=   $rec->update([
+             'secuencia' => $sec
+          ]);
+          
+
+        if($result){
+        
+          return response()->json(['done']);
+        }
+        
+        else{
+             return response()->json(['fail']);
+        }
+         
+         
+   }  
+    
 
 }
