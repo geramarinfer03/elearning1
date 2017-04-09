@@ -3,8 +3,13 @@
 namespace elearning1\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Illuminate\Contracts\Auth\Guard;
 use elearning1\user;
+use elearning1\Curso;
+use elearning1\Matricula;
+
+use Alert;
 
 class IndexController extends Controller
 {
@@ -13,9 +18,13 @@ class IndexController extends Controller
     }
 
     public function home(){
-        
-       //$usuarioactual=\Auth::user();
+        	 
+    	$id =\Auth::user();
 
-      return view('home');/*->with("usuario",  $usuarioactual);*/
+    	$mat_curso = Curso::distinct()->select('Curso.id_curso', 'Curso.nombre', 'Curso.duracion', 'Curso.fecha_inicio', 'Curso.fecha_final', 'Curso.estado')->join('Matricula', 'Matricula.curso', 'Curso.id_curso')
+                                          ->where('Matricula.usuario', '=', $id->id)->get();
+
+      Alert::success('Bienvenido  ' . $id->nombre);
+      return view('home')->with("cursos",  $mat_curso);
     }
 }

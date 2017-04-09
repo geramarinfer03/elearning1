@@ -59,8 +59,8 @@ class Kernel extends HttpKernel
         'sweetalert' => \UxWeb\SweetAlert\ConvertMessagesIntoSweetAlert::class,
 
         'admin' => \elearning1\Http\Middleware\Admin::class,
-        'editor' => \elearning1\Http\Middleware\editor::class,
-        'profe' => \elearning1\Http\Middleware\profe::class,
+        'editor' => \elearning1\Http\Middleware\Editor::class,
+        'profe' => \elearning1\Http\Middleware\Profe::class,
 
     ];
 }

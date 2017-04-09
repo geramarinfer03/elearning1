@@ -37,6 +37,7 @@ Route::group(['middleware' => 'guest'], function () {
 	// Registration routes...
 	Route::get('registrarse', 'Auth\RegisterController@showRegistrationForm');
 	Route::post('registrarse', ['as' => 'registrarse', 'uses' => 'Auth\RegisterController@register']);
+
 });
 
 // Authentication Routes
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/home', 'IndexController@home')->name('home');
 	Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
+	Route::get('misCursos', 'CursoController@misCursos')->name('misCursos');
 
 
 });

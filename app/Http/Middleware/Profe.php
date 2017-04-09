@@ -2,18 +2,10 @@
 
 namespace elearning1\Http\Middleware;
 
-use Illuminate\Contracts\Auth\Guard;
-
 use Closure;
-use Session;
-use Alert;
-class Admin
-{
-    protected $auth;
 
-    public function __construct(Guard $auth){
-        $this->auth = $auth;
-    }
+class profe
+{
     /**
      * Handle an incoming request.
      *
@@ -21,10 +13,9 @@ class Admin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-    {
-       // dd($this->auth->user());
-        if($this->auth->user()->rol->id_rol != 1){
+    public function handle($request, Closure $next){
+
+         if($this->auth->user()->rol->id_rol < 3){
 
             Alert::error('No cuenta con los permisos para realizar esta accción', 'Contacte con uno de los administradores del sitio')->persistent("cerrar");
             return redirect()->back()->with('errors', 'Usted no tiene permisos de Administrador');

@@ -163,7 +163,7 @@
 
       <!-- Left side column. contains the logo and sidebar -->
      <section>
-     @if ($usuario != null && $usuario->rol->id_rol == 1)
+      @if ($usuario != null && $usuario->rol->id_rol < 6)
         @include('menus.menuAdmin');
       @endif
     </section>
