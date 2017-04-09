@@ -36,7 +36,7 @@ class RecursoController extends Controller
         
         $recurso = Recurso::find($id);
         
-        $semana = $recurso -> semana;
+        $semana = $recurso ->semana;
          return view('Recursos.crearRecurso')->with('padre',$id)
                                              ->with('semana',$semana);
     }
@@ -229,19 +229,24 @@ class RecursoController extends Controller
 
 
     /*--------D R A G   A N D   D R O P*/
-    public function updateDrag (){
+    public function updateDrag($r){
+
+
+      
+
+
          
-         $id = Input::get('id');
-         $sec = Input::get('sec');
+        /* $id = Input::get('id');
+         $sec = Input::get('sec');*/
+
          
-         
+      
              
        /*  $rec = Recurso::find($id);*/
          
          alert()->success('Recurso creado exitosamente ');
-         return back();
-         
-         
+        
+          return view('home');
          
          
    }

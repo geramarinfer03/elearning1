@@ -150,22 +150,71 @@ function cambiarNombreSemana(idS){
 
 
 $(function () {
+   // var contador = 1;
     $('.main_table_seccion').sortable({
         stop: function() {
-            $.map($(this).find('TR'),function(el){
-             var intemID = el.id;
-             var itemIndex = $(el).index();
-        
-              console.log(intemID);
-              console.log(itemIndex);
-                
+             var arrayPosition = Array();
+         
+            var datoSelect;
+            $.map($(this).find('tr'),function(el){
+             
+              var intemID = el.id;
+
+             // arrayR.push(intemID);
+            arrayPosition.push(intemID);
+
+
+             
+              //console.log(intemID);
+             //console.log(contador);
+
+              
+
+
+               //contador++;
                 /*$.ajax({
                     url:'/updateDrag',
                     type: 'POST',
                     dataType: 'json',
                     data: {intemID:intemID, itemIndex:itemIndex}
                 })*/
+               
             })
+             
+           /* var myJsonString = JSON.stringify(arrayPosition);
+            console.log(myJsonString);
+    
+             $.ajax({
+                type: "post",
+                url: "/updateDrag",
+                dataType: 'json',
+                data:  myJsonString
+              });
+*/
+
+alert(arrayPosition);
+
+$.ajax(
+   {
+        url: "/updateDrag/"+arrayPosition,
+        type: "get",
+        data: arrayPosition,
+        dataType: 'json',
+        success: function(msg) {
+            alert(msg);
+        }
+    }
+);
+
+           
+           //var url = "/updateDrag/"+arrayPosition;
+
+//
+           // $.post(url, function (resul) {
+          //    $(this).html(resul); 
+          //  })
+
+           // contador = 1;
 
         }
     });

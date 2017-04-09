@@ -85,7 +85,7 @@ Route::group(['middleware'=>['profe']], function() {
 	Route::post('recursos.update', 'RecursoController@update');
 	Route::get('editarRecurso/{id}','RecursoController@edit');
 	Route::get('crearRecursoSemana/{id}','RecursoController@crearRecursoSemana');
-	Route::get('crearRecurso/{id}','RecursoController@crearRecurso'); //crea recurso en seccion
+	Route::get('crearRecurso','RecursoController@crearRecurso'); //crea recurso en seccion
 });
 
 
@@ -93,7 +93,7 @@ Route::post('guardarNombreSemana', 'RecursoController@setNameWeek')->name('guard
 
 /*------ Recursos rutas ----- */ 
 
-
+Route::get('updateDrag/{r}','RecursoController@updateDrag')->name('updateDrag');
 
 
 

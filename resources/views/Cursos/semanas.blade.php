@@ -47,7 +47,9 @@
 
 
                                 @foreach($semana->recursos as $recurso)
-                                
+                                  @php
+                                    $n = 0;
+                                  @endphp
                                 
                                 
                                 
@@ -66,9 +68,9 @@
 											
                           				@endif
 
-                          				@if($recurso->tipo_recurso == 1||$recurso->tipo_recurso == 5)
+                          				@if($recurso->tipo_recurso == 1|| $recurso->tipo_recurso == 5)
          									<script type="text/javascript">
-												tabular("<tr class='opacity'><td><a style='text-decoration: underline;' href='{{$recurso->url}}'  target='_blank'>{{$recurso->nombre}}</a><p class='notesP'>{{$recurso->notas}}</p></td><td><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i></button></td></tr>",{{$recurso->semana}}, {{$recurso->recurso_padre}});                         					
+												tabular("<tr id='{{$recurso->id_recurso}} class='opacity'><td><a style='text-decoration: underline;' href='{{$recurso->url}}'  target='_blank'>{{$recurso->nombre}}</a><p class='notesP'>{{$recurso->notas}}</p></td><td><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i></button></td></tr>",{{$recurso->semana}}, {{$recurso->recurso_padre}});                         					
                           					</script>
                           				@endif
                                 
@@ -95,7 +97,7 @@
                                 
                                        @if($recurso->tipo_recurso == 3 ||$recurso->tipo_recurso == 4  )
 											<script type="text/javascript">
-												tabular("<tr id='{{$recurso->id_recurso}}'><td><p class='tituloP'>{{$recurso->nombre}}</p><p class='notesP'>{{$recurso->notas}}</p></td><td><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i></button></td></tr>", {{$recurso->semana}}, {{$recurso->recurso_padre}});
+												tabular("<tr id='{{$recurso}}'><td><p class='tituloP'>{{$recurso->nombre}}</p><p class='notesP'>{{$recurso->notas}}</p></td><td><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i></button></td></tr>", {{$recurso->semana}}, {{$recurso->recurso_padre}});
 											</script>
                                 
                                         
@@ -104,13 +106,13 @@
 
                           				@if($recurso->tipo_recurso == 1||$recurso->tipo_recurso == 5)
          									<script type="text/javascript">
-												tabular("<tr id='{{$recurso->id_recurso}}'><td><a style='text-decoration: underline;' href='{{$recurso->url}}'  target='_blank'>{{$recurso->nombre}}</a><p class='notesP'>{{$recurso->notas}}</p></td><td><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i></button></td></tr>",{{$recurso->semana}}, {{$recurso->recurso_padre}});                         					
+												tabular("<tr id='{{$recurso}}'><td><a style='text-decoration: underline;' href='{{$recurso->url}}'  target='_blank'>{{$recurso->nombre}}</a><p class='notesP'>{{$recurso->notas}}</p></td><td><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i></button></td></tr>",{{$recurso->semana}}, {{$recurso->recurso_padre}});                         					
                           					</script>
                           				@endif
                                 
                                         @if($recurso->tipo_recurso == 2)
          									<script type="text/javascript">
-												tabular("<tr id='{{$recurso->id_recurso}}'><td><table id='mainmain_table_seccion_table{{$recurso->id_recurso}}' class='display table table-hover conB'><thead><tr><th><p class='tituloP'>{{$recurso->nombre}}</p><p class='notesP'>{{$recurso->notas}}</p></th><th><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='btn btn-default hiddenclass'><i class='fa fa-edit'></i></button><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='crearRecurso({{$recurso->id_recurso}})' class='btn btn-default hiddenclass'><i class='fa fa-plus'></i></button></th></tr></thead><tbody id='sem{{$recurso->semana}}_row{{$recurso->id_recurso}}' class='main_table_seccion'></table></td></tr>",{{$recurso->semana}}, {{$recurso->recurso_padre}});                         					
+												tabular("<tr id='{{$recurso}}'><td><table id='mainmain_table_seccion_table{{$recurso->id_recurso}}' class='display table table-hover conB'><thead><tr><th><p class='tituloP'>{{$recurso->nombre}}</p><p class='notesP'>{{$recurso->notas}}</p></th><th><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='btn btn-default hiddenclass'><i class='fa fa-edit'></i></button><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='crearRecurso({{$recurso->id_recurso}})' class='btn btn-default hiddenclass'><i class='fa fa-plus'></i></button></th></tr></thead><tbody id='sem{{$recurso->semana}}_row{{$recurso->id_recurso}}' class='main_table_seccion'></table></td></tr>",{{$recurso->semana}}, {{$recurso->recurso_padre}});                         					
                           					</script>
                           		        @endif
                                 
