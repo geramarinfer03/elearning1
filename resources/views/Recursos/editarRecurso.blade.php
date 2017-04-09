@@ -7,7 +7,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="login-box-body">
-                        {!! Form::model($recurso,['route'=>['recursos.update', $recurso->id_recurso], 'method'=>'PATCH', 'class'=>'form-horizontal']) !!}
+                        {!! Form::model($recurso,['url'=>'recursos.update', 'method'=>'POST', 'class'=>'form-horizontal']) !!}
+                        
+                        {!! Form::hidden('id_recurso', $recurso->id_recurso) !!}
                         <div class="form-group has-feedback">
                             {!! Form::label('nombre', 'Nombre') !!} {!! Form::text('nombre', null, ['class'=>'form-control']) !!}
                             <span class="fa fa-book form-control-feedback"></span> {!! $errors->has('nombre')?$errors->first('nombre'):'' !!}

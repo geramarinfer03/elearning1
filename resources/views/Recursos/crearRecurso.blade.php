@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="login-box-body">
-                        {!! Form::open(['route'=>'recursos.store','method' => 'post','class'=>'form-horizontal']) !!}
+                        {!! Form::open(['url'=>'recursos.store','method' => 'post','class'=>'form-horizontal']) !!}
 
                         <div class="form-group has-feedback">
                             {!! Form::label('nombre', 'Nombre') !!} {!! Form::text('nombre', null, ['class'=>'form-control','placeholder'=>'Nombre']) !!}

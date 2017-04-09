@@ -25,7 +25,7 @@ class editor
      */
     public function handle($request, Closure $next){
 
-        if($this->auth->user()->rol->id_rol <= 2){
+        if($this->auth->user()->rol->id_rol > 2){
 
             Alert::error('No cuenta con los permisos para realizar esta accción', 'Contacte con uno de los administradores del sitio')->persistent("cerrar");
             return redirect()->home();

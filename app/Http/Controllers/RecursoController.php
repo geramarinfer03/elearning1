@@ -139,9 +139,9 @@ class RecursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        
+    
          $this->validate($request, [
           'nombre'=>'Required',
           'notas'=>'Required',
@@ -149,11 +149,14 @@ class RecursoController extends Controller
           
           ]);
         
+
+
           $nombre = $request->input('nombre');
           $notas = $request->input('notas');
           $url = $request->input('url');
           $vis = $request->input('visibl');
           $estado = $request->input('estado');
+          $id = $request->input('id_recurso');
         
          $recurso = Recurso::find($id); 
         
@@ -166,7 +169,7 @@ class RecursoController extends Controller
              
          ]);
              
-             
+
          if($result){
              alert()->success('Recurso modificado exitosamente');
          }

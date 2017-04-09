@@ -74,23 +74,32 @@ Route::group( ['middleware'=>['auth','admin']], function() {
 });
 
 /* ------ Cursos rutas ------------------- */
-//Route::resource('cursos','CursoController');
 
 Route::get('cursos.index', 'CursoController@index');
 Route::get('cursos.show/{id}', 'CursoController@show');
+
+Route::group(['middleware'=>['profe']], function() {
+	Route::post('recursos.store', 'RecursoController@store');
+	Route::post('recursos.update', 'RecursoController@update');
+	Route::get('editarRecurso/{id}','RecursoController@edit');
+	Route::get('crearRecursoSemana/{id}','RecursoController@crearRecursoSemana');
+	Route::get('crearRecurso/{id}','RecursoController@crearRecurso'); //crea recurso en seccion
+});
 
 
 
 
 /*------ Recursos rutas ----- */ 
-Route::resource('recursos','RecursoController');
 
-Route::get('editarRecurso/{id}','RecursoController@edit');
-Route::post('updateRecurso','RecursoController@update');
-Route::get('createRecurso','RecursoController@create');
-Route::post('storeCurso','RecursoController@store');
-Route::get('crearRecurso/{id}','RecursoController@crearRecurso');
-Route::get('crearRecursoSemana/{id}','RecursoController@crearRecursoSemana');
+
+
+
+
+//Route::post('updateRecurso','RecursoController@update');
+//Route::get('createRecurso','RecursoController@create');
+//Route::post('storeCurso','RecursoController@store');
+
+
 
 
 
