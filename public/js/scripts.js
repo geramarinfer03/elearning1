@@ -79,28 +79,22 @@ function tabular(html, semana, recPadre) {
 
 
 
-$(function () {
-    $('.main_table_seccion').sortable({
-        stop: function() {
-            $.map($(this).find('tr'),function(el){
-             var intemID = el.id;
-             var itemIndex = $(el).index();
+function activarEdicion(){
+    if($('.inputS').prop('disabled')){
+        $('.hiddenclass').prop('class', 'visibleclass');
+        $('.inputS').prop('disabled', false);
+        $(".main_table_seccion").sortable("enable");
         
-              console.log(intemID);
-              console.log(itemIndex);
-                
-                /*$.ajax({
-                    url:'/updateDrag',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {intemID:intemID, itemIndex:itemIndex}
-                })*/
-            })
+     
+   }else{
+      
+      $('.inputS').prop('disabled', true);
+      $('.visibleclass').prop('class', 'hiddenclass');
+      $(".main_table_seccion").sortable("disable");
 
-        }
-    });
-});
+  }
 
+}
 
 function edicion(id_recurso) {
     //funcion para mostrar y etditar la informacion del usuario
@@ -112,9 +106,9 @@ function edicion(id_recurso) {
 
     var url = "/editarRecurso/" + id_recurso + "";
 
-    /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+
     $.get(url, function (resul) {
-        $("#contenido_capa_edicion").html(resul); //leccion 10
+        $("#contenido_capa_edicion").html(resul);
     })
     irarriba();
 }
@@ -125,9 +119,9 @@ function crearRecurso(id_padre) {
 
     var url = "/crearRecurso/" + id_padre + "";
 
-    /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+
     $.get(url, function (resul) {
-        $("#contenido_capa_edicion").html(resul); //leccion 10
+        $("#contenido_capa_edicion").html(resul); 
     })
     irarriba();
 }
@@ -148,3 +142,32 @@ function crearRecursoSemana(semana) {
     })
     irarriba();
 }
+
+
+function cambiarNombreSemana(idS){
+     $('#btnCnameSemana_' + idS).attr('class', 'btn_semanaNombre');   
+}
+
+
+$(function () {
+    $('.main_table_seccion').sortable({
+        stop: function() {
+            $.map($(this).find('TR'),function(el){
+             var intemID = el.id;
+             var itemIndex = $(el).index();
+        
+              console.log(intemID);
+              console.log(itemIndex);
+                
+                /*$.ajax({
+                    url:'/updateDrag',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {intemID:intemID, itemIndex:itemIndex}
+                })*/
+            })
+
+        }
+    });
+    $(".main_table_seccion").sortable("disable");
+});

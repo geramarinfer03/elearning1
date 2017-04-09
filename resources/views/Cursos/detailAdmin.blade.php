@@ -36,6 +36,20 @@
                         <li class="list-group-item">
                             <b>Fecha Final</b> <a class="pull-right">{{$fechaF}}</a>
                         </li>
+                        @unless(!Auth::check())
+                           @if(Auth::user()->rol->id_rol == 1)
+                               <li class="list-group-item">
+                                <b>Perfil en el curso</b> <a class="pull-right">Administrador</a>
+                              </li>
+                           @else
+                              <li class="list-group-item">
+                                <b>Perfil en el curso</b> <a class="pull-right">{{$nombreRol}}</a>
+                              </li>
+                           @endif
+                        
+                        @endunless
+                        
+
                     </ul>
 
                     <hr>
@@ -105,11 +119,22 @@
         </div>
     </div> FIN ROW  -->
 
+                  @if(Auth::check() && Auth::user()->rol->id_rol == 1)
+                         <button type="button" style="margin-bottom: 15px;"  onclick="activarEdicion()" class="btn btn-primary btn-md pull-left"><i class="fa fa-edit"></i> Activar Edición</button>
+                  @else
 
+                    @if( $isMatriculated < 5)
+                        <button type="button" style="margin-bottom: 15px;"  onclick="activarEdicion()" class="btn btn-primary btn-md pull-left"><i class="fa fa-edit"></i> Activar Edición</button>
+                
+                    @endif
+                   
+                  @endif
+                
+                    
                         @foreach($semanas as $semana)
                           @include('Cursos.semanas')
                         @endforeach
-
+    
                 </div>
                 <!-- /.tab-content -->
             </div>

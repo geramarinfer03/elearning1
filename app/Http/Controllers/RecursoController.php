@@ -5,6 +5,8 @@ namespace elearning1\Http\Controllers;
 use elearning1\Semana;
 use elearning1\Recurso;
 use Illuminate\Http\Request;
+use Illuminate\HttpResponse;
+use Input;
 
 class RecursoController extends Controller
 {
@@ -191,6 +193,32 @@ class RecursoController extends Controller
     {
         //
     }
+
+    public function setNameWeek(Request $request){
+        $data=$request->all();
+        $nombreSemana = $data['nombreSemana'];
+        $id_semana = $data['id_semana'];
+
+        $week = Semana::find($id_semana);
+
+        $week->tema = $nombreSemana;
+
+        $resultado = $week->save();
+
+        if($resultado){
+           alert()->success('Modificacion Correcta.', 'Guardando!');
+
+
+        }else{
+
+           alert()->error('Modificacion Incorrecta.', '¡Algo Ocurrio!');
+
+        }
+
+        return redirect()->back();
+
+
+    }
     
     
     
@@ -198,4 +226,25 @@ class RecursoController extends Controller
         
         return view('Recursos.etiquetaTexto');
     }
+
+
+    /*--------D R A G   A N D   D R O P*/
+    public function updateDrag (){
+         
+         $id = Input::get('id');
+         $sec = Input::get('sec');
+         
+         
+             
+       /*  $rec = Recurso::find($id);*/
+         
+         alert()->success('Recurso creado exitosamente ');
+         return back();
+         
+         
+         
+         
+   }
+
+
 }

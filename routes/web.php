@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 	Route::get('misCursos', 'CursoController@misCursos')->name('misCursos');
 
+	Route::post('crearMatricula', 'MatriculaController@store');
+
 
 });
 
@@ -59,7 +61,7 @@ Route::group( ['middleware'=>['auth','admin']], function() {
  	Route::post('editar_usuario', 'UsuarioController@editar_usuario');
  	Route::post('editar_matricula', 'MatriculaController@update');
  	Route::get('matricularUsuario/{id}', 'MatriculaController@matriculaForm');
-	Route::post('crearMatricula', 'MatriculaController@store');
+	
 
 
 	Route::get('cursos.create', 'CursoController@create');
@@ -87,7 +89,7 @@ Route::group(['middleware'=>['profe']], function() {
 });
 
 
-
+Route::post('guardarNombreSemana', 'RecursoController@setNameWeek')->name('guardarNombreSemana');
 
 /*------ Recursos rutas ----- */ 
 

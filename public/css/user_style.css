@@ -49,6 +49,14 @@
   height: 34px;
 }
 
+.btn_semanaNombre{
+  background: transparent;
+  color: green;
+  border: none;
+  width: 34px;
+  height: 34px;
+}
+
 .btn_inv{
   display: none;
 }

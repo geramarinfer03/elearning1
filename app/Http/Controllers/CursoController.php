@@ -6,6 +6,7 @@ use elearning1\Curso;
 use elearning1\Semana;
 use Alert;
 use elearning1\Matricula;
+use elearning1\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Auth\Guard;
@@ -40,14 +41,17 @@ class CursoController extends Controller
 
        }else{
 
-          $mat_curso = Curso::distinct()->select('Curso.id_curso', 'Curso.nombre', 'Curso.duracion', 'Curso.fecha_inicio', 'Curso.fecha_final', 'Curso.estado')->where('Curso.fecha_final', '>', $hoy)->where('Curso.estado', '=', 1)->leftJoin('Matricula',  function($join) use($id, $hoy){
+         /* $mat_curso = Curso::distinct()->select('Curso.id_curso', 'Curso.nombre', 'Curso.duracion', 'Curso.fecha_inicio', 'Curso.fecha_final', 'Curso.estado')->where('Curso.fecha_final', '>', $hoy)->where('Curso.estado', '=', 1)->leftJoin('Matricula',  function($join) use($id, $hoy){
           $join->on('Curso.id_curso', '=', 'Matricula.curso')->where('Matricula.usuario', '=', $id->id);
-          })->whereNull('Matricula.curso')->paginate(6);
+          })->whereNull('Matricula.curso')->paginate(6);*/
+
+           $mat_curso = Curso::distinct()->where('Curso.fecha_final', '>', $hoy)->where('Curso.estado', '=', 1)->get();
 
 
        }
       }
       $titulo = "Lista de Cursos";
+
        //return view('Cursos.index',['cursos'=>$mat_curso]);  
       return view('Cursos.index')->with('cursos', $mat_curso)
                                  ->with('titulo', $titulo);
@@ -187,6 +191,7 @@ class CursoController extends Controller
 
       //rol 6 -> guess
       $miCurso = 6;
+      $rol_nombre = "";
 
       if($user != NULL){
           $miCurso = Matricula::distinct()->where('Matricula.usuario', '=', $user->id)
@@ -195,14 +200,22 @@ class CursoController extends Controller
           foreach ($miCurso as $mat) {
             $rol = $mat->rol;
           }
+          $rol_nombre = Rol::find($rol);
+          if($rol_nombre != null){
+            $rol_nombre = $rol_nombre->nombre;
+          }else{
+            $rol_nombre = "";
+          }
           $miCurso = $rol;
       }
-      
+
+
       
       return view('Cursos.detailAdmin')->with('curso', $curso)
                                        ->with('semanas', $semanas)
                                        ->with('profesores', $profes)
-                                       ->with('isMatriculated', $miCurso);
+                                       ->with('isMatriculated', $miCurso)
+                                       ->with('nombreRol', $rol_nombre);
     }
 
     /**
