@@ -113,3 +113,19 @@ function crearRecurso(id_padre) {
     })
     irarriba();
 }
+
+
+
+
+function crearRecursoSemana(semana) {
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+
+    var url = "/crearRecurso/" + semana + "";
+
+    /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul); //leccion 10
+    })
+    irarriba();
+}

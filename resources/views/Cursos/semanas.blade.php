@@ -127,7 +127,7 @@
                         <!--Fin Contenido-->
                     </div>
 
-                    <a style="color:white; margin:5px 20px 5px 5px; float: right;" onclick="" class="btn btn-success"><i class="fa fa-plus"></i></a>
+                    <a style="color:white; margin:5px 20px 5px 5px; float: right;" onclick="crearRecursoSemana({{$semana->id_semana}})" class="btn btn-success"><i class="fa fa-plus"></i></a>
 
                 </div>
 
