@@ -88,6 +88,13 @@ $(function () {
         
               console.log(intemID);
               console.log(itemIndex);
+                
+                /*$.ajax({
+                    url:'/updateDrag',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {intemID:intemID, itemIndex:itemIndex}
+                })*/
             })
 
         }
