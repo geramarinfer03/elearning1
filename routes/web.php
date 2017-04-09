@@ -72,6 +72,7 @@ Route::post('updateRecurso','RecursoController@update');
 Route::get('createRecurso','RecursoController@create');
 Route::post('storeCurso','RecursoController@store');
 Route::get('crearRecurso/{id}','RecursoController@crearRecurso');
+Route::get('crearRecursoSemana/{{id}}','RecursoController@crearRecursoSemana');
 
 
  Route::get('form_editar_usuario/{id}', 'UsuarioController@form_editar_usuario');

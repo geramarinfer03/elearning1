@@ -24,8 +24,12 @@ class RecursoController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function crearRecurso($id){
+    
+    public function crearRecursoSemana($semana){
         
+    }
+    
+    public function crearRecurso($id){
         
         $recurso = Recurso::find($id);
         
@@ -70,6 +74,13 @@ class RecursoController extends Controller
         
         
         $sem = Semana::find($semana);
+        $contador = $sem -> secuencia;
+        $contador= $contador +1;
+        
+        $result1= $sem->update([
+            
+            'secuencia' =>$contador
+        ])
  
         
         $result = Recurso::create([
@@ -84,7 +95,7 @@ class RecursoController extends Controller
           'semana' => $semana
         ]);
         
-       if($result){
+       if($result && $result1){
              alert()->success('Recurso creado exitosamente');
          }
         else{
