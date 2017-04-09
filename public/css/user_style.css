@@ -113,3 +113,7 @@ th{
     opacity: 0.50;
 }
 
+
+#main_table tr{
+    cursor: pointer;
+}

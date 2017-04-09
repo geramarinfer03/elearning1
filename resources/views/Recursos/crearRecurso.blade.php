@@ -64,6 +64,10 @@
                         {!! Form::hidden('estado', '1') !!} {!! Form::hidden('visibl', '1') !!}
                         {!! Form::hidden('recurso_padre', $padre) !!} 
                         {!! Form::hidden('semana', $semana) !!} 
+                        
+
+                        
+
 
 
                         <div class="row">

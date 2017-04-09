@@ -2,7 +2,7 @@
 
 namespace elearning1\Http\Controllers;
 
-
+use elearning1\Semana;
 use elearning1\Recurso;
 use Illuminate\Http\Request;
 
@@ -26,7 +26,8 @@ class RecursoController extends Controller
     
     
     public function crearRecursoSemana($semana){
-        
+        return view('Recursos.crearRecurso')->with('padre',0)
+                                             ->with('semana',$semana);
     }
     
     public function crearRecurso($id){
@@ -51,7 +52,7 @@ class RecursoController extends Controller
     public function store(Request $request)
     {
 
-         $this->validate($request, [
+        $this->validate($request, [
           'nombre'=>'Required',
           'notas'=>'Required',
           'url' => 'Required',
@@ -73,17 +74,18 @@ class RecursoController extends Controller
           $semana = $request->input('semana');
         
         
-        $sem = Semana::find($semana);
+         $sem = Semana::find($semana);
+        
         $contador = $sem -> secuencia;
         $contador= $contador +1;
         
         $result1= $sem->update([
             
             'secuencia' =>$contador
-        ])
+        ]);
  
         
-        $result = Recurso::create([
+       $result = Recurso::create([
           'nombre'=>$nombre,
           'notas'=> $notas,
           'url' => $url,
@@ -91,16 +93,18 @@ class RecursoController extends Controller
           'visibl' => $vis,
           'recurso_padre' =>$recurso_padre,
           'tipo_recurso' =>$tipo_recurso,
-          'secuencia' => 1,
+          'secuencia' => $contador,
           'semana' => $semana
         ]);
         
        if($result && $result1){
-             alert()->success('Recurso creado exitosamente');
+             alert()->success('Recurso creado exitosamente ');
          }
         else{
             alert()->success('Error al crear recurso');
         }
+
+
         return back();
     }
 

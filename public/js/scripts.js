@@ -80,7 +80,18 @@ function tabular(html, semana, recPadre) {
 
 
 $(function () {
-    $('.main_table_seccion').sortable();
+    $('.main_table_seccion').sortable({
+        stop: function() {
+            $.map($(this).find('tr'),function(el){
+             var intemID = el.id;
+             var itemIndex = $(el).index();
+        
+              console.log(intemID);
+              console.log(itemIndex);
+            })
+
+        }
+    });
 });
 
 
@@ -121,7 +132,8 @@ function crearRecursoSemana(semana) {
     $("#capa_modal").show();
     $("#capa_para_edicion").show();
 
-    var url = "/crearRecurso/" + semana + "";
+
+    var url = "/crearRecursoSemana/" + semana + "";
 
     /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
     $.get(url, function (resul) {

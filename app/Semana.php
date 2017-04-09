@@ -19,7 +19,7 @@ class Semana extends Model
     }
 
     public function recursos(){
-    	return $this->hasMany(Recurso::class, 'semana');
+    	return $this->hasMany(Recurso::class, 'semana')->orderBy('secuencia');
     }
 
 }
