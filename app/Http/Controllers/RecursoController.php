@@ -23,6 +23,16 @@ class RecursoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function crearRecurso($id){
+        
+        
+        $recurso = Recurso::find($id);
+        
+        $semana = $recurso -> semana;
+         return view('Recursos.crearRecurso')->with('padre',$id)
+                                             ->with('semana',$semana);
+    }
     public function create()
     {
         //
@@ -36,7 +46,47 @@ class RecursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+         $this->validate($request, [
+          'nombre'=>'Required',
+          'notas'=>'Required',
+          'url' => 'Required',
+          'estado' => 'Required',
+          'visibl' => 'Required',
+          'recurso_padre' => 'Required',
+          'tipo' => 'Required',
+          'semana' => 'Required' 
+          
+          ]);
+        
+          $nombre = $request->input('nombre');
+          $notas = $request->input('notas');
+          $url = $request->input('url');
+          $vis = $request->input('visibl');
+          $estado = $request->input('estado');
+          $recurso_padre = $request->input('recurso_padre');
+          $tipo_recurso = $request->input('tipo');
+          $semana = $request->input('semana');
+        
+        $result = Recurso::create([
+          'nombre'=>$nombre,
+          'notas'=> $notas,
+          'url' => $url,
+          'estado' => $estado,
+          'visibl' => $vis,
+          'recurso_padre' =>$recurso_padre,
+          'tipo_recurso' =>$tipo_recurso,
+          'secuencia' => 1,
+          'semana' => $semana
+        ]);
+        
+       if($result){
+             alert()->success('Recurso creado exitosamente');
+         }
+        else{
+            alert()->success('Error al crear recurso');
+        }
+        return back();
     }
 
     /**
@@ -72,7 +122,41 @@ class RecursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+         $this->validate($request, [
+          'nombre'=>'Required',
+          'notas'=>'Required',
+          'url' => 'Required' 
+          
+          ]);
+        
+          $nombre = $request->input('nombre');
+          $notas = $request->input('notas');
+          $url = $request->input('url');
+          $vis = $request->input('visibl');
+          $estado = $request->input('estado');
+        
+         $recurso = Recurso::find($id); 
+        
+         $result = $recurso->update([
+             'nombre' => $nombre,
+             'notas'=>$notas,
+             'url' => $url,
+             'visibl' => $vis,
+             'estado' => $estado
+             
+         ]);
+             
+             
+         if($result){
+             alert()->success('Recurso modificado exitosamente');
+         }
+        else{
+            alert()->success('Error al modificar recurso');
+        }
+                
+         return back();
+       
     }
 
     /**
@@ -84,5 +168,12 @@ class RecursoController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    
+    
+    public function etiquetaTexto(){
+        
+        return view('Recursos.etiquetaTexto');
     }
 }

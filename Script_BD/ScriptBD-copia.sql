@@ -48,7 +48,7 @@ estado INT (1) NOT NULL
 CREATE TABLE Semana (
 id_semana INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 tema VARCHAR(30) NOT NULL,
-visible INT(1) NOT NULL,
+visibl INT(1) NOT NULL,
 estado INT (1) NOT NULL,
 curso  INT (10) UNSIGNED NOT NULL,
 secuencia INT(10) UNSIGNED NOT NULL,
@@ -63,7 +63,7 @@ nombre VARCHAR(30) NOT NULL,
 url VARCHAR(255),
 tipo_recurso INT(10) UNSIGNED NOT NULL,
 recurso_padre INT(10) UNSIGNED NOT NULL,
-visible INT(1) NOT NULL,
+visible INT (1) NOT NULL,
 secuencia INT(10) NOT NULL,
 notas VARCHAR(100) NOT NULL,
 estado INT (1) NOT NULL,
@@ -149,7 +149,7 @@ values
 ('Planificacion inicial', 1, 1, 2,1)
 ;
 
-insert into Recurso (nombre, url,tipo_recurso,recurso_padre,visible,secuencia,notas,estado,semana)
+insert into Recurso (nombre, url,tipo_recurso,recurso_padre,visibl,secuencia,notas,estado,semana)
 values
 ('Tema 1: Objetivos', null, 3, 0, 1, 1, 'etiqueta', 1, 1),
 ('Tema 1: Instalación', null, 2, 0, 1, 2, 'pdf instalacion', 1, 1),

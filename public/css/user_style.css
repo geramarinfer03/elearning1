@@ -83,7 +83,7 @@
 .conB{
   margin: 3px 0px;
   padding: 5px;
-  border: 1px solid black;
+  border: 1px dotted black;
 }
 .hiddenclass{
   display: none;
@@ -102,3 +102,14 @@
 .notesP{
     color: #9E9E9E;
 }
+
+th{
+    background-color: #E3F2FD;
+    
+}
+
+
+.opacity{
+    opacity: 0.50;
+}
+

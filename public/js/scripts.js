@@ -1,5 +1,7 @@
-function irarriba(){
-$('html, body').animate({scrollTop:0}, 300);
+function irarriba() {
+    $('html, body').animate({
+        scrollTop: 0
+    }, 300);
 }
 
 /*function buscarusuario(){
@@ -21,100 +23,93 @@ $('html, body').animate({scrollTop:0}, 300);
 }*/
 
 function mostrarMatricula(id_usuario) {
-  //funcion para mostrar y etditar la informacion del usuario
- 
- // $("#usuario_seleccionado").val(id_usuario);
-  $("#capa_modal").show();
-  $("#capa_para_edicion").show();
+    //funcion para mostrar y etditar la informacion del usuario
 
-  var url = "/matricularUsuario/"+id_usuario+"";
+    // $("#usuario_seleccionado").val(id_usuario);
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
 
-  /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
-  $.get(url,function(resul){
-  $("#contenido_capa_edicion").html(resul);  //leccion 10
-  })
-irarriba();
+    var url = "/matricularUsuario/" + id_usuario + "";
+
+    /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul); //leccion 10
+    })
+    irarriba();
 }
 
 
-$(document).on("click",".div_modal",function(e){
- //funcion para ocultar las capas modales
- $("#capa_modal").hide();
- $("#capa_para_edicion").hide();
- $("#contenido_capa_edicion").html("");  //leccion 10
-
-}) 
-
-
-$(document).on("click",".pagination li a",function(e){
-//para que la pagina se cargen los elementos
- e.preventDefault();
- var url =$( this).attr("href");
-
- $("#contenido_capa_edicion").html($("#cargador_empresa").html());
-  $.get(url,function(resul){
-  $("#contenido_capa_edicion").html(resul);
-  })
+$(document).on("click", ".div_modal", function (e) {
+    //funcion para ocultar las capas modales
+    $("#capa_modal").hide();
+    $("#capa_para_edicion").hide();
+    $("#contenido_capa_edicion").html(""); //leccion 10
 
 })
 
 
-function cambio_rol(id_matricula){
-  $('#btnMatriculaUsuarios_'+id_matricula).attr('class','btn_img');
+$(document).on("click", ".pagination li a", function (e) {
+    //para que la pagina se cargen los elementos
+    e.preventDefault();
+    var url = $(this).attr("href");
+
+    $("#contenido_capa_edicion").html($("#cargador_empresa").html());
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul);
+    })
+
+})
+
+
+function cambio_rol(id_matricula) {
+    $('#btnMatriculaUsuarios_' + id_matricula).attr('class', 'btn_img');
 }
 
-function seleccionCursoMat(id){
-  $('#curso_mat').val(id);
+function seleccionCursoMat(id) {
+    $('#curso_mat').val(id);
 }
 
 
 
-function tabular(html, semana ,recPadre){
-  //alert(html);
-  console.log(html);
-  console.log(semana);
-  console.log(recPadre);
-  console.log("#sem"+ semana + "_row" + recPadre);
+function tabular(html, semana, recPadre) {
 
-  $("#sem"+ semana + "_row" + recPadre).append(html);
+
+    $("#sem" + semana + "_row" + recPadre).append(html);
 }
 
-$(function(){
-  $('.main_table_seccion').sortable();
+
+
+$(function () {
+    $('.main_table_seccion').sortable();
 });
 
 
 function edicion(id_recurso) {
-  //funcion para mostrar y etditar la informacion del usuario
- 
- // $("#usuario_seleccionado").val(id_usuario);
-    
-  $("#capa_modal").show();
-  $("#capa_para_edicion").show();
+    //funcion para mostrar y etditar la informacion del usuario
 
-  var url = "/editarRecurso/"+id_recurso+"";
+    // $("#usuario_seleccionado").val(id_usuario);
 
-  /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
-  $.get(url,function(resul){
-  $("#contenido_capa_edicion").html(resul);  //leccion 10
-  })
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+
+    var url = "/editarRecurso/" + id_recurso + "";
+
+    /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul); //leccion 10
+    })
     irarriba();
 }
 
-/*function edicion(id){
-    
+function crearRecurso(id_padre) {
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
 
- if($('.inp'+id).prop('disabled')){
-    $('#label'+id).prop('class', 'visibleclass');
-    $('.inp'+id).prop('disabled', false);
-     
-    $('.inp'+id).focus();
+    var url = "/crearRecurso/" + id_padre + "";
 
-    
-  }else{
-     $('#label'+id).prop('class', 'hiddenclass');
-     $('.inp'+id).prop('disabled', true);
-  }
-  
-}*/
-
+    /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul); //leccion 10
+    })
+    irarriba();
+}

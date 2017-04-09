@@ -148,7 +148,7 @@ class CursoController extends Controller
                 'visible'=> '1',
                 'estado' => '1',
                 'curso' => $curso_id,
-                'secuencia' => $contador
+                'secuencia' => 0
             ]);
             
              $contador = $contador+1;
