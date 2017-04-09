@@ -68,6 +68,10 @@ class RecursoController extends Controller
           $tipo_recurso = $request->input('tipo');
           $semana = $request->input('semana');
         
+        
+        $sem = Semana::find($semana);
+ 
+        
         $result = Recurso::create([
           'nombre'=>$nombre,
           'notas'=> $notas,

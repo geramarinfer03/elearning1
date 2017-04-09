@@ -65,10 +65,13 @@ Route::group( ['middleware'=>['auth','admin']], function() {
 Route::resource('cursos','CursoController');
 
 /*------ Recursos rutas ----- */ 
+Route::resource('recursos','RecursoController');
+
 Route::get('editarRecurso/{id}','RecursoController@edit');
-Route::post('updatecurso','RecursoController@update');
+Route::post('updateRecurso','RecursoController@update');
 Route::get('createRecurso','RecursoController@create');
 Route::post('storeCurso','RecursoController@store');
+Route::get('crearRecurso/{id}','RecursoController@crearRecurso');
 
 
  Route::get('form_editar_usuario/{id}', 'UsuarioController@form_editar_usuario');
