@@ -23,8 +23,6 @@ class IndexController extends Controller
 
     	$mat_curso = Curso::distinct()->select('Curso.id_curso', 'Curso.nombre', 'Curso.duracion', 'Curso.fecha_inicio', 'Curso.fecha_final', 'Curso.estado')->join('Matricula', 'Matricula.curso', 'Curso.id_curso')
                                           ->where('Matricula.usuario', '=', $id->id)->get();
-
-      Alert::success('Bienvenido  ' . $id->nombre);
       return view('home')->with("cursos",  $mat_curso);
     }
 }

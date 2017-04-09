@@ -16,7 +16,6 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="/usuarios"><i class="fa fa-circle-o"></i> Listar </a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> Sub 2</a></li>
               </ul>
             </li>
             @endif
@@ -29,10 +28,10 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/cursos"><i class="fa fa-circle-o"></i>Listar</a></li>
+                <li><a href="/cursos.index"><i class="fa fa-circle-o"></i>Listar</a></li>
                 <li><a href="/misCursos"><i class="fa fa-circle-o"></i> Mis Cursos</a></li>
                 @if($usuario->rol->id_rol == 1)
-                 <li><a href="/cursos/create"><i class="fa fa-circle-o"></i>Crear Curso</a></li>
+                 <li><a href="/cursos.create"><i class="fa fa-circle-o"></i>Crear Curso</a></li>
                 @endif
                      
               </ul>

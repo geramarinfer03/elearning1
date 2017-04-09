@@ -7,7 +7,9 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-     {!! Form::model($curso, ['route'=>['cursos.update', $curso->id_curso], 'method'=>'PATCH', 'class'=>'form-horizontal']) !!}
+     {!! Form::model($curso, ['url'=>'cursos.update', 'method'=>'POST', 'class'=>'form-horizontal']) !!}
+     
+     {!! Form::hidden('id_curso', $curso->id_curso) !!}
      <div class="form-group has-feedback">
        {!! Form::label('nombre', 'Nombre') !!}
        {!! Form::text('nombre', null,  ['class'=>'form-control']) !!}

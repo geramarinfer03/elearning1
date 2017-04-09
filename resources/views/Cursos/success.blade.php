@@ -9,7 +9,7 @@
                 <h4><i class="icon fa fa-check"></i> Mensaje!</h4> {{$mensaje}}
                 
             </div>
-            <a href="{{ route('cursos.index') }}"><button class="btn btn-primary">Continuar</button> </a>
+            <a href="cursos.index"><button class="btn btn-primary">Continuar</button> </a>
         </div>
         <!-- /.box-body -->
     </div>

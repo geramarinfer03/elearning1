@@ -35,7 +35,8 @@
   <!--@php
     $usuario = Auth::user();
   @endphp -->
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+
 
 
     <div class="wrapper">
@@ -43,7 +44,7 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="index.php" class="logo">
+        <a href="/index.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
          <!-- <span class="logo-mini"><b>AD</b>V</span> -->
           <span class="logo-mini"><img src="{{asset('img/logo_mini.png')}}"></span>
@@ -62,7 +63,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-         @if ($usuario != null && $usuario->rol->id_rol < 5)
+         @if ($usuario != null && $usuario->rol->id_rol < 6)
            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
          @endif 
           <a class="navbar-brand" href="#">E learning</a>
@@ -83,7 +84,7 @@
               </ul>
             </li> -->
          
-            <li><a href="{{route('cursos.index')}}">Cursos</a></li>
+            <li><a href="/cursos.index">Cursos</a></li>
             
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -175,7 +176,7 @@
       <!-- Content Wrapper. Contains page content -->
 
       <!--<div @if (1 === 2) class="content-wrapper" @else class="contenido2" @endif> -->
-      <div @if (Auth::check() != null && $usuario->rol->id_rol < 5) class="content-wrapper" @else class="contenido2" @endif>
+      <div @if (Auth::check() != null && $usuario->rol->id_rol < 6) class="content-wrapper" @else class="contenido2" @endif>
         
         <!-- Main content -->
         <section class="content">

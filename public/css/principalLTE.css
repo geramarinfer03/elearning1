@@ -490,6 +490,7 @@ a:focus {
 }
 .sidebar {
   padding-bottom: 10px;
+  margin-top: 40%;
 }
 .sidebar-form input:focus {
   border-color: transparent;

@@ -55,6 +55,18 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group( ['middleware'=>['auth','admin']], function() {
 
 	Route::get('usuarios', 'UsuarioController@listado_usuarios')->name('usuarios');
+	Route::get('form_editar_usuario/{id}', 'UsuarioController@form_editar_usuario');
+ 	Route::post('editar_usuario', 'UsuarioController@editar_usuario');
+ 	Route::post('editar_matricula', 'MatriculaController@update');
+ 	Route::get('matricularUsuario/{id}', 'MatriculaController@matriculaForm');
+	Route::post('crearMatricula', 'MatriculaController@store');
+
+
+	Route::get('cursos.create', 'CursoController@create');
+	Route::post('cursos', 'CursoController@store');
+	Route::get('cursos.edit/{id}', 'CursoController@edit');
+	Route::post('cursos.update', 'CursoController@update');
+
 	/*Route::get('cursos', 'CursoController@index');
 	Route::get('cursos_create', 'CursoController@create');
 	Route::post('cursos_store', 'CursoController@store');*/
@@ -62,7 +74,13 @@ Route::group( ['middleware'=>['auth','admin']], function() {
 });
 
 /* ------ Cursos rutas ------------------- */
-Route::resource('cursos','CursoController');
+//Route::resource('cursos','CursoController');
+
+Route::get('cursos.index', 'CursoController@index');
+Route::get('cursos.show/{id}', 'CursoController@show');
+
+
+
 
 /*------ Recursos rutas ----- */ 
 Route::resource('recursos','RecursoController');
@@ -75,11 +93,7 @@ Route::get('crearRecurso/{id}','RecursoController@crearRecurso');
 Route::get('crearRecursoSemana/{id}','RecursoController@crearRecursoSemana');
 
 
- Route::get('form_editar_usuario/{id}', 'UsuarioController@form_editar_usuario');
- Route::post('editar_usuario', 'UsuarioController@editar_usuario');
- Route::post('editar_matricula', 'MatriculaController@update');
- Route::get('matricularUsuario/{id}', 'MatriculaController@matriculaForm');
- Route::post('crearMatricula', 'MatriculaController@store');
+
  
 
 

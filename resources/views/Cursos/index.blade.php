@@ -42,17 +42,17 @@
             </div>
             <div class="small-box-footer">
                 <div class="tools">
-                    <a style="color:white; margin:5px;" class="btn" href="{{ route('cursos.show', $curso->id_curso) }}"><i class="fa fa-eye"></i></a>
+                    <a style="color:white; margin:5px;" class="btn" href="cursos.show/{{$curso->id_curso}}"><i class="fa fa-eye"></i></a>
                     @unless(!Auth::check())
                       @if(Auth::user()->rol->id_rol < 5)
-                       <a style="color:blue; margin:5px;"  href="{{ route('cursos.edit', $curso->id_curso) }}"><i class="fa fa-edit"></i></a>
+                       <a style="color:blue; margin:5px;"  href="cursos.edit/{{$curso->id_curso}}"><i class="fa fa-edit"></i></a>
                       @endif
                     @endunless
 
 
 
                 </div>
-                <!--{!! Form::open(['method'=>'delete', 'route'=>['cursos.destroy', $curso->id_curso]]) !!}
+               <!--
                 {!! Form::button('<i class="fa fa-trash-o"></i>', ['type' => 'submit','class'=>'btn btn-danger btn-sm' ,  'onclick'=> 'return confirm("Do you want to delete blog?")'])!!}
                 {!! Form::close() !!}-->
             </div>
@@ -70,9 +70,11 @@
 
 
 <!-- /.box-body -->
+@if(Auth::user()->rol->id_rol == 1)
 <div class="box-footer clearfix no-border">
-    <a href="{{route('cursos.create')}}"><button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Agregar Curso</button></a>
+    <a href="cursos.create"><button type="button" class="btn btn-primary btn-lg pull-right"><i class="fa fa-plus"></i> Agregar Curso</button></a>
 </div>
+@endif
 
 </div>
 

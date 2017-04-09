@@ -58,8 +58,9 @@ class CursoController extends Controller
     $titulo = "Mis Cursos";
     $id =\Auth::user();
 
+
     $mat_curso = Curso::distinct()->select('Curso.id_curso', 'Curso.nombre', 'Curso.duracion', 'Curso.fecha_inicio', 'Curso.fecha_final', 'Curso.estado')->join('Matricula', 'Matricula.curso', 'Curso.id_curso')
-                                         ->where('Matricula.usuario', '='. $id->id);
+                                         ->where('Matricula.usuario', '=', $id->id)->get();
 
 
 
@@ -160,8 +161,8 @@ class CursoController extends Controller
            /*$curso = $request->all();
            Curso::create($curso);*/
 
-           $mensaje = "Curso Agregado correctamente ";
-           return view('Cursos.success',['mensaje'=> $mensaje]);
+          Alert::success("Curso ". $nombre ." agregado con éxito", "Guardado");
+          return redirect('cursos.index');
 
          
     }
@@ -226,7 +227,7 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
+    public function update(Request $request){
          $this->validate($request, [
           'nombre'=>'Required',
           //'duracion'=>'Required',
@@ -234,6 +235,8 @@ class CursoController extends Controller
           'fecha_final'=>'Required',
 
           ]);
+
+         $id = $request->input('id_curso');
 
          $nombre = $request->input('nombre');
            //$duracion = $request->input('duracion');
@@ -257,7 +260,7 @@ class CursoController extends Controller
         /* $cursoUpdate = $request->all();
         $curso->update($cursoUpdate);*/
 
-        $curso->update([
+        $resultado = $curso->update([
          'nombre' => $nombre,
          'duracion' => $duracion,
          'fecha_inicio' => $finicial,
@@ -265,10 +268,16 @@ class CursoController extends Controller
          'estado' => $estado
          ]);
 
+        if($resultado){
+          Alert::success('Curso Modificado con éxito', 'Se Guardaron sus cambios');
+          return redirect('cursos.index');
+        }
+        else{
+          Alert::error('¡¡Algo sucedió!! :C', 'No se Guardaron sus cambios');
+          return redirect('cursos.edit/'. $curso->id_curso);
+        }
 
-        $mensaje = "Curso Modificado correctamente";
-
-        return view('Cursos.success',['mensaje'=> $mensaje]);
+        
 
     }
 
@@ -278,7 +287,7 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+   /* public function destroy($id)
     {
           $curso = Curso::find($id);
           $curso->delete();
@@ -286,4 +295,5 @@ class CursoController extends Controller
           $mensaje = "Curso Eliminado correctamente";
           return view('Cursos.success',['mensaje'=> $mensaje]);
     }
+    */
 }
