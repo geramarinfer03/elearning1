@@ -96,17 +96,15 @@
                                 </script>
                                 @endif
                                 
+                                @unless(!Auth::check())
                                 @if($recurso->rol < $isMatriculated && Auth::user()->rol->id_rol != '1')
                                 <script type="text/javascript">
                                     visibleInactivo({{$recurso->id_recurso}});
                                 </script>
                                 @endif
+                                @endunless
                                 
-                                <!--p>{{Auth::user()->rol->id_rol}}</p>
-                                <p>{{$recurso->rol}}</p>
-                                <p>{{$isMatriculated}}</p>
-                                <p>{{$recurso->visibl}}</p-->
-                                
+
                                 
 
                             @endforeach

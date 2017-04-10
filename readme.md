@@ -7,6 +7,18 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Instrucciones
+1 - Crear Base de datos con el script.  Ruta: elearning1/Script_BD/ScriptBD.sql.
+
+2- Se crearan 5 usuarios en el se encuentran sus Usuarios y contrasenas.
+
+3- Composer update
+
+4- Modificar Archivo HtmlServiceProvider.php. 
+   Ruta: elearning1/vendor/laravelcollective/html/src/HtmlServiceProvider.php
+
+   Modificar linea: 52.  $form = new FormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->token());
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
@@ -38,3 +50,5 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+

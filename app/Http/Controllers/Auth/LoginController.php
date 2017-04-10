@@ -71,7 +71,7 @@ class LoginController extends Controller
 
 
        
-/*
+
     public function login(Request $request){
 
 
@@ -89,9 +89,10 @@ class LoginController extends Controller
     {
 
         $usuarioactual=\Auth::user();
-       return redirect()->back();
+        alert()->success("Bienvenido");
+       return redirect()->home();
     }
-       */
+
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
@@ -111,9 +112,9 @@ class LoginController extends Controller
        return  redirect()->to()->back();//view('home')->with("usuario",  $usuarioactual);
     }*/
 
-  /*  return "credenciales incorrectas";
+  /*  return "credenciales incorrectas";*/
 
-    }*/
+    }
 
 
 //login
