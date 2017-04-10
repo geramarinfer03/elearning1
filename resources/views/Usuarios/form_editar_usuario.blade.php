@@ -192,7 +192,7 @@
                       <tr role="row" class="odd">
                         <td class="sorting_1">{{$mat->id_matricula}}</td>
                         <td>
-                          <a href="cursos.curso">
+                          <a href="/cursos.show/{{$mat->cursos->id_curso}}">
                           <i class="fa fa-book"></i>
                           &nbsp;&nbsp;{{$mat->cursos->nombre}}
                           </a>
