@@ -125,3 +125,14 @@ th{
 #main_table tr{
     cursor: pointer;
 }
+
+
+
+.estadoInactivo{
+    
+}
+
+
+.visibleInactivo{
+    display: none;
+}

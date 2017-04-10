@@ -38,6 +38,11 @@
                             {{ Form::checkbox('estado', 1, null, ['class' => 'field']) }} 
                             {!! $errors->has('estado')?$errors->first('estado'):'' !!}
                         </div>
+                        
+                        <div class="form-group">
+                           {!! Form::label('rol', 'Rol') !!}
+                           {{ Form::select('rol',$roles, null, ['class'=>'form-control select2'])}}
+                        </div>
 
 
 

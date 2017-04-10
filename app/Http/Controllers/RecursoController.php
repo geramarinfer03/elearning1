@@ -2,7 +2,9 @@
 
 namespace elearning1\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Guard;
 use elearning1\Semana;
+use elearning1\Rol;
 use elearning1\Recurso;
 use Illuminate\Http\Request;
 use Illuminate\HttpResponse;
@@ -28,17 +30,23 @@ class RecursoController extends Controller
     
     
     public function crearRecursoSemana($semana){
+        $usuario = \Auth::user();
+        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->pluck('nombre','id_rol');
         return view('Recursos.crearRecurso')->with('padre',0)
-                                             ->with('semana',$semana);
+                                            ->with('semana',$semana)
+                                            ->with('roles',$rols_user);
     }
     
     public function crearRecurso($id){
+        
+        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->pluck('nombre','id_rol');
         
         $recurso = Recurso::find($id);
         
         $semana = $recurso ->semana;
          return view('Recursos.crearRecurso')->with('padre',$id)
-                                             ->with('semana',$semana);
+                                             ->with('semana',$semana)
+                                             ->with('roles',$rols_user);
     }
     public function create()
     {
@@ -57,12 +65,13 @@ class RecursoController extends Controller
         $this->validate($request, [
           'nombre'=>'Required',
           'notas'=>'Required',
-          'url' => 'Required',
+         /*'url' => 'Required',*/
           'estado' => 'Required',
           'visibl' => 'Required',
           'recurso_padre' => 'Required',
           'tipo' => 'Required',
-          'semana' => 'Required' 
+          'semana' => 'Required',
+          'rol' => 'Required' 
           
           ]);
         
@@ -74,7 +83,9 @@ class RecursoController extends Controller
           $recurso_padre = $request->input('recurso_padre');
           $tipo_recurso = $request->input('tipo');
           $semana = $request->input('semana');
+          $rol =  $request->input('rol');
         
+
         
          $sem = Semana::find($semana);
         
@@ -101,7 +112,8 @@ class RecursoController extends Controller
           'recurso_padre' =>$recurso_padre,
           'tipo_recurso' =>$tipo_recurso,
           'secuencia' => $contador,
-          'semana' => $semana
+          'semana' => $semana,
+          'rol' => $rol
         ]);
         
        if($result){
@@ -135,8 +147,11 @@ class RecursoController extends Controller
     public function edit($id)
     {
         
+        $usuario = \Auth::user();
+        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->pluck('nombre','id_rol');
         $recurso = Recurso::find($id);
-        return view('Recursos.editarRecurso')->with('recurso',$recurso);
+        return view('Recursos.editarRecurso')->with('recurso',$recurso)
+                                             ->with('roles',$rols_user);
     }
 
     /**
@@ -152,7 +167,8 @@ class RecursoController extends Controller
          $this->validate($request, [
           'nombre'=>'Required',
           'notas'=>'Required',
-          'url' => 'Required' 
+         /*'url' => 'Required' */
+          'rol' => 'Required'
           
           ]);
         
@@ -164,6 +180,7 @@ class RecursoController extends Controller
           $vis = $request->input('visibl');
           $estado = $request->input('estado');
           $id = $request->input('id_recurso');
+          $rol =  $request->input('rol');
         
          $recurso = Recurso::find($id); 
         
@@ -172,7 +189,8 @@ class RecursoController extends Controller
              'notas'=>$notas,
              'url' => $url,
              'visibl' => $vis,
-             'estado' => $estado
+             'estado' => $estado,
+             'rol' => $rol
              
          ]);
              
@@ -264,6 +282,14 @@ class RecursoController extends Controller
           $sec = $request->input('sec');
         
           $rec = Recurso::find($id);
+          $rp= $rec->recurso_padre;
+           
+        
+          if($rp!=0){
+              $recursoPadre = Recurso::find($rp);
+              $secP = $recursoPadre -> secuencia;
+              $sec= $sec+$secP+1;
+          }
         
           $result=   $rec->update([
              'secuencia' => $sec

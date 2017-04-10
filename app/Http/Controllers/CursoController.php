@@ -244,8 +244,8 @@ class CursoController extends Controller
          $this->validate($request, [
           'nombre'=>'Required',
           //'duracion'=>'Required',
-          'fecha_inicio'=>'Required',
-          'fecha_final'=>'Required',
+          /*'fecha_inicio'=>'Required',
+          'fecha_final'=>'Required',*/
 
           ]);
 
@@ -253,18 +253,18 @@ class CursoController extends Controller
 
          $nombre = $request->input('nombre');
            //$duracion = $request->input('duracion');
-         $finicial = $request->input('fecha_inicio');
-         $ffinal = $request->input('fecha_final');
+        /* $finicial = $request->input('fecha_inicio');
+         $ffinal = $request->input('fecha_final');*/
          $estado = $request->input('estado');
 
-         $f1 = new DateTime($finicial);
+      /*   $f1 = new DateTime($finicial);
          $f2 = new DateTime($ffinal);
 
          $interval = date_diff($f2, $f1);
 
          $week = $interval->format('%a');
 
-         $duracion =  round($week/7);
+         $duracion =  round($week/7);*/
 
 
 
@@ -275,9 +275,9 @@ class CursoController extends Controller
 
         $resultado = $curso->update([
          'nombre' => $nombre,
-         'duracion' => $duracion,
+         /*'duracion' => $duracion,
          'fecha_inicio' => $finicial,
-         'fecha_final' => $ffinal,
+         'fecha_final' => $ffinal,*/
          'estado' => $estado
          ]);
 

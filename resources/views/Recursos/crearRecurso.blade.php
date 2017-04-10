@@ -60,13 +60,19 @@
 
                         </div>
 
+                        <div class="form-group">
+                           {!! Form::label('rol', 'Rol') !!}
+                           {{ Form::select('rol',$roles, null, ['class'=>'form-control select2'])}}
+                        </div>
 
-                        {!! Form::hidden('estado', '1') !!} {!! Form::hidden('visibl', '1') !!}
+
+                        {!! Form::hidden('estado', '1') !!} 
+                        {!! Form::hidden('visibl', '1') !!} 
                         {!! Form::hidden('recurso_padre', $padre) !!} 
-                        {!! Form::hidden('semana', $semana) !!} 
-                        
+                        {!! Form::hidden('semana', $semana) !!}
 
-                        
+
+
 
 
 

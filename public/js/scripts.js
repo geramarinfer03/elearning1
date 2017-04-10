@@ -200,3 +200,33 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
+
+
+
+
+function estadoInactivo(id){
+    
+    
+    
+    /*$('#'+id).attr('class','estadoInactivo');*/
+   /* $('#'+id).children().attr('disabled',true);*/
+    
+
+    $('#'+id).attr('class','opacity')
+    $('#'+id).find('a').attr('disabled', true);
+     /*$('#'+id).find('a').removeAttr("href");*/
+    
+    $('#'+id).find('a').bind('click',false);
+
+}
+
+function visibleInactivo(id){
+
+    
+    $('#'+id).attr('class','visibleInactivo');
+}
+
+
+
+

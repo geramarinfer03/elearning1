@@ -24,20 +24,20 @@
        {!! $errors->has('duracion')?$errors->first('duracion'):'' !!}
    </div-->
 
-   <div class="form-group has-feedback">
+   <!--div class="form-group has-feedback">
 
        {!! Form::label('fecha_inicio', 'Fecha inicial') !!}
        {!! Form::date('fecha_inicio', \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $curso->fecha_inicio)->format('Y-m-d'),  ['class'=>'form-control']) !!}
        <span class="fa fa-clock-o form-control-feedback"></span>
        {!! $errors->has('fecha_inicio')?$errors->first('fecha_inicio'):'' !!}
-   </div>
+   </div-->
 
-   <div class="form-group has-feedback">
+   <!--div class="form-group has-feedback">
        {!! Form::label('fecha_final', 'Fecha final') !!}
        {!! Form::date('fecha_final', \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $curso->fecha_final)->format('Y-m-d'),  ['class'=>'form-control']) !!}
        <span class="fa fa-clock-o form-control-feedback"></span>
        {!! $errors->has('fecha_final')?$errors->first('fecha_final'):'' !!}
-   </div>
+   </div-->
 
 
    <div class="form-group has-feedback">

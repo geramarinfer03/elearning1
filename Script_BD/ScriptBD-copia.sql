@@ -63,13 +63,15 @@ nombre VARCHAR(30) NOT NULL,
 url VARCHAR(255),
 tipo_recurso INT(10) UNSIGNED NOT NULL,
 recurso_padre INT(10) UNSIGNED NOT NULL,
-visible INT (1) NOT NULL,
+visibl INT (1) NOT NULL,
 secuencia INT(10) NOT NULL,
 notas VARCHAR(100) NOT NULL,
 estado INT (1) NOT NULL,
 semana INT(10) UNSIGNED NOT NULL,
+rol INT(10) UNSIGNED NOT NULL,
 FOREIGN KEY (semana) REFERENCES Semana(id_semana),
-FOREIGN KEY (tipo_recurso) REFERENCES Tipo_Recurso(id_tipo_recurso)
+FOREIGN KEY (tipo_recurso) REFERENCES Tipo_Recurso(id_tipo_recurso),
+FOREIGN KEY (rol) REFERENCES Rol(id_rol)
 );
 
 /* /*NO se para que funciona

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Recurso extends Model
 {
     protected $fillable = [
-        'id_recurso','nombre', 'url', 'tipo_recurso', 'recurso_padre', 'visibl', 'secuencia', 'notas', 'estado', 'semana'
+        'id_recurso','nombre', 'url', 'tipo_recurso', 'recurso_padre', 'visibl', 'secuencia', 'notas', 'estado', 'semana','rol'
     ];
 
 
@@ -19,6 +19,11 @@ class Recurso extends Model
     public function semana(){
 
     	return $this->belongsTo(Semana::class,'semana');
+    }
+    
+    public function rol(){
+
+    	return $this->belongsTo(Rol::class,'rol');
     }
 
     /*public function tipo_recurso(){
