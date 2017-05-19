@@ -277,5 +277,18 @@ function cambiarTipoRecurso(){
 
   }
 
-};
+}
+
+function descargarImagen(id, serverpath){
+
+    var url = "/dwlImg/" + id;
+
+    $.get(url, function (resul) {
+
+        //$("#imagen").attr('src', '/storage/'+ id +'/tmp'+id);
+        
+    })
+  
+
+}
 

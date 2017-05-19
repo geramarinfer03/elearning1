@@ -76,9 +76,11 @@
                                 
                                 
                                         @if($recurso->tipo_recurso== 6  )
-											<script type="text/javascript">
-												tabular("<tr class='normal' id='{{$recurso->id_recurso}}'><td><p class='tituloP'>{{$recurso->nombre}}</p><p class='notesP'>{{$recurso->notas}}</p><a href='{{$recurso->url}}' class='btn btn-primary'><i class='fa fa-download'></i></a></td><td><button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i></button></td></tr>", {{$recurso->semana}}, {{$recurso->recurso_padre}});
-											</script>
+
+											 <!-- <script type="text/javascript">
+												tabular("<tr class='normal' id='{{$recurso->id_recurso}}'> <td> <p class='tituloP'>{{$recurso->nombre}}</p> <p class='notesP'>{{$recurso->notas}}</p> @if($recurso->isvideo()) <img src='/img/miniaturas/json.png' style='width: 80px; height: 80px; ' />  @else <img src='/img/miniaturas/<?= $recurso->extencion(); ?>.png' style='width: 80px; height: 80px; ' /> <form action='donwloadFile' method='POST' id='formDownload'> <input type='hidden' name='urlFile' value='{{$recurso->url}}'> <input type='hidden' name='nameFile' value='{{$recurso->nombre}}'> <div class='row'> <div class='col-md-1'> <button  style='margin: 10px; margin-left: 18px;' type='submit' class='btn btn-primary btn-block btn-flat'><i class='fa fa-download'></i></button> </div> <div class='col-md-4'> <p class='notesP' style='margin-top: 20px;'>{{$recurso->nombre}}</p> </div> </div> </form>   @endif   </td> <td> <button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i>  </button> </td> </tr>", {{$recurso->semana}}, {{$recurso->recurso_padre}}); -->
+											</script>  
+                          @include('Recursos.archivo')
                           				@endif
                                 
 

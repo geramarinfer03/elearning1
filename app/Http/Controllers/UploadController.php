@@ -86,7 +86,7 @@ class UploadController extends Controller {
 
 
 		        
-		        $destinationPath = $localRepo = realpath('../../../') . "/localRepository/"; 
+		        $destinationPath = $localRepo = realpath('../../../') . "/localRepository"; 
 
 
 		        if(!file_exists($destinationPath)){
@@ -200,19 +200,96 @@ class UploadController extends Controller {
 
 
 
+
+
+
+
+	public function downloadImageIns($id_recurso){
+
+		$recurso = Recurso::find($id_recurso);
+
+		$dir = $recurso->url;
+
+		$ext = $recurso->extencion();
+
+		$file = fopen($dir, "r");
+
+		$newPath =  'public/'.$id_recurso . '/tmp'. $id_recurso . '.'. $ext;
+
+			Storage::put($newPath, $file);
+			echo asset('storage/' . $file. '.' . $ext);
+
+		
+
+		$p = 'storage/'. $newPath;
+
+		//return $p;
+
+
+		
+
+		return redirect()->home();
+	}
+
+
+
+
+
+
+
+	public function getDownload(Request $request){
+
+		$nombre = $request->input('nameFile');
+
+		$url = $request->input('urlFiles');
+
+		$ext = $request->input('extRec');
+
+		
+		
+		$mimetype = \GuzzleHttp\Psr7\mimetype_from_extension($ext);
+		
+		       
+
+
+
+
+    //$mimetype = MimeType::detectByFileExtension(pathinfo($url, PATHINFO_EXTENSION));
+
+   
+
+    $headers = array(
+              'Content-Type: '.$mimetype,
+            );
+
+	return response()->download($url, $nombre.".".$ext, $headers);
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 	public function store(Request $request)
 	{
-		if ($request->hasFile('files')) {
+		/*if ($request->hasFile('files')) {
 			$file = $request->file('files');
 		foreach($file as $files){
 			$filename = $files->getClientOriginalName();
 			$extension = $files->getClientOriginalExtension();
 			$picture = sha1($filename . time()) . '.' . $extension;
-			$folder = project::select('folder')->where('id', session('progetto'))->get();
+			$folder = project::select('folder')->where('id', session('progetto'))->get();*/
 			
 			//specify your folder
 			
-			$destinationPath = public_path() . '/files_clients/' .$folder[0]->folder. '/';
+			/*$destinationPath = public_path() . '/files_clients/' .$folder[0]->folder. '/';
 			$files->move($destinationPath, $picture);
 			$destinationPath1='http://'.$_SERVER['HTTP_HOST'].'/files_clients/' .$folder[0]->folder. '/';
 					$filest = array();
@@ -222,7 +299,7 @@ class UploadController extends Controller {
 			$filest['thumbnailUrl'] = $destinationPath1.$picture;
 			$filesa['files'][]=$filest;}
 		return  $filesa;
-		}
+		}*/
 	}
 
 // add more customized code available at https://github.com/blueimp/jQuery-File-Upload in https://github.com/blueimp/jQuery-File-Upload/blob/master/server/php/UploadHandler.php

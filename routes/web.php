@@ -108,6 +108,8 @@ Route::post('updateDrag','RecursoController@updateDrag');
 
 Route::post('archivos.upload', 'UploadController@upload');
 
+Route::get('dwlImg/{id}', 'UploadController@downloadImageIns');
+Route::post('download', 'UploadController@getDownload');
 
  
 
