@@ -6,10 +6,6 @@
 			<img src="/img/miniaturas/json.png" style="width: 80px; height: 80px; " />
 		
 		@elseif ($recurso->isimage())
-			<script type="text/javascript">
-				descargarImagen('{{$recurso->id_recurso}}', '{{$recurso->url}}');
-			</script>
-
 			<img src="/storage/{{$recurso->id_recurso}}/tmp{{$recurso->id_recurso}}.{{$recurso->extencion()}}" id="imagen{{$recurso->id_recurso}}" style="width: 50%; height: 50%; " />
 			<form action="/download" method="POST" id="formDownload">
 
@@ -65,3 +61,6 @@
 		</button>
 	</td>
 </tr>
+
+
+<!-- Esto no se usa, solo para estructurar el codigo, luego se pasa comprimido al metodo de JS-->
