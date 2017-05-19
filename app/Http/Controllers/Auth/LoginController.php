@@ -38,6 +38,8 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/';
 
+    //protected $stg = storage_path() . '/app';
+
 
     protected $redirectAfterLogout = '/';
     /**
@@ -154,40 +156,52 @@ class LoginController extends Controller
         
     }*/
 
-    /*protected function eliminarDir($carpeta){
+    protected function eliminarDir($carpeta){
       foreach(glob($carpeta . "/*") as $archivos_carpeta){
           echo $archivos_carpeta;
+          echo "";
    
           if (is_dir($archivos_carpeta)){
-              eliminarDir($archivos_carpeta);
+              $this->eliminarDir($archivos_carpeta);
           }
           else{
               unlink($archivos_carpeta);
           }
       }
    
-      rmdir($carpeta);
-  }*/
+      if(is_dir($carpeta) && $carpeta != storage_path() . "/app"){
+        rmdir($carpeta);
+      }
+  }
 
 
 
 //login
 
-    /*protected function logout(){
-      /* $user = Auth::user(); 
+    public function logout(Request $request){
+       $user = Auth::user(); 
         Log::info('User Logged Out. ', [$user]);
         Auth::logout();
         Session::flush();
-        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');*/
-        /* $this->guard()->logout();
+
+        //return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+         $this->guard()->logout();
 
         $request->session()->flush();
 
         $request->session()->regenerate();
 
-        return redirect('/');
+        $stg = storage_path() . "/app";
+        //$stg = public_path() . "/storage";
+        //dd($stg);
+        $this->eliminarDir($stg);
+
+        alert()->success("Vuelva pronto");
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+        //  return redirect()->inicio();
        // return redirect('login');
-    }*/
+    }
 
         
     

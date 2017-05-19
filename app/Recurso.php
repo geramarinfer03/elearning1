@@ -60,7 +60,7 @@ class Recurso extends Model
         $ext = $this->extencion();
 
         if($ext == "bmp"  || $ext == "gif" ||  $ext == "jpeg" ||  $ext == "png" || 
-            $ext == "svg" || $ext == "ico" || $ext == "pnm"  || $ext == "rgb" || $ext == "3ds"){
+            $ext == "svg" || $ext == "ico" || $ext == "pnm"  || $ext == "rgb" || $ext == "jpg"){
             return true;
         }
         return false;

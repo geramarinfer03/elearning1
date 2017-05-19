@@ -193,7 +193,7 @@ class UploadController extends Controller {
 
 
 
-	public function uploadVideos(Array $file, Request $request){
+	public function uploadVideos(Request $request){
 
 
 	}
