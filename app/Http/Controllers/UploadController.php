@@ -169,8 +169,6 @@ class UploadController extends Controller {
          		 	Alert::error("Disculpe!, intente de nuevo", "No se pudo guardar el archivo");
          		 	return redirect()->back();  
 
-
-
          		 }
 
 
