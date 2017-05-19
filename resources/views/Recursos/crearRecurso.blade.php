@@ -42,7 +42,7 @@
                         <div class="col-md-12">
 
                             <div class="form-group has-feedback">
-                                {!! Form::label('nombre', 'Nombre') !!} {!! Form::text('nombre', null, ['class'=>'form-control','placeholder'=>'Nombre']) !!}
+                                {!! Form::label('nombre', 'Nombre') !!} {!! Form::text('nombre', null, ['class'=>'form-control','placeholder'=>'Nombre', 'required'=>'required']) !!}
                                 <span class="fa fa-book form-control-feedback"></span> {!! $errors->has('nombre')?$errors->first('nombre'):'' !!}
                             </div>
 
@@ -106,7 +106,7 @@
 
                             <div class="form-group has-feedback">
                                 {!! Form::label('nombreFile', 'Nombre') !!} 
-                                {!! Form::text('nombreFile', null, ['class'=>'form-control','placeholder'=>'Nombre']) !!}
+                                {!! Form::text('nombreFile', null, ['class'=>'form-control','placeholder'=>'Nombre', 'required'=>'required']) !!}
                                 <span class="fa fa-book form-control-feedback"></span> {!! $errors->has('nombreFile')?$errors->first('nombreFile'):'' !!}
                             </div>
 

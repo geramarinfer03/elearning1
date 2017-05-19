@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Storage;
 
 
 use App\Http\Controllers\VideoStream;
+use elearning1\Semana;
+use elearning1\Recurso;
 
 
 
@@ -81,6 +83,8 @@ class UploadController extends Controller {
 		        $semana = $request->input('semanaF');
 		        $rol =  $request->input('rolFile');
 		        $curso = $request->input('cursoF');
+
+
 		        
 		        $destinationPath = $localRepo = realpath('../../../') . "/localRepository/"; 
 
@@ -133,10 +137,44 @@ class UploadController extends Controller {
 				 //que hara esto? 
 				//echo asset("storage/" . $nombre);
 					  
-					  
-				// sending back with message
-				Alert::success(":)", "Archivo Guardado");
-				return redirect()->back();  
+				/*** GUARDANDO LOS DATOS EN LA BASE DE DATOS RELACIONAL*/	  
+				$sem = Semana::find($semana);
+        
+         		$contador = Recurso::where('Recurso.semana', '=', $semana)->max('secuencia');
+         		$contador= $contador+1;
+
+         		$rutaurl = $pathRecurso . "/". $fileName;
+
+         		//dd("Recurso Padre: ". $recurso_padre);
+
+         		 $result = Recurso::create([
+		          'nombre'=> $nombre,
+		          'notas'=> $notas,
+		          'url' => $rutaurl,
+		          'estado' => $estado,
+		          'visibl' => $vis,
+		          'recurso_padre' => $recurso_padre,
+		          'tipo_recurso' => 6,
+		          'secuencia' => $contador,
+		          'semana' => $semana,
+		          'rol' => $rol
+		        ]);
+
+         		 if($result){
+         		 	Alert::success(":)", "Archivo Guardado");
+					return redirect()->back();  
+
+         		 }else{
+         		 	unlink($rutaurl);
+         		 	Alert::error("Disculpe!, intente de nuevo", "No se pudo guardar el archivo");
+         		 	return redirect()->back();  
+
+
+
+         		 }
+
+
+				
 						    		 		
 
 			}else{
