@@ -26,12 +26,16 @@
     <link rel="stylesheet" href="{{asset('css/_all-skins.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
+
+
+
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="{{asset('js/scripts.js')}}"></script>
-  
 
+
+        
 
   </head>
   <!--@php
@@ -224,7 +228,7 @@
           <b>Version</b> 1.0.0
         </div>
         <strong>Universidad Nacional de Costa Rica -  2017</strong> 
-        <p style="margin: 0 auto;">José Marin - Josue Valerio</p>
+        <p style="margin: 0 auto;">José Marin - Josue Valerio - Lian Rodriguez</p>
       </footer>
 
       
@@ -240,6 +244,43 @@
     <script src="{{asset('js/scripts.js')}}"></script>
     <script src="{{asset('js/sweetalert.min.js')}}"></script>
 
+
+
+
+    
+
+   <!--  <script src="{{asset('js/dropzone.min.js')}}"></script>
+        <script src="{{asset('dropzone/dropzone.js')}}"></script>
+     <script src="{{asset('js/dropzone-amd-module.js')}}"></script>
+          <script src="{{asset('dropzone/dropzone-config.js')}}"></script>
+
+
+
+
+<script src="{{asset('fileUploader/js/vendor/jquery.ui.widget.js')}}"></script>
+
+<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+
+<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script src="{{asset('fileUploader/js/jquery.iframe-transport.js')}}"></script>
+
+
+<script src="{{asset('fileUploader/js/jquery.fileupload.js')}}"></script>
+
+<script src="{{asset('fileUploader/js/jquery.fileupload-process.js')}}"></script>
+
+<script src="{{asset('fileUploader/js/jquery.fileupload-image.js')}}"></script>
+
+<script src="{{asset('fileUploader/js/jquery.fileupload-audio.js')}}"></script>
+
+<script src="{{asset('fileUploader/js/jquery.fileupload-video.js')}}"></script>
+
+<script src="{{asset('fileUploader/js/jquery.fileupload-validate.js')}}"></script> -->
+
+  
      @include('sweet::alert')
     
   </body>

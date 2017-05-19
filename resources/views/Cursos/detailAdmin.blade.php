@@ -1,4 +1,6 @@
-@extends('layouts.principal') @section('contenido')
+@extends('layouts.principal') 
+
+@section('contenido')
 
 
 
@@ -6,6 +8,7 @@
 <section class="content">
 
     <div class="row">
+    @include('modal_usuario')
         <div class="col-md-3">
 
             <!-- Profile Image -->
@@ -76,48 +79,7 @@
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
 
-                       <!-- <div class="post clearfix">
-                            <div class="user-block">
 
-                                <span class="username">
-                                   <a href="#">Semana 1</a>
-                                   <a href="#" class="pull-right btn-box-tool"><i class="fa fa-edit"></i></a>
-                                </span>
-                                <span class="description">Tema de la semana</span>
-                            </div>
-                            
-                            <!-- RECURSOS  
-
-                        </div> -->
-
-   <!-- <div class="row">
-        <div class="col-md-12">
-            <div class="box collapsed-box">
-                <div class="box-header with-border"> 
-                  <input class="box-title inputS" type="text" value="Esto es un tema"/>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>                    
-                    </div> 
-                </div>
-                                
-                <div style="display: none;" class="box-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                        
-                          <ul id="menu2" style="width: 300px;">
-                              <li style="list-style: none; padding: 5px;margin: 3px 0;background: #000;"><a style="color: #fff" href="#">Hola</a></li>
-                             <li style="list-style: none; padding: 5px;margin: 3px 0;background: #000;"><a style="color: #fff" href="#">Hola2</a></li>
-                             <li style="list-style: none; padding: 5px;margin: 3px 0;background: #000;"><a style="color: #fff" href="#">Hola3</a></li>
-                          </ul>
-                        
-                        </div>
-                    </div>
-                                    
-                </div>
-            </div>
-
-        </div>
-    </div> FIN ROW  -->
 
                   @if(Auth::check() && Auth::user()->rol->id_rol == 1)
                          <button type="button" style="margin-bottom: 15px;"  onclick="activarEdicion()" class="btn btn-primary btn-md pull-left"><i class="fa fa-edit"></i> Activar Edición</button>

@@ -2,7 +2,7 @@
 	width: 100%;
 }
 .div_modal {
-  display: none;
+  /*display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -13,12 +13,23 @@
   -webkit-opacity: .8;
   -moz-opacity: .8;
   filter: alpha(opacity=80);
-  z-index: 820;
+  z-index: 820;*/
+   display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index:1001;
+        opacity:.75;
+        -moz-opacity: 0.75;
+        filter: alpha(opacity=75);
 }
 
 
 .div_contenido {
-  background-color: #ecf0f5;
+ /* background-color: #ecf0f5;
   box-shadow: 0 0 20px 0 #222;
   -webkit-box-shadow: 0 0 20px 0 #222;
   -moz-box-shadow: 0 0 20px 0 #222;
@@ -33,7 +44,19 @@
   top: -25px;
   width: auto;
   min-height: 90%;
-  z-index: 830;
+  z-index: 830;*/
+   display: none;
+        position: fixed;
+        top: 15%;
+        left: 12%;
+        width: 80%;
+        height: 80%;
+        padding: 16px;
+        background: #fff;
+        border: 5px groove #006600; 
+        color: #333;
+        z-index:1002;
+        overflow: auto;
 }
 
 .label1{
@@ -136,3 +159,73 @@ th{
 .visibleInactivo{
     display: none;
 }
+
+.border{
+  border: 2px dotted gray;
+}
+
+
+/*.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  cursor: pointer;
+}*/
+
+/**********File Inputs**********/
+
+
+
+/*
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+
+.inputfile + label {
+  cursor: pointer; 
+}
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile-1 + label {
+    color: #fff;
+    background-color: #ec9b1b;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+    background-color: #d47e03;
+}
+*/

@@ -6,9 +6,11 @@ use Illuminate\Contracts\Auth\Guard;
 use elearning1\Semana;
 use elearning1\Rol;
 use elearning1\Recurso;
+use elearning1\TipoRecurso;
 use Illuminate\Http\Request;
 use Illuminate\HttpResponse;
 use Input;
+
 
 class RecursoController extends Controller
 {
@@ -29,25 +31,37 @@ class RecursoController extends Controller
      */
     
     
-    public function crearRecursoSemana($semana){
+    public function crearRecursoSemana($semana, $curso){
         $usuario = \Auth::user();
-        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->pluck('nombre','id_rol');
+        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->orderBy('id_rol', 'desc')->get()->pluck('nombre','id_rol');
+      $tipo_recurso = TipoRecurso::all()->pluck('nombre', 'id_tipo_recurso');
+
         return view('Recursos.crearRecurso')->with('padre',0)
                                             ->with('semana',$semana)
-                                            ->with('roles',$rols_user);
+                                            ->with('roles',$rols_user)
+                                            ->with('tipo_recurso', $tipo_recurso)
+                                            ->with('curso', $curso);
     }
     
-    public function crearRecurso($id){
-        
-        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->pluck('nombre','id_rol');
+    public function crearRecurso($id, $curso){
+        $usuario = \Auth::user();
+
+        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->orderBy('id_rol', 'desc')->get()->pluck('nombre','id_rol');
         
         $recurso = Recurso::find($id);
         
         $semana = $recurso ->semana;
+
+        $tipo_recurso = TipoRecurso::all()->pluck('nombre', 'id_tipo_recurso');
+
          return view('Recursos.crearRecurso')->with('padre',$id)
                                              ->with('semana',$semana)
-                                             ->with('roles',$rols_user);
+                                             ->with('roles',$rols_user)
+                                             ->with('tipo_recurso', $tipo_recurso)
+                                             ->with('curso', $curso);
+
     }
+
     public function create()
     {
         //
@@ -62,18 +76,19 @@ class RecursoController extends Controller
     public function store(Request $request)
     {
 
+
         $this->validate($request, [
           'nombre'=>'Required',
-          'notas'=>'Required',
-         /*'url' => 'Required',*/
           'estado' => 'Required',
           'visibl' => 'Required',
           'recurso_padre' => 'Required',
-          'tipo' => 'Required',
+          'tipo' => 'Required|not_in:0',
           'semana' => 'Required',
           'rol' => 'Required' 
           
           ]);
+
+
         
           $nombre = $request->input('nombre');
           $notas = $request->input('notas');
@@ -85,6 +100,8 @@ class RecursoController extends Controller
           $semana = $request->input('semana');
           $rol =  $request->input('rol');
         
+      
+      
 
         
          $sem = Semana::find($semana);
@@ -102,7 +119,8 @@ class RecursoController extends Controller
             'secuencia' =>$contador
         ]);*/
  
-        
+
+
        $result = Recurso::create([
           'nombre'=>$nombre,
           'notas'=> $notas,
@@ -115,6 +133,8 @@ class RecursoController extends Controller
           'semana' => $semana,
           'rol' => $rol
         ]);
+
+      
         
        if($result){
              alert()->success('Recurso creado exitosamente ');

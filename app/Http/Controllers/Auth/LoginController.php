@@ -85,25 +85,32 @@ class LoginController extends Controller
 
 
 
-        if ($this->guard()->attempt($credentials, $request->has('remember')))
-    {
+        if ($this->guard()->attempt($credentials, $request->has('remember'))){
 
-        $usuarioactual=\Auth::user();
-        alert()->success("Bienvenido");
-       return redirect()->home();
-    }
+          $usuarioactual=\Auth::user();
+          alert()->success("Bienvenido");
+
+         return redirect()->home();
+        }
+
+       //  alert()->error('Estos credenciales no son correctos', 'Intente de nuevo');
+
+//////
+        //return redirect()->home();      
+
+    
 
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
-    /*    $this->incrementLoginAttempts($request);
+        $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
 
 
 
-    $credentials = $request->only('email', 'password');
+    /*$credentials = $request->only('email', 'password');
 
     if ($this->auth->attempt($credentials, $request->has('remember')))
     {

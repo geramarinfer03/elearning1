@@ -86,8 +86,8 @@ Route::group(['middleware'=>['profe']], function() {
     
     
 	Route::get('editarRecurso/{id}','RecursoController@edit');
-	Route::get('crearRecursoSemana/{id}','RecursoController@crearRecursoSemana');
-	Route::get('crearRecurso/{id}','RecursoController@crearRecurso'); //crea recurso en seccion
+	Route::get('crearRecursoSemana/{id}/{curso}','RecursoController@crearRecursoSemana');
+	Route::get('crearRecurso/{id}/{curso}','RecursoController@crearRecurso'); //crea recurso en seccion
 });
 
 
@@ -106,7 +106,7 @@ Route::post('updateDrag','RecursoController@updateDrag');
 //Route::post('storeCurso','RecursoController@store');
 
 
-
+Route::post('archivos.upload', 'UploadController@upload');
 
 
  

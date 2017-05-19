@@ -1,7 +1,8 @@
 function irarriba() {
     $('html, body').animate({
         scrollTop: 0
-    }, 300);
+    }, 100);
+    $('#capa_para_edicion').scrollTop(0);
 }
 
 /*function buscarusuario(){
@@ -29,13 +30,16 @@ function mostrarMatricula(id_usuario) {
     $("#capa_modal").show();
     $("#capa_para_edicion").show();
 
+
+
     var url = "/matricularUsuario/" + id_usuario + "";
 
     /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+    irarriba();
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul); //leccion 10
     })
-    irarriba();
+    
 }
 
 
@@ -106,41 +110,44 @@ function edicion(id_recurso) {
 
     var url = "/editarRecurso/" + id_recurso + "";
 
+        irarriba();
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul);
+    })
+
+}
+
+function crearRecurso(id_padre, curso) {
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+
+    var url = "/crearRecurso/" + id_padre + "/" + curso;
+
+   irarriba();
 
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul);
     })
-    irarriba();
-}
-
-function crearRecurso(id_padre) {
-    $("#capa_modal").show();
-    $("#capa_para_edicion").show();
-
-    var url = "/crearRecurso/" + id_padre;
-
-
-    $.get(url, function (resul) {
-        $("#contenido_capa_edicion").html(resul);
-    })
-    irarriba();
+  
 }
 
 
 
 
-function crearRecursoSemana(semana) {
+function crearRecursoSemana(semana, curso) {
     $("#capa_modal").show();
     $("#capa_para_edicion").show();
 
 
-    var url = "/crearRecursoSemana/" + semana + "";
+    var url = "/crearRecursoSemana/" + semana + "/"+ curso + "";
+
+      irarriba();
 
     /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul); //leccion 10
     })
-    irarriba();
+  
 }
 
 
@@ -229,4 +236,46 @@ function visibleInactivo(id){
 
 
 
+function cambiarTipoRecurso(){
+
+  $('.urlCR').css("display", "none");
+  $('.notasCR').css("display", "none");
+   $('#notasCR').val("");
+   $('#urlCR').val("");
+
+
+  var seleccion = $('#tipoRecursoA').val();
+  switch(seleccion){
+    case "6": 
+        $('#tab1').attr('class','tab-pane');
+        $('#tab2').attr('class','tab-pane active');
+
+        $('#litab2').attr('class','active');
+        $('#litab1').attr('class','');
+
+        $("#atab2").attr("aria-expanded","true");
+        $("#atab1").attr("aria-expanded","false");
+
+        
+        $('#tipoRecursoA').val("");
+        break;
+
+    case "1":
+        $('.urlCR').css("display", "block");
+        $('.notasCR').css("display", "block");
+
+        break;
+
+    case "2":
+         $('.notasCR').css("display", "block");
+        break;
+
+    case "5":
+        $('.urlCR').css("display", "block");
+        $('.notasCR').css("display", "block");
+        break;
+
+  }
+
+};
 

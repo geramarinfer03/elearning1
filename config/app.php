@@ -165,6 +165,7 @@ return [
 	    Collective\Html\HtmlServiceProvider::class,
         CountryList\CountryListServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Artisaninweb\SoapWrapper\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,6 +233,8 @@ return [
 		'Input' => Iluminate\Support\Facades\Input::class,
         'CountryList' => CountryList\Facades\CountryListFacade::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
+        'SoapWrapper' => Artisaninweb\SoapWrapper\Facade::class,
 
     ],
 
