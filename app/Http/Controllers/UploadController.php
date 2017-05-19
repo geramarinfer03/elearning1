@@ -253,16 +253,11 @@ class UploadController extends Controller {
 
 
 
-
-    //$mimetype = MimeType::detectByFileExtension(pathinfo($url, PATHINFO_EXTENSION));
-
-   
-
-    $headers = array(
+  		  $headers = array(
               'Content-Type: '.$mimetype,
             );
 
-	return response()->download($url, $nombre.".".$ext, $headers);
+		return response()->download($url, $nombre.".".$ext, $headers);
 
 	}
 

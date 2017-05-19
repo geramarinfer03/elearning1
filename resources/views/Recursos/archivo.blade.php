@@ -11,6 +11,21 @@
 			</script>
 
 			<img src="/storage/{{$recurso->id_recurso}}/tmp{{$recurso->id_recurso}}.{{$recurso->extencion()}}" id="imagen{{$recurso->id_recurso}}" style="width: 50%; height: 50%; " />
+			<form action="/download" method="POST" id="formDownload">
+
+			<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
+			<input type="hidden" name="urlFiles" value="{{$recurso->url}}">   
+			<input type="hidden" name="nameFile" value="{{$recurso->nombre}}">
+			<input type="hidden" name="extRec" value="{{$recurso->extencion()}}">      
+			<div class="row">
+			<div class="col-md-1">
+			<button  style="margin: 10px; margin-left: 18px;" type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-download"></i></button>
+			</div>
+			<div class="col-md-4">
+				<p class="notesP" style="margin-top: 20px;">{{$recurso->nombre}}</p>
+			</div>
+			</div>
+			</form>
 		
 		@else
 		
