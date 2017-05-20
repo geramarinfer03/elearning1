@@ -59,13 +59,13 @@ FOREIGN KEY (curso) REFERENCES Curso(id_curso)
 
 CREATE TABLE Recurso (
 id_recurso INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(30) NOT NULL,
+nombre VARCHAR(150) NOT NULL,
 url VARCHAR(255),
 tipo_recurso INT(10) UNSIGNED NOT NULL,
 recurso_padre INT(10) UNSIGNED NOT NULL,
 visibl INT (1) NOT NULL,
 secuencia INT(10) NOT NULL,
-notas VARCHAR(100) NOT NULL,
+notas VARCHAR(255) NOT NULL,
 estado INT (1) NOT NULL,
 semana INT(10) UNSIGNED NOT NULL,
 rol INT(10) UNSIGNED NOT NULL,
@@ -131,9 +131,7 @@ insert into Recurso (nombre, url,tipo_recurso,recurso_padre,visibl,secuencia,not
 values
 ('Tema 1: Objetivos', null, 3, 0, 1, 1, 'etiqueta', 1, 1, 5),
 ('Tema 1: Instalación', null, 2, 0, 1, 2, 'pdf instalacion', 1, 1, 5),
-('textoEntrada', 'Temas relacionados a este curso', 4, 0, 1, 3, 'texto', 1, 1, 5),
-('Plantilla', 'http://almsaeedstudio.com/download/AdminLTE-dist', 6, 0, 1, 4, 'Plantilla utilizada en el proyecto Elearning', 1, 1, 5);
-
+('textoEntrada', 'Temas relacionados a este curso', 4, 0, 1, 3, 'texto', 1, 1, 5);
 
 
 insert into Usuario(nombre,email, password, id_rol, genero, pais,fecha_ultimo_ingreso,ip, os, navegador, lenguaje)

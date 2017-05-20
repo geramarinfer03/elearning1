@@ -91,6 +91,7 @@
 .inputS{
   border: none;
   font-size: 24px;
+  width: 90%;
 }
 
 .inputS:disabled{

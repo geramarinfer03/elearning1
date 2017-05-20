@@ -31,7 +31,7 @@ Route::get('/hola', function()	{
 
 //rutas accessibles slo si el usuario no se ha logueado
 Route::group(['middleware' => 'guest'], function () {
-	Route::get('/', 'PagesController@index');
+	Route::get('/', 'PagesController@index')->name('inicio');
 	Route::get('login', 'Auth\LoginController@showLoginForm');
 	Route::post('login','Auth\LoginController@login')->name('login'); 
 	// Registration routes...
@@ -108,6 +108,8 @@ Route::post('updateDrag','RecursoController@updateDrag');
 
 Route::post('archivos.upload', 'UploadController@upload');
 
+Route::get('dwlImg/{id}', 'UploadController@downloadImageIns');
+Route::post('download', 'UploadController@getDownload');
 
  
 

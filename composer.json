@@ -12,7 +12,8 @@
         "umpirsky/country-list": "2.0.2",
         "uxweb/sweet-alert": "^1.4",
         "vcarreira/country-list": "~1.0",
-         "artisaninweb/laravel-soap": "0.3.*"
+         "artisaninweb/laravel-soap": "0.3.*",
+         "guzzlehttp/guzzle": "~6.0" 
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

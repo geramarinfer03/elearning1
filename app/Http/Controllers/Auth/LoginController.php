@@ -7,6 +7,7 @@ use Alert;
 use Validator;
 use elearning1\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Auth\SessionGuard;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
@@ -36,6 +37,8 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+
+    //protected $stg = storage_path() . '/app';
 
 
     protected $redirectAfterLogout = '/';
@@ -123,24 +126,82 @@ class LoginController extends Controller
 
     }
 
+      /*  public function logout()
+    {
+
+        $user=\Auth::user();
+
+        // If we have an event dispatcher instance, we can fire off the logout event
+        // so any further processing can be done. This allows the developer to be
+        // listening for anytime a user signs out of this application manually.
+        $this->clearUserDataFromStorage();
+
+        if (! is_null($this->user)) {
+            $this->cycleRememberToken($user);
+        }
+
+        if (isset($this->events)) {
+            $this->events->dispatch(new Events\Logout($user));
+        }
+
+        // Once we have fired the logout event we will clear the users out of memory
+        // so they are no longer available as the user is no longer considered as
+        // being signed into this application and should not be available here.
+        $this->user = null;
+
+      //  $this->eliminarDir('/storage/tmp');
+
+        $this->loggedOut = true;
+
+        
+    }*/
+
+    protected function eliminarDir($carpeta){
+      foreach(glob($carpeta . "/*") as $archivos_carpeta){
+          echo $archivos_carpeta;
+          echo "";
+   
+          if (is_dir($archivos_carpeta)){
+              $this->eliminarDir($archivos_carpeta);
+          }
+          else{
+              unlink($archivos_carpeta);
+          }
+      }
+   
+      if(is_dir($carpeta) && $carpeta != storage_path() . "/app"){
+        rmdir($carpeta);
+      }
+  }
+
+
 
 //login
 
-    /*protected function logout(){
-      /* $user = Auth::user(); 
+    public function logout(Request $request){
+       $user = Auth::user(); 
         Log::info('User Logged Out. ', [$user]);
         Auth::logout();
         Session::flush();
-        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');*/
-        /* $this->guard()->logout();
+
+        //return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+         $this->guard()->logout();
 
         $request->session()->flush();
 
         $request->session()->regenerate();
 
-        return redirect('/');
+        $stg = storage_path() . "/app";
+        //$stg = public_path() . "/storage";
+        //dd($stg);
+        $this->eliminarDir($stg);
+
+        alert()->success("Vuelva pronto");
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+        //  return redirect()->inicio();
        // return redirect('login');
-    }*/
+    }
 
         
     
