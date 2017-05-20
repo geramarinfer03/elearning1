@@ -3,10 +3,13 @@
 		<p class='tituloP'>{{$recurso->nombre}}</p>
 		<p class='notesP'>{{$recurso->notas}}</p>
 		@if($recurso->isvideo())
-			<img src="/img/miniaturas/json.png" style="width: 80px; height: 80px; " />
+			 <video controls>
+
+	        Your browser does not support the <code>video</code> element.
+	    </video>
 		
 		@elseif ($recurso->isimage())
-			<img src="/storage/{{$recurso->id_recurso}}/tmp{{$recurso->id_recurso}}.{{$recurso->extencion()}}" id="imagen{{$recurso->id_recurso}}" style="width: 50%; height: 50%; " />
+			<img src="/storage/{{$recurso->id_recurso}}/tmp{{$recurso->id_recurso}}.{{$recurso->extencion()}}" id="imagen{{$recurso->id_recurso}}" style="width: 50%;" />
 			<form action="/download" method="POST" id="formDownload">
 
 			<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
@@ -64,3 +67,6 @@
 
 
 <!-- Esto no se usa, solo para estructurar el codigo, luego se pasa comprimido al metodo de JS-->
+
+
+

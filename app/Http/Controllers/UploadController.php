@@ -177,9 +177,8 @@ class UploadController extends Controller {
 
 			}else{
 
-				dd("Es un video");
+				$this->uploadVideos($request);
 
-				//llama a metodo por WS
 			}
 		}else{
 
@@ -194,6 +193,145 @@ class UploadController extends Controller {
 
 
 	public function uploadVideos(Request $request){
+		ini_set('memory_limit', '-1');
+		 // obteniendo la informacion del archivo
+
+		  
+		$file = Input::file('file');
+		$mime = $file->getMimeType();
+
+		  if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/x-matroska" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") {
+
+		  	 if (Input::file('file')->isValid()) {
+
+
+		 		$destinationPath = $localRepo = realpath('../../../') . "/localRepository/tmp"; 
+
+
+			    $extension = Input::file('file')->getClientOriginalExtension(); // obtiene la extension del archivo
+		        //$originalName = Input::file('file')->getClientOriginalName();
+
+
+
+		        if(!file_exists($destinationPath)){
+		        	
+		        	 // Si el directorio no ha sido creado
+		        	 if(!file_exists($destinationPath)){
+						$iscreated = 0;
+				     	try{
+				     		//Intenta crearlo, con permisos de escritura
+				     		$iscreated = mkdir($destinationPath, 0700, true);
+				     	}catch(\Exception $e){}
+
+
+				     	//Error de creacion de carpeta
+				     	if($iscreated == 0){
+							Alert::error("Error de permisos", "No se pudo crear la carpeta")->persistent('Close');
+							return redirect()->back();     		
+				     	}
+				     	
+				     }
+				}
+
+				$fileName = rand(11111,99999).'.'.$extension;
+
+				$nombre = $request->input('nombreFile');
+		        $notas = $request->input('notasFile');
+		        $vis = $request->input('visiblF');
+		        $estado = $request->input('estadoF');
+		        $recurso_padre = $request->input('recurso_padreF');
+		        $tipo_recurso = $request->input('tipoF');
+		        $semana = $request->input('semanaF');
+		        $rol =  $request->input('rolFile');
+		        $curso = $request->input('cursoF');
+		          $id =\Auth::user();
+		          $user = $id->nombre;
+
+	
+
+		        Input::file('file')->move($destinationPath, $fileName);
+
+		     	$sem = Semana::find($semana);
+        
+         		$contador = Recurso::where('Recurso.semana', '=', $semana)->max('secuencia');
+         		$contador= $contador+1;
+
+         		$rutaurl = $fileName; 
+
+
+				$this->soapWrapper->add('VideoWS', function ($service) {
+				    $service->wsdl("http://localhost:8080/VideoWS/VideoWS?wsdl");
+				    $service->trace(true);                                                   // Optional: (parameter: true/false)
+				    $service->cache(WSDL_CACHE_NONE);                                        // Optional: Set the WSDL cache
+				 
+				});
+
+				//obtiene la ruta del repositorio local
+				$localRepo = realpath('../../../') . "/localRepository/tmp/"; 
+
+				$fileRoot = $localRepo . $fileName; 
+
+				//dd($fileRoot);
+
+				//obtiene el archivo y lo transforma a bytes
+				$contents = file_get_contents($fileRoot);
+
+				dd(filesize($contents));
+				$data = [
+				    'fileName' => $rutaurl,
+				    'video' => $contents,
+				    'course' => $curso."",
+				    'user' => $user,
+				];
+
+				$resultado =    $this->soapWrapper->call('VideoWS.upload', $data);
+
+
+
+				$rutaurl = "/". $fileName; 
+
+				if($resultado){
+					 $result = Recurso::create([
+			          'nombre'=> $nombre,
+			          'notas'=> $notas,
+			          'url' => $rutaurl,
+			          'estado' => $estado,
+			          'visibl' => $vis,
+			          'recurso_padre' => $recurso_padre,
+			          'tipo_recurso' => 6,
+			          'secuencia' => $contador,
+			          'semana' => $semana,
+			          'rol' => $rol
+			        ]);
+
+					Alert::success(":)", "Archivo Guardado");
+					return redirect()->back();  
+
+					}else{
+
+						unlink($rutaurl);
+         		 		Alert::error("Disculpe!, intente de nuevo", "No se pudo guardar el archivo");
+         		 		return redirect()->back();
+					}
+
+				dd(":O something happens");
+
+
+
+
+
+
+
+		  	 }
+
+		 
+
+
+		  }else {
+			 alert()->error("Este formato es invalido" , "intente con otro video");
+			 redirect()->back();
+
+		  }
 
 
 	}
