@@ -6,7 +6,7 @@
 
 
 
-			<video onclick="Descargar(this,{{$recurso->id_recurso}})" poster="{{asset('img/down.png')}}"
+			<video onclick="Descargar(this,{{$recurso->id_recurso}})" onloadstart="CargarIcono(this)" poster="{{asset('img/down.png')}}"
              src="/storage/videos/{{$recurso->Curso()}}/{{$recurso->semana}}/{{$recurso->url}}" type="video/mp4" width="500" height="500" controls>
 				
 				

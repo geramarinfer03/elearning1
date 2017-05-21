@@ -294,7 +294,7 @@ function descargarImagen(id, serverpath) {
 
 
 
-function Descargar(element,id) {
+function Descargar(element, id) {
 
 
     $.ajax({
@@ -305,13 +305,13 @@ function Descargar(element,id) {
             $(element).attr('poster', 'http://localhost:8000/img/play.png');
         },
         error: function () {
-            
-            
+
+
             console.log('0');
             $(element).attr('poster', 'http://localhost:8000/img/cargando.gif');
-            var urle = $('#urlFiles_'+id).val();
-            var semana = $('#semanaFile_'+id).val();
-            
+            var urle = $('#urlFiles_' + id).val();
+            var semana = $('#semanaFile_' + id).val();
+
 
             setTimeout(function () {
                 $.ajax({
@@ -330,10 +330,21 @@ function Descargar(element,id) {
         }
     });
 
+}
 
+function CargarIcono(element) {
+    $.ajax({
+        url: element.src,
+        success: function () {
 
+            console.log('1');
+            $(element).attr('poster', 'http://localhost:8000/img/play.png');
+        },
+        error: function () {
+            console.log('1');
 
+        }
 
-
+    });
 
 }
