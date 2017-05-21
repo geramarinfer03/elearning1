@@ -276,7 +276,7 @@ class UploadController extends Controller {
 				//obtiene el archivo y lo transforma a bytes
 				$contents = file_get_contents($fileRoot);
 
-				dd(filesize($contents));
+				
 				$data = [
 				    'fileName' => $rutaurl,
 				    'video' => $contents,

@@ -9,7 +9,7 @@
 	    </video>
 		
 		@elseif ($recurso->isimage())
-			<img src="/storage/{{$recurso->id_recurso}}/tmp{{$recurso->id_recurso}}.{{$recurso->extencion()}}" id="imagen{{$recurso->id_recurso}}" style="width: 50%;" />
+			<img src="/storage/{{$recurso->id_recurso}}/tmp{{$recurso->id_recurso}}.{{$recurso->extencion()}}" id="imagen{{$recurso->id_recurso}}" style="width: 30%;" />
 			<form action="/download" method="POST" id="formDownload">
 
 			<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
