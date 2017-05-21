@@ -39,7 +39,7 @@ function mostrarMatricula(id_usuario) {
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul); //leccion 10
     })
-    
+
 }
 
 
@@ -110,7 +110,7 @@ function edicion(id_recurso) {
 
     var url = "/editarRecurso/" + id_recurso + "";
 
-        irarriba();
+    irarriba();
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul);
     })
@@ -123,12 +123,12 @@ function crearRecurso(id_padre, curso) {
 
     var url = "/crearRecurso/" + id_padre + "/" + curso;
 
-   irarriba();
+    irarriba();
 
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul);
     })
-  
+
 }
 
 
@@ -139,15 +139,15 @@ function crearRecursoSemana(semana, curso) {
     $("#capa_para_edicion").show();
 
 
-    var url = "/crearRecursoSemana/" + semana + "/"+ curso + "";
+    var url = "/crearRecursoSemana/" + semana + "/" + curso + "";
 
-      irarriba();
+    irarriba();
 
     /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul); //leccion 10
     })
-  
+
 }
 
 
@@ -212,83 +212,128 @@ $.ajaxSetup({
 
 
 
-function estadoInactivo(id){
-    
-    
-    
+function estadoInactivo(id) {
+
+
+
     /*$('#'+id).attr('class','estadoInactivo');*/
-   /* $('#'+id).children().attr('disabled',true);*/
-    
-
-    $('#'+id).attr('class','opacity')
-    $('#'+id).find('a').attr('disabled', true);
-     /*$('#'+id).find('a').removeAttr("href");*/
-    
-    $('#'+id).find('a').bind('click',false);
-
-}
-
-function visibleInactivo(id){
-
-    
-    $('#'+id).attr('class','visibleInactivo');
-}
+    /* $('#'+id).children().attr('disabled',true);*/
 
 
+    $('#' + id).attr('class', 'opacity')
+    $('#' + id).find('a').attr('disabled', true);
+    /*$('#'+id).find('a').removeAttr("href");*/
 
-function cambiarTipoRecurso(){
-
-  $('.urlCR').css("display", "none");
-  $('.notasCR').css("display", "none");
-   $('#notasCR').val("");
-   $('#urlCR').val("");
-
-
-  var seleccion = $('#tipoRecursoA').val();
-  switch(seleccion){
-    case "6": 
-        $('#tab1').attr('class','tab-pane');
-        $('#tab2').attr('class','tab-pane active');
-
-        $('#litab2').attr('class','active');
-        $('#litab1').attr('class','');
-
-        $("#atab2").attr("aria-expanded","true");
-        $("#atab1").attr("aria-expanded","false");
-
-        
-        $('#tipoRecursoA').val("");
-        break;
-
-    case "1":
-        $('.urlCR').css("display", "block");
-        $('.notasCR').css("display", "block");
-
-        break;
-
-    case "2":
-         $('.notasCR').css("display", "block");
-        break;
-
-    case "5":
-        $('.urlCR').css("display", "block");
-        $('.notasCR').css("display", "block");
-        break;
-
-  }
+    $('#' + id).find('a').bind('click', false);
 
 }
 
-function descargarImagen(id, serverpath){
+function visibleInactivo(id) {
+
+
+    $('#' + id).attr('class', 'visibleInactivo');
+}
+
+
+
+function cambiarTipoRecurso() {
+
+    $('.urlCR').css("display", "none");
+    $('.notasCR').css("display", "none");
+    $('#notasCR').val("");
+    $('#urlCR').val("");
+
+
+    var seleccion = $('#tipoRecursoA').val();
+    switch (seleccion) {
+        case "6":
+            $('#tab1').attr('class', 'tab-pane');
+            $('#tab2').attr('class', 'tab-pane active');
+
+            $('#litab2').attr('class', 'active');
+            $('#litab1').attr('class', '');
+
+            $("#atab2").attr("aria-expanded", "true");
+            $("#atab1").attr("aria-expanded", "false");
+
+
+            $('#tipoRecursoA').val("");
+            break;
+
+        case "1":
+            $('.urlCR').css("display", "block");
+            $('.notasCR').css("display", "block");
+
+            break;
+
+        case "2":
+            $('.notasCR').css("display", "block");
+            break;
+
+        case "5":
+            $('.urlCR').css("display", "block");
+            $('.notasCR').css("display", "block");
+            break;
+
+    }
+
+}
+
+function descargarImagen(id, serverpath) {
 
     var url = "/dwlImg/" + id;
 
     $.get(url, function (resul) {
 
         //$("#imagen").attr('src', '/storage/'+ id +'/tmp'+id);
-        
+
     })
-  
+
 
 }
 
+
+
+function Descargar(element,id) {
+
+
+    $.ajax({
+        url: element.src,
+        success: function () {
+
+            console.log('1');
+            $(element).attr('poster', 'http://localhost:8000/img/play.png');
+        },
+        error: function () {
+            
+            
+            console.log('0');
+            $(element).attr('poster', 'http://localhost:8000/img/cargando.gif');
+            var urle = $('#urlFiles_'+id).val();
+            var semana = $('#semanaFile_'+id).val();
+            
+
+            setTimeout(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/downloadVideo/',
+                    data: { urlFiles: urle, semanaFile: semana },
+                    success: function (msg) {
+
+                        $(element).attr('poster', 'http://localhost:8000/img/play.png');
+                        element.load();
+                    }
+                });
+
+            }, 1000);
+
+        }
+    });
+
+
+
+
+
+
+
+}

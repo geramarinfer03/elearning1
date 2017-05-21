@@ -111,7 +111,7 @@ Route::post('archivos.upload', 'UploadController@upload');
 Route::get('dwlImg/{id}', 'UploadController@downloadImageIns');
 Route::post('download', 'UploadController@getDownload');
 
- 
+Route::post('downloadVideo', 'UploadController@downloadVideo');
 
 
 /*Route::get('cursos', 'CursoController@index');

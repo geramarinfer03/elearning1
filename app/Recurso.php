@@ -16,6 +16,12 @@ class Recurso extends Model
     protected $primaryKey = 'id_recurso';
     public $timestamps = false;
 
+    public function Curso(){
+
+        $sem = Semana::find($this->semana);
+        return $sem->curso;
+    }
+
     public function semana(){
 
     	return $this->belongsTo(Semana::class,'semana');
