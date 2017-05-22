@@ -117,6 +117,19 @@ function edicion(id_recurso) {
 
 }
 
+function edicionArchivo(id_recurso) {
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+
+    var url = "/editarRecursoArchivo/" + id_recurso + "";
+
+    irarriba();
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul);
+    })
+
+}
+
 function crearRecurso(id_padre, curso) {
     $("#capa_modal").show();
     $("#capa_para_edicion").show();

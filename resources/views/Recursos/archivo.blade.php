@@ -78,7 +78,7 @@
 
     </td>
     <td>
-        <button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i>
+        <button id='btn_activar_edicion' style='color:blue; margin:5px;' onclick='edicionArchivo(<?= $recurso->id_recurso; ?>)' class='tn btn-default hiddenclass'><i class='fa fa-edit'></i>
             
         </button>
     </td>

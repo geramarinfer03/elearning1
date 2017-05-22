@@ -70,6 +70,11 @@ class UploadController extends Controller
         if ($extension != "exe") {
             if ($tipo != 'video') {
                 //Ejecuta upload normal
+
+                $this->validate($request, [
+                    'nombreFile'=>'Required'
+                  ]);
+                
                 $nombre = $request->input('nombreFile');
                 $notas = $request->input('notasFile');
                // $url = $request->input('url');
@@ -177,7 +182,7 @@ class UploadController extends Controller
 
     
 
-  public function uploadVideos(Request $request)
+    public function uploadVideos(Request $request)
     {
         ini_set('memory_limit', '-1');
          // obteniendo la informacion del archivo
@@ -186,18 +191,21 @@ class UploadController extends Controller
         $file = Input::file('file');
         $mime = $file->getMimeType();
 
-       if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/x-matroska" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") {
+        if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/x-matroska" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") {
             if (Input::file('file')->isValid()) {
                 $extension = Input::file('file')->getClientOriginalExtension(); // obtiene la extension del archivo
-                $fileName = rand(11111, 99999).'.'.$extension; // renameing image
+                $originalName = Input::file('file')->getClientOriginalName(); //obtiene el nombre original del archivo
+               
+                //$fileName = rand(11111, 99999).'.'.$extension; // renameing image
 
-             
-
+            
                 $contents = file_get_contents($file);
 
-              
+                $this->validate($request, [
+                    'nombreFile'=>'Required'
+                  ]);
         
-              
+
 
                 $nombre = $request->input('nombreFile');
                 $notas = $request->input('notasFile');
@@ -209,16 +217,16 @@ class UploadController extends Controller
                 $rol =  $request->input('rolFile');
                 $curso = $request->input('cursoF');
                 $id =\Auth::user();
-                $user = $id->nombre;
+                $user = $id->id;
 
+             
 
-                $rutaurl = $fileName;
+                //$rutaurl = $fileName;
+                
                 $contador = Recurso::where('Recurso.semana', '=', $semana)->max('secuencia');
                 $contador= $contador+1;
 
-               $destinationPath=  'public/'.'videos/'.$curso.'/'.$semana.'/'.$fileName;
-                Storage::put($destinationPath, file_get_contents($file));
-
+              
                 $this->soapWrapper->add('VideoWS', function ($service) {
                     $service->wsdl("http://localhost:8080/VideoWS/VideoWS?wsdl");
                     $service->trace(true);                                                   // Optional: (parameter: true/false)
@@ -226,17 +234,43 @@ class UploadController extends Controller
                 });
 
                 $data = [
-                   'fileName' => $rutaurl,
+                   'fileName' => $originalName,
                    'video' => $contents,
-                   'course' => $curso."",
+                   'course' => $curso,
                    'user' => $user,
                 ];
 
-                $resultado =    $this->soapWrapper->call('VideoWS.upload', $data);
+ 
 
-                $rutaurl = $fileName;
+                $resultado = 0;
+                try {
+                    $respuesta =    $this->soapWrapper->call('VideoWS.upload', $data);
+                    $resultado = json_decode(json_encode($respuesta->return), true);
+                } catch (\Exception $e) {
+                }
 
-                if ($resultado) {
+                if ($resultado == 0) {
+                    Alert::error("Disculpe!, intente de nuevo", "Al parecer el WS dio problemas")->persistent('Close');
+                    ;
+                    return redirect()->back();
+                }
+
+
+               // var_dump($resultado->return);
+
+            //   dd($array["id"]. "  Status " . $array["status"]);
+
+            //     $fileName = rand(11111, 99999).'.'.$extension; // renameing image
+
+                 $rutaurl = $resultado["id"] . '.' . $extension;
+
+
+                if ($resultado["status"] == 1) {
+                    $destinationPath=  'public/'.'videos/'.$curso.'/'.$semana.'/'.$rutaurl;
+                    Storage::put($destinationPath, file_get_contents($file));
+
+
+
                     $result = Recurso::create([
                      'nombre'=> $nombre,
                      'notas'=> $notas,
@@ -249,9 +283,6 @@ class UploadController extends Controller
                      'semana' => $semana,
                      'rol' => $rol
                     ]);
-
-
-                    
 
                     Alert::success(":)", "Archivo Guardado");
                     return redirect()->back();
@@ -269,11 +300,104 @@ class UploadController extends Controller
         }
 
 
-        return redirect()->back();
+          return redirect()->back();
     }
-    
 
-  
+
+
+    function UpdateArchivo(Request $request)
+    {
+         ini_set('memory_limit', '-1');
+        // obteniendo la informacion del archivo
+
+      
+        $file = Input::file('file');
+
+
+        if ($file) {
+            $mime = $file->getMimeType();
+
+            list($tipo, $exten) = explode("/", $mime);
+
+            $extension = Input::file('file')->getClientOriginalExtension();
+
+
+            if ($extension != "exe") {
+                if ($tipo != 'video') {
+                    $nombre = $request->input('nombre');
+                    $notas = $request->input('notas');
+                    $vis = $request->input('visibl');
+                    $estado = $request->input('estado');
+                    $id = $request->input('id_recurso');
+                    $rol =  $request->input('rol');
+
+
+                    $destinationPath = $localRepo = realpath('../../../') . "/localRepository";
+
+
+                    if (!file_exists($destinationPath)) {
+                         // Si el directorio no ha sido creado
+                        if (!file_exists($destinationPath)) {
+                            $iscreated = 0;
+                            try {
+                                //Intenta crearlo, con permisos de escritura
+                                $iscreated = mkdir($destinationPath, 0700);
+                            } catch (\Exception $e) {
+                            }
+
+
+                            //Error de creacion de carpeta
+                            if ($iscreated == 0) {
+                                Alert::error("Error de permisos", "No se pudo crear la carpeta")->persistent('Close');
+                                return redirect()->back();
+                            }
+                        }
+                    }
+                     //Necesito el curso al que pertenece.
+                    $rec = Recurso::find($id);
+                    $curs1 = $rec->Curso();
+
+                    $sem = $rec->semana;
+
+                    $pathRecurso = $destinationPath."/".$curs1."/".$sem;
+                     
+
+                    if (!file_exists($pathRecurso)) {
+                        $iscreated = 0;
+                        try {
+                        //Intenta crearlo, con permisos de escritura
+                            $iscreated = mkdir($pathRecurso, 0700, true);
+                        } catch (\Exception $e) {
+                        }
+
+                        if ($iscreated == 0) {
+                            Alert::error("Error >n<", "No se pudo crear la carpeta o ruta")->persistent('Close');
+                            return redirect()->back();
+                        }
+                    }
+
+                     $fileName = rand(11111, 99999).'.'.$extension; // renameing image
+
+                     $result = Input::file('file')->move($pathRecurso, $fileName); // uploading file to given path
+                     
+
+                     
+
+                    Alert::success(":)", "Archivo Modificado");
+                        return redirect()->back();
+                } else {
+                }
+            } else {
+                alert()->error("Este formato es invalido", "intente con otro video");
+                return redirect()->back();
+            }
+        } else {
+            echo "0";
+        }
+    }
+
+
+
 
 
     public function downloadImageIns($id_recurso)
@@ -346,6 +470,12 @@ class UploadController extends Controller
 
         $url = $request->input('urlFiles');
 
+        list($urlfile, $exten) = explode(".", $url);
+
+        $fileName = $urlfile;
+
+        //dd($fileName);
+
         $semana = $request->input('semanaFile');
         $sem = Semana::find($semana);
         $curso = Curso::find($sem->curso);
@@ -359,12 +489,12 @@ class UploadController extends Controller
         });
 
         $data = [
-        'fileName' => $url
+        'fileName' => $fileName
         ];
 
         $resultado = $this->soapWrapper->call('VideoWS.download', $data);
         
-        $destinationPath=  'public/'.'videos/'.$cursoid.'/'.$semana.'/'.$url;
+        $destinationPath=  'public/'.'videos/'.$cursoid.'/'.$semana.'/'.$fileName . "." . $exten;
 
         Storage::put($destinationPath, $resultado->return);
 
@@ -374,7 +504,7 @@ class UploadController extends Controller
 
 
 
-
+     
 
 
 
