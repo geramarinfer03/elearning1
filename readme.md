@@ -9,6 +9,9 @@
 
 ## ------------------------------ Instrucciones -------------------------------------------------------------------
 ## Proyecto parte laravel
+0- Clonar Proyecto
+   Pasarse a branch subidaa: git checkout subidaa
+
 1 - Crear Base de datos con el script.  Ruta: elearning1/Script_BD/ScriptBD.sql.
 
 2- Se crearan 5 usuarios en el se encuentran sus Usuarios y contrasenas.
@@ -36,14 +39,12 @@
 ## -- Web Service ---
 
 1- Instalar Mongo.
-2- Descargar Web Service. 
+2- Clonar Web Service. 
 3- Iniciar mongoDB
 4- Ejecutar Web Service en servidor de aplicaciones (Glassfish).
 
-## GlassFish
-1- Aumentar heap space de Glassfish 
-   Ruta: glassfish-4.1.1/glassfish/domains/domain1/config/domain.xml
-   Aumentar: <jvm-options>-Xmx4096m</jvm-options>
+## Java Heap
+  Aumentar tamaño Java Heap de JVM y glassfish
 
 
 ## About Laravel
