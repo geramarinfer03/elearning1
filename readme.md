@@ -41,7 +41,8 @@
 1- Instalar Mongo.
 2- Clonar Web Service. 
 3- Iniciar mongoDB
-4- Ejecutar Web Service en servidor de aplicaciones (Glassfish).
+4- Crear Repositorio de videos: /var/www/html/repository
+5- Ejecutar Web Service en servidor de aplicaciones (Glassfish).
 
 ## Java Heap
   Aumentar tamaño Java Heap de JVM y glassfish
