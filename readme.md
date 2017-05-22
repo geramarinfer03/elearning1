@@ -7,7 +7,8 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## Instrucciones
+## ------------------------------ Instrucciones -------------------------------------------------------------------
+## Proyecto parte laravel
 1 - Crear Base de datos con el script.  Ruta: elearning1/Script_BD/ScriptBD.sql.
 
 2- Se crearan 5 usuarios en el se encuentran sus Usuarios y contrasenas.
@@ -18,6 +19,32 @@
    Ruta: elearning1/vendor/laravelcollective/html/src/HtmlServiceProvider.php
 
    Modificar linea: 52.  $form = new FormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->token());
+
+5- Crear Archivo .env
+
+6- Generar KEY:  php artisan key:generate
+
+7- Generar STORAGE: php artisan storage:link
+
+8- Modificar Archivo SoapWrapper.php
+   Ruta: elearning1/vendor/artisanweb/laravel-soap/src/artisaWeb/SoapWrapper/SoapWrapper.php
+   Modificar linea: 137. colocar array($data);
+
+## Archivo php.ini
+1- Aumnetar post_max_size y upload_max_filesize
+
+## -- Web Service ---
+
+1- Instalar Mongo.
+2- Descargar Web Service. 
+3- Iniciar mongoDB
+4- Ejecutar Web Service en servidor de aplicaciones (Glassfish).
+
+## GlassFish
+1- Aumentar heap space de Glassfish 
+   Ruta: glassfish-4.1.1/glassfish/domains/domain1/config/domain.xml
+   Aumentar: <jvm-options>-Xmx4096m</jvm-options>
+
 
 ## About Laravel
 
