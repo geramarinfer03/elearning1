@@ -7,7 +7,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## Instrucciones
+## ------------------------------ Instrucciones -------------------------------------------------------------------
+## Proyecto parte laravel
+0- Clonar Proyecto
+   Pasarse a branch subidaa: git checkout subidaa
+
 1 - Crear Base de datos con el script.  Ruta: elearning1/Script_BD/ScriptBD.sql.
 
 2- Se crearan 5 usuarios en el se encuentran sus Usuarios y contrasenas.
@@ -18,6 +22,31 @@
    Ruta: elearning1/vendor/laravelcollective/html/src/HtmlServiceProvider.php
 
    Modificar linea: 52.  $form = new FormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->token());
+
+5- Crear Archivo .env
+
+6- Generar KEY:  php artisan key:generate
+
+7- Generar STORAGE: php artisan storage:link
+
+8- Modificar Archivo SoapWrapper.php
+   Ruta: elearning1/vendor/artisanweb/laravel-soap/src/artisaWeb/SoapWrapper/SoapWrapper.php
+   Modificar linea: 137. colocar array($data);
+
+## Archivo php.ini
+1- Aumnetar post_max_size y upload_max_filesize
+
+## -- Web Service ---
+
+1- Instalar Mongo.
+2- Clonar Web Service. 
+3- Iniciar mongoDB
+4- Crear Repositorio de videos: /var/www/html/repository
+5- Ejecutar Web Service en servidor de aplicaciones (Glassfish).
+
+## Java Heap
+  Aumentar tamaño Java Heap de JVM y glassfish
+
 
 ## About Laravel
 

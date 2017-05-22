@@ -174,6 +174,19 @@ class RecursoController extends Controller
                                              ->with('roles',$rols_user);
     }
 
+
+    public function editArchivo($id)
+    {
+
+
+
+        $usuario = \Auth::user();
+        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->pluck('nombre','id_rol');
+        $recurso = Recurso::find($id);
+        return view('Recursos.editarRecursoArchivo')->with('recurso',$recurso)
+                                             ->with('roles',$rols_user);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -225,6 +238,10 @@ class RecursoController extends Controller
          return back();
        
     }
+
+
+
+    
 
     /**
      * Remove the specified resource from storage.

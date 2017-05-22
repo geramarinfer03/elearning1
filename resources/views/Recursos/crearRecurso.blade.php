@@ -116,6 +116,15 @@
                                 <span class="fa fa-book form-control-feedback"></span> {!! $errors->has('notas')?$errors->first('notasFile'):'' !!}
                             </div>
 
+                            <div class="form-group has-feedback">
+                               {!! Form::file('file', ['class'=>'fileupload', 'type'=>'file', 'id'=>'fileupload', 'required'=>'required']) !!}
+                                 <p class="errors">{!!$errors->first('any')!!}</p>
+                                 @if(Session::has('error'))
+                                 <p class="errors">{!! Session::get('msg') !!}</p>
+                                @endif
+                            </span>
+                            </div>
+
 
 
                         </div>
@@ -124,22 +133,11 @@
 
 
                   
-                     <div class="row">
-                        <div class="col-xs-6">
 
 
 
-                         {!! Form::file('file', ['class'=>'fileupload', 'type'=>'file', 'id'=>'fileupload', 'required'=>'required']) !!}
-                                 <p class="errors">{!!$errors->first('any')!!}</p>
-                                 @if(Session::has('error'))
-                                 <p class="errors">{!! Session::get('msg') !!}</p>
-                                @endif
-                                </span>
+                        
 
-                           
-                            </div>  
-              
-                         </div>
                 
 
 
