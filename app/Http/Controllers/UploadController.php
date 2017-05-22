@@ -380,19 +380,149 @@ class UploadController extends Controller
 
                      $result = Input::file('file')->move($pathRecurso, $fileName); // uploading file to given path
                      
+                     $rutaurl = $pathRecurso . "/". $fileName;
 
-                     
+                     $result = $rec->update([
+                        'nombre' => $nombre,
+                        'notas'=>$notas,
+                        'url' => $rutaurl,
+                        'visibl' => $vis,
+                        'estado' => $estado,
+                        'rol' => $rol
+             
+                     ]);
 
-                    Alert::success(":)", "Archivo Modificado");
+                    if ($result) {
+                        Alert::success(":)", "Archivo Modificado");
                         return redirect()->back();
-                } else {
+                    } else {
+                         Alert::error("Error >n<", "No se pudo modificar el archivo")->persistent('Close');
+                        return redirect()->back();
+                    }
+                } // Es video
+                else {
+
+
+                    return $this ->modificarVideo($request);
                 }
             } else {
                 alert()->error("Este formato es invalido", "intente con otro video");
                 return redirect()->back();
             }
+        } // No se modifica el archivo
+        else {
+            $nombre = $request->input('nombre');
+            $notas = $request->input('notas');
+            $vis = $request->input('visibl');
+            $estado = $request->input('estado');
+            $id = $request->input('id_recurso');
+            $rol =  $request->input('rol');
+
+            $rec = Recurso::find($id);
+
+            $result = $rec->update([
+                        'nombre' => $nombre,
+                        'notas'=>$notas,
+                        'visibl' => $vis,
+                        'estado' => $estado,
+                        'rol' => $rol
+             
+                     ]);
+
+            if ($result) {
+                Alert::success(":)", "Archivo Modificado");
+                return redirect()->back();
+            } else {
+                Alert::error("Error >n<", "No se pudo modificar el archivo")->persistent('Close');
+                        return redirect()->back();
+            }
+        }
+    }
+
+
+    public function modificarVideo(Request $request)
+    {
+
+        ini_set('memory_limit', '-1');
+         // obteniendo la informacion del archivo
+
+          
+        $file = Input::file('file');
+        $mime = $file->getMimeType();
+
+        if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/x-matroska" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") {
+            if (Input::file('file')->isValid()) {
+                $extension = Input::file('file')->getClientOriginalExtension(); // obtiene la extension del archivo
+                $originalName = Input::file('file')->getClientOriginalName(); //obtiene el nombre original del archivo
+
+                $contents = file_get_contents($file); // contenido
+
+                $nombre = $request->input('nombre');
+                $notas = $request->input('notas');
+                $vis = $request->input('visibl');
+                $estado = $request->input('estado');
+                $id = $request->input('id_recurso');
+                $rol =  $request->input('rol');
+
+                $idc =\Auth::user();
+                $user = $idc->id;
+
+                 $rec = Recurso::find($id);
+                 $curs1 = $rec->Curso();
+                 $sem = $rec->semana;
+
+                $this->soapWrapper->add('VideoWS', function ($service) {
+                    $service->wsdl("http://localhost:8080/VideoWS/VideoWS?wsdl");
+                    $service->trace(true);                                                   // Optional: (parameter: true/false)
+                    $service->cache(WSDL_CACHE_NONE);                                        // Optional: Set the WSDL cache
+                });
+
+                $data = [
+                   'fileName' => $originalName,
+                   'video' => $contents,
+                   'course' => $curs1,
+                   'user' => $user,
+                ];
+
+
+                $resultado = 0;
+                try {
+                    $respuesta =    $this->soapWrapper->call('VideoWS.upload', $data);
+                    $resultado = json_decode(json_encode($respuesta->return), true);
+                } catch (\Exception $e) {
+                }
+
+                if ($resultado == 0) {
+                    Alert::error("Disculpe!, intente de nuevo", "Al parecer el WS dio problemas")->persistent('Close');
+                    ;
+                    return redirect()->back();
+                }
+
+                $rutaurl = $resultado["id"] . '.' . $extension;
+
+
+                if ($resultado["status"] == 1) {
+                    $destinationPath=  'public/'.'videos/'.$curs1.'/'.$sem.'/'.$rutaurl;
+                    Storage::put($destinationPath, file_get_contents($file));
+
+                    $result = $rec->update([
+                        'nombre' => $nombre,
+                        'notas'=>$notas,
+                        'url' => $rutaurl,
+                        'visibl' => $vis,
+                        'estado' => $estado,
+                        'rol' => $rol
+                     ]);
+
+                    Alert::success(":)", "Archivo Modificado");
+                    return redirect()->back();
+
+
+                }
+            }
         } else {
-            echo "0";
+            alert()->error("Este formato es invalido", "intente con otro video");
+            return redirect()->back();
         }
     }
 
