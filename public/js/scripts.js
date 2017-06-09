@@ -259,6 +259,18 @@ function cambiarTipoRecurso() {
 
     var seleccion = $('#tipoRecursoA').val();
     switch (seleccion) {
+        case "7":
+            $('#tab1').attr('class', 'tab-pane');
+            $('#tab3').attr('class', 'tab-pane active');
+
+            $('#litab3').attr('class', 'active');
+            $('#litab1').attr('class', '');
+
+            $("#atab3").attr("aria-expanded", "true");
+            $("#atab1").attr("aria-expanded", "false");
+            $('#tipoRecursoA').val("");
+
+            break;
         case "6":
             $('#tab1').attr('class', 'tab-pane');
             $('#tab2').attr('class', 'tab-pane active');
@@ -360,4 +372,94 @@ function CargarIcono(element) {
 
     });
 
+}
+
+function goo(){
+    alert("dobuleclick");
+
+}
+
+function borrarUltimaFila(){
+   var nFilas = $("#tabla_criterios tr").length;
+   var actual = nFilas -1;
+   if(actual > 0){
+    $("#criterio"+actual).remove();
+    }
+
+
+}
+
+function filaCriterio(){
+   // var nextRow = fila + 1;
+    
+     var nFilas = $("#tabla_criterios tr").length;
+     var actual = nFilas-1;
+
+     var area = $("#indicacionesF"+actual).val();
+     var puntaje = $("#puntaje"+actual).val();
+
+     var ppuntaje = $("#puntaje"+actual).text();
+
+     if(area !== '' && puntaje !== ''){
+         var newContent =  "<td ondblclick='goo()' class='puntajeColumn' style='width: 10px;' > "+
+                            "<p  id='puntaje"+actual+"'>"+puntaje+"</p>"+
+                            "</td> "+
+                             "<td ondblclick='goo()' class='criterioColumn'>"+
+                             "<p id='puntaje"+actual+"'>"+area+"</p>"+
+                             "</td>";
+
+        $("#criterio"+actual).html(newContent);
+
+        var nFilas = $("#tabla_criterios tr").length;
+
+        var content =  "<tr id='criterio"+nFilas+"'>"+
+                            "<td class='puntajeColumn' style='width: 10px;'> "+
+                                "<input  min='0' type='number' class='inputPuntaje' name='puntaje"+nFilas+"' id='puntaje"+nFilas+"' /> "+
+                            "</td> "+
+                             "<td class='criterioColumn'>"+
+                            "<textarea  name='indicacionesF"+nFilas+"' id='indicacionesF"+nFilas+"' "+
+                            "rows='4' style='width: 100%;'  " +
+                            "placeholder='Escriba las indicaciones generales en este apartado'></textarea>"+                
+                            "</td>" +
+                    "</tr>";
+
+        $('#tabla_criterios').append(content);
+     }
+     else{
+       if(ppuntaje !== ''){
+             var nFilas = $("#tabla_criterios tr").length;
+
+            var content =  "<tr id='criterio"+nFilas+"'>"+
+                                "<td class='puntajeColumn' style='width: 10px;'> "+
+                                    "<input  min='0' type='number' class='inputPuntaje' name='puntaje"+nFilas+"' id='puntaje"+nFilas+"' /> "+
+                                "</td> "+
+                                 "<td class='criterioColumn'>"+
+                                "<textarea  name='indicacionesF"+nFilas+"' id='indicacionesF"+nFilas+"' "+
+                                "rows='4' style='width: 100%;'  " +
+                                "placeholder='Escriba las indicaciones generales en este apartado'></textarea>"+                
+                                "</td>" +
+                        "</tr>";
+
+            $('#tabla_criterios').append(content);
+
+
+        }else{
+        
+    }
+     }
+
+
+     
+
+    
+
+
+     //$("#formularioE").attr("disabled", true);
+    
+
+
+}
+
+function filaActividad(){
+    alert($("#formularioEvaluacion").html());
 }

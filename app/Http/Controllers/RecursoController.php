@@ -343,6 +343,11 @@ class RecursoController extends Controller
         }
          
          
+   }
+
+   public function tarea(Request $request){
+      dd($request);
+
    }  
     
 

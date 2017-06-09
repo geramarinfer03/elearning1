@@ -97,7 +97,8 @@ values
 ('Etiqueta'),
 ('Texto'),
 ('Enlace'),
-('Archivo')
+('Archivo'),
+('Tarea')
 ;
 
 
