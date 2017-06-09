@@ -181,7 +181,7 @@
 
                                 <div class="col-md-7">
                                   <div class="form-group has-feedback">
-                                    <table id="tabla_criterios" class="table table-striped" cellspacing="0" width="100%">
+                                    <table id="tabla_actividades" class="table table-striped" cellspacing="0" width="100%">
        
                                      <thead>
                                         <tr>

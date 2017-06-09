@@ -395,6 +395,8 @@ function filaCriterio(){
      var nFilas = $("#tabla_criterios tr").length;
      var actual = nFilas-1;
 
+     alert("actual: "+actual+" nFilas: "+nFilas);
+
      var area = $("#indicacionesF"+actual).val();
      var puntaje = $("#puntaje"+actual).val();
 

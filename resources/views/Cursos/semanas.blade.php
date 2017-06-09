@@ -83,8 +83,8 @@
                                 
                                  @if($recurso->tipo_recurso== 7  ) <!-- Si es una tarea -->
 
-                                    @include('Recursos.archivo') <!-- Para montar la vista antes de pasarla a texto comprimido -->
-
+                                    <!--@include('Recursos.archivo') <!-- Para montar la vista antes de pasarla a texto comprimido -->
+                                    
                                     <!--
                                      <script type="text/javascript">
                                      tabular("", {{$recurso->semana}}, {{$recurso->recurso_padre}}); 
@@ -129,10 +129,7 @@
                         <!--Fin Contenido-->
                     </div>
 
-                   <!-- @php
-                      $cont = file_get_contents(".../../storage/Formulario/form.blade.php"); 
-                      echo $cont;
-                    @endphp
+                   <!--
                     Sirve para abrir los form que se van a guardar...
                     --> 
 
