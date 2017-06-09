@@ -145,10 +145,19 @@ values
 /*  Tipo Moderador Password: moderador1234   Usuario: moderador@example.com */ 
 ('Moderador Sistema', 'moderador@example.com', '$2y$10$ll0p0xH0BtPcTfAAPgard..k4jTsF59.P5GSOvAbfOAG53F2rg1Hm', 4, 'femenino', 'Costa Rica', now(), '192.168.1.1', 'Windows', 'Firefox', 'es'),
 /*  Tipo Estudiante Password: estudiante1234   Usuario: estudiante@example.com */ 
-('Estudiante Sistema', 'estudiante@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'femenino', 'Costa Rica', now(), '192.168.1.1', 'Windows', 'Firefox', 'es');
+('Estudiante Sistema', 'estudiante@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'femenino', 'Costa Rica', now(), '192.168.1.1', 'Windows', 'Firefox', 'es'),
 
+('Estudiante Uno', 'estudiante1@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
 
+('Estudiante Dos', 'estudiante2@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
 
+('Estudiante Tres', 'estudiante3@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
+
+('Estudiante Cuatro', 'estudiante4@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
+
+('Estudiante Cinco', 'estudiante5@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
+
+('Estudiante Seis', 'estudiante6@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es');
 
 
 
