@@ -11,6 +11,7 @@ class Curso extends Model
         'duracion',
         'fecha_inicio',
         'fecha_final',
+        'evaluado',
         'estado'
     ];
     
@@ -31,5 +32,9 @@ class Curso extends Model
 
         return $this->hasMany(Semana::class, 'curso');
 
+    }
+
+    public function porEvaluar(){
+        return (100 - $this->evaluado);
     }
 }

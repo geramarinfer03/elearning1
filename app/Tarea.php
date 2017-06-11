@@ -3,6 +3,7 @@
 namespace elearning1;
 
 use Illuminate\Database\Eloquent\Model;
+use elearning1\Formulario;
 
 class Tarea extends Model
 {
@@ -12,10 +13,12 @@ class Tarea extends Model
         'id_curso',
         'fech_limit_entrega',
         'fech_limit_evaluacion',
-        'porcentaje'.
+        'porcentaje'
     ];
     
     protected $primaryKey = 'id_tarea';
     protected $table = "Tarea";
     public $timestamps = false;
+
+   
 }

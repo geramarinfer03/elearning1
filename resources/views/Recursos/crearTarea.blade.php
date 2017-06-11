@@ -11,7 +11,7 @@
                 <div class="tab-content">
 
                 <div class="tab-pane active col-md-12" id="tabT1">
-                      {!! Form::open(['url'=>'recursos.tarea','method' => 'post','class'=>'form-horizontal', 'files'=>true]) !!}
+                      {!! Form::open(['url'=>'tareas.crearTarea', 'method' => 'post','class'=>'form-horizontal', 'id'=>'crearTareaForm', 'files'=>true]) !!}
 
                     <div class="row" style="margin: 5px;">
                         <br>
@@ -76,7 +76,7 @@
 
                             <div class="form-group has-feedback">
                                 {!! Form::label('fecha_limite', 'Fecha Limite') !!}
-                                {!! Form::date('fecha_limite', null,  ['class'=>'form-control', 'required'=>'required']) !!}
+                                {!! Form::date('fecha_limite', Carbon\Carbon::today()->toDateString(),  ['class'=>'form-control', 'required'=>'required', 'min'=> Carbon\Carbon::today()->toDateString()]) !!}
                                 <span class="fa fa-clock-o form-control-feedback"></span>
                                 {!! $errors->has('fecha_limite')?$errors->first('fecha_limite'):'' !!}
                             </div>
@@ -85,7 +85,7 @@
 
                             <div class="form-group has-feedback">
                                 {!! Form::label('fecha_limite_eval', 'Fecha Limite para Evaluar') !!}
-                                {!! Form::date('fecha_limite_eval', null,  ['class'=>'form-control', 'required'=>'required']) !!}
+                                {!! Form::date('fecha_limite_eval', Carbon\Carbon::today()->toDateString(),  ['class'=>'form-control', 'required'=>'required', 'min'=> Carbon\Carbon::today()->toDateString()]) !!}
                                 <span class="fa fa-clock-o form-control-feedback"></span>
                                 {!! $errors->has('fecha_limite_eval')?$errors->first('fecha_limite_eval'):'' !!}
                             </div>
@@ -97,7 +97,7 @@
 
                             <div class="form-group has-feedback">
                                 {!! Form::label('porcentaje', 'Valor porcentual') !!}
-                                {!! Form::number('fecha_limite', '100') !!}
+                                {!! Form::number('porcentaje', $evaluado, ['min'=> 0,'max'=> $evaluado]) !!}
                                 <span class="fa fa-percent form-control-feedback"></span>
                                 {!! $errors->has('porcentaje')?$errors->first('porcentaje'):'' !!}
                             </div>
@@ -120,11 +120,16 @@
 
                         {!! Form::hidden('recurso_padreF', $padre) !!} 
                         {!! Form::hidden('semanaF', $semana) !!}
-                        {!! Form::hidden('cursoF', $curso) !!}
+                       {!! Form::hidden('cursoF', $curso) !!}
 
                         <div class="row">
                         <div class="col-md-3">
-                            {!! Form::submit('Subir', ['class'=>'btn btn-success btn-block btn-flat']) !!}
+
+                         <button id='btnCrearTarea' type='button' onclick='crearTarea()' class='btn btn-success btn-lg'>
+                                              <i class='fa fa-plus'></i> Crear Espacio Tarea
+                                         </button>
+
+                          <!--  {!! Form::submit('Crear Espacio Tarea', ['class'=>'btn btn-success btn-block btn-flat']) !!} -->
                         </div>
                         </div>
 
@@ -135,7 +140,7 @@
                 </div>
                 <div class="tab-pane" id="tabT2">
              
-                  <div id='formularioEvaluacion'>
+                  <div id='formularioEvaluacion' class="noMostar">
                           <div class='col-md-12'>
                             <div class='login-box-body'>
                                 <div class='row'>
@@ -186,12 +191,12 @@
                                         <div class='row' style='margin: 5px;'>
                                         <div class='col-md-2' style='float: right;'>
                                          <button id='formularioE' type='button' onclick='filaCriterio()' class='btn btn-info botonForm' style='float: right;'>
-                                              <i class='fa fa-plus'></i>Fila
+                                              <i class='fa fa-plus'></i> Fila
                                          </button>
                                         </div>
                                         <div class='col-md-2' style='float: right;'>
                                          <button id='EliminarformularioE' type='button' onclick='borrarUltimaFila()' class='btn btn-danger botonForm' style='float: right;'>
-                                              <i class='fa fa-minus'></i>Fila
+                                              <i class='fa fa-minus'></i> Fila
                                          </button>
                                         </div>
                                         </div>
@@ -227,12 +232,12 @@
                                         <div class='row' style='margin: 5px;'>
                                         <div class='col-md-2' style='float: right;'>
                                          <button id='formularioActividadesE' type='button' onclick='filaActividad()' class='btn btn-info botonForm' style='float: right;'>
-                                              <i class='fa fa-plus'></i>Fila
+                                              <i class='fa fa-plus'></i> Fila
                                          </button>
                                         </div>
                                         <div class='col-md-2' style='float: right;'>
                                          <button id='EliminarformularioActiv' type='button' onclick='borrarUltimaFilaActividad()' class='btn btn-danger botonForm' style='float: right;'>
-                                              <i class='fa fa-minus'></i>Fila
+                                              <i class='fa fa-minus'></i> Fila
                                          </button>
                                         </div>
                                         </div>
@@ -272,21 +277,31 @@
                   </div>
                      {!! Form::open(['url'=>'tareas.formulario','method' => 'post', 'id'=>'formCrearForm']) !!}
 
-
+                    
 
                        <textarea name="cuerpoForm" id="cuerpoForm" style="display: none;" rows="8" style="width: 100%;"></textarea>
                 
-                      
+                     <div id="codigoVerificar" class="row" style="margin: 5px;">
+                     <div class="col-md-6" style="margin-bottom: 25px; margin-top: 25px;">
+
+                        <label for="tareaAsig">Código de tarea</label>
+
+                         <input onkeyup="buscarTareaForm()"  min='0' type='text' class='' name='tareaAsig' id='tareaAsig' />
+                         <button id="confirmarTarea" onclick="buscarTareaForm()" type="button" class="btn btn-info btn-flat noMostar" >Confirmar</button>
+                          
+                    </div>
+                    </div>
+              
                      <div class="row" style="margin: 5px;">
                      <div class="col-md-12">
                        <!--{!! Form::submit('Subir', ['class'=>'btn btn-success btn-block btn-flat']) !!}-->
-                        <button id="formularioE" onclick="generarFormulario()" type="button" class="btn btn-success btn-lg">Generar Formulario</button>
+                        <button id="formularioGenerar" onclick="generarFormulario()" type="button" class="btn btn-success btn-lg noMostar">Generar Formulario</button>
                     </div>
                     </div>
 
+    
 
-
-                     {!! Form::close() !!}
+                     {!! Form::close() !!} 
 
 
 

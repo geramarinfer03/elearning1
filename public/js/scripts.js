@@ -559,7 +559,10 @@ function generarFormulario(){
    $.ajax({
             type: "POST",
             url: "/tareas.formulario",
-            data: {formulario:formulario},
+            data: {
+                formulario:formulario,
+                suma:suma,
+            },
             success: function(data) {
                 //alert(data);
                // $('form').remove();
@@ -567,6 +570,99 @@ function generarFormulario(){
                 //$('#contenido_capa_edicion').append('<p>Tu texto se ha guardado correctamente!</p><a href="data.txt" target="_blank">Ver</a>');
             }
         });
+
+}
+
+
+function buscarTareaForm(){
+    var url = "/tareas.buscarTarea";
+    var tareas = $("#tareaAsig").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            tareaAsig:tareas
+        },
+        success: function(data) {
+
+ 
+          if(data === "0"){
+
+           // alert("No tiene HAGO UNO");
+           $("#formularioEvaluacion").attr('class', "");
+           $("#formularioGenerar").attr('class', 'btn btn-success btn-lg');
+           $("#codigoVerificar").remove();
+
+          }else{
+            if(data === '1'){
+               swal(
+                  'Esta tarea ya tiene un formulario!',
+                  ':/',
+                  'error'
+                )
+            }
+          }
+      
+
+           //$("#contenido_capa_edicion").html(data);
+                //$('#contenido_capa_edicion').append('<p>Tu texto se ha guardado correctamente!</p><a href="data.txt" target="_blank">Ver</a>');
+        }
+    });
+
+
+}
+
+function crearTarea(){
+
+    //$( "#crearTareaForm" ).submit(function() {
+  // Enviamos el formulario usando AJAX
+  /*alert("xD");
+        $.ajax({
+            type: 'POST',
+            url: "/tareas.crearTarea",
+            data: $(this).serialize(),
+            // Mostramos un mensaje con la respuesta de PHP
+            success: function(data) {
+                $('#contenido_capa_edicion').html(data);
+            }
+        })        
+        return false;*/
+   // }); 
+
+    var url = "/tareas.crearTarea"; // El script a dónde se realizará la petición.
+    var tarea = (-1);
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $("#crearTareaForm").serialize(), // Adjuntar los campos del formulario enviado.
+           success: function(data)
+           {    
+
+            $('#tabT1').attr('class', 'tab-pane');
+            $('#tabT2').attr('class', 'tab-pane active');
+
+            $('#litabT2').attr('class', 'active');
+            $('#litabT1').attr('class', '');
+
+            $("#atabT2").attr("aria-expanded", "true");
+            $("#atabT1").attr("aria-expanded", "false");
+
+            $("#confirmarTarea").attr('class', 'btn btn-info btn-flat');
+
+
+            $("#tareaAsig").val(data);
+               
+                swal({
+                  title: '!Tarea Creada! # '+data,
+                  text: 'El código de la tarea es: ' + data + '\n' + 'Construya el formulario de evaluacion',
+                  type: 'success',
+                  timer: 4000
+                })
+
+                               
+           }
+         });
+
 
 }
 
