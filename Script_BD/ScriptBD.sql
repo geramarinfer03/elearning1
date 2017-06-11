@@ -107,6 +107,7 @@ CREATE TABLE Formulario(
 id_formulario INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 id_tarea INT(10) UNSIGNED NOT NULL,
 url VARCHAR(255),
+totalPuntos INT(10) UNSIGNED NOT NULL,
 FOREIGN KEY (id_tarea) REFERENCES Tarea(id_tarea)
 );
 
@@ -155,12 +156,13 @@ values
 ;
 
 
-insert into Curso(nombre, duracion, fecha_inicio, fecha_final, estado)
+insert into Curso(nombre, duracion, fecha_inicio, fecha_final, estado, evaluado)
 values
-('Programacion Web', 2, '2017-01-14 12:00:00', '2017-06-10 00:00:00', 1),
-('Administracion de Proyectos', 3, '2017-10-12 12:00:00', '2018-04-01 00:00:00', 1),
-('Ingenieria en Sistemas', 2, '2017-10-12 12:00:00', '2018-04-01 00:00:00', 1)
+('Programacion Web', 2, '2017-01-14 12:00:00', '2017-06-10 00:00:00', 1, 0),
+('Administracion de Proyectos', 3, '2017-10-12 12:00:00', '2018-04-01 00:00:00', 1, 0),
+('Ingenieria en Sistemas', 2, '2017-10-12 12:00:00', '2018-04-01 00:00:00', 1, 0)
 ;
+
 
 
 insert into Semana(tema, visible, estado, curso, secuencia)

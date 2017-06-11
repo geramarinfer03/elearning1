@@ -122,3 +122,5 @@ Route::post('downloadVideo', 'UploadController@downloadVideo');
 /*Route::get('cursos', 'CursoController@index');
 Route::get('cursos_create', 'CursoController@create');
 Route::post('cursos_store', 'CursoController@store');*/
+
+Route::post('tareas.formulario','TareaController@crearFormulario');

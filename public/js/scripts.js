@@ -374,10 +374,7 @@ function CargarIcono(element) {
 
 }
 
-function goo(){
-    alert("dobuleclick");
 
-}
 
 function borrarUltimaFila(){
    var nFilas = $("#tabla_criterios tr").length;
@@ -395,7 +392,6 @@ function filaCriterio(){
      var nFilas = $("#tabla_criterios tr").length;
      var actual = nFilas-1;
 
-     alert("actual: "+actual+" nFilas: "+nFilas);
 
      var area = $("#indicacionesF"+actual).val();
      var puntaje = $("#puntaje"+actual).val();
@@ -403,10 +399,10 @@ function filaCriterio(){
      var ppuntaje = $("#puntaje"+actual).text();
 
      if(area !== '' && puntaje !== ''){
-         var newContent =  "<td ondblclick='goo()' class='puntajeColumn' style='width: 10px;' > "+
-                            "<p  id='puntaje"+actual+"'>"+puntaje+"</p>"+
+         var newContent =  "<td class='puntajeColumn' style='width: 10px;' > "+
+                            "<p  class='puntajeCriterio' id='puntaje"+actual+"'>"+puntaje+"</p>"+
                             "</td> "+
-                             "<td ondblclick='goo()' class='criterioColumn'>"+
+                             "<td class='criterioColumn'>"+
                              "<p id='puntaje"+actual+"'>"+area+"</p>"+
                              "</td>";
 
@@ -415,10 +411,10 @@ function filaCriterio(){
         var nFilas = $("#tabla_criterios tr").length;
 
         var content =  "<tr id='criterio"+nFilas+"'>"+
-                            "<td class='puntajeColumn' style='width: 10px;'> "+
+                            "<td class='puntajeColumn columinput' style='width: 10px;'> "+
                                 "<input  min='0' type='number' class='inputPuntaje' name='puntaje"+nFilas+"' id='puntaje"+nFilas+"' /> "+
                             "</td> "+
-                             "<td class='criterioColumn'>"+
+                             "<td class='criterioColumn columinput'>"+
                             "<textarea  name='indicacionesF"+nFilas+"' id='indicacionesF"+nFilas+"' "+
                             "rows='4' style='width: 100%;'  " +
                             "placeholder='Escriba las indicaciones generales en este apartado'></textarea>"+                
@@ -451,17 +447,126 @@ function filaCriterio(){
      }
 
 
-     
-
-    
-
-
-     //$("#formularioE").attr("disabled", true);
-    
-
-
 }
 
 function filaActividad(){
-    alert($("#formularioEvaluacion").html());
+    var nFilas = $("#tabla_actividades tr").length;
+     var actual = nFilas-1;
+
+
+
+     var area = $("#actividadesDesc"+actual).val();
+
+
+
+
+      if(area !== ''){
+         var newContent =  "<td class='criterioColumn'> "+
+                            "<p  id='actividadesDesc"+actual+"'>"+area+"</p>"+
+                            "</td> "+
+                             "<td  class='puntajeColumn' style='width: 10px;'>"+
+                             "<input disabled='disabled' min='0' type='number' class='inputPuntos' name='puntos"+actual+"' id='puntos"+actual+"' />"+
+                             "</td>";
+
+        $("#actividad"+actual).html(newContent);
+
+        var nFilas = $("#tabla_actividades tr").length;
+
+        var content =  "<tr id='actividad"+nFilas+"'>"+
+                            "<td class='criterioColumn columinput'>"+
+                                "<textarea name='actividadesDesc1'  id='actividadesDesc"+nFilas+"' rows='4' style='width: 100%;' placeholder='Describa la actividad  que se evaluara'>"+
+                                "</textarea>"+  
+                            "</td>"+                                        
+                            "<td class='puntajeColumn columinput' style='width: 10px;''>"+
+                                 "<input disabled='disabled' min='0' type='number' class='inputPuntos' name='puntos"+nFilas+"' id='puntos"+nFilas+"' />"+
+                            "</td>"+
+                        "</tr>";
+
+        $('#tabla_actividades').append(content);
+    }
 }
+
+function generarFormulario(){
+
+    var suma = 0;  
+    var indicaciones = $("#indicacionesF").val();
+
+    $("#indicacionesF").remove();
+
+    $("#indicacionesText").text(indicaciones);
+
+   // $("#tabla_criterios input, #tabla_criterios textarea").remove();
+   $(".columinput").remove();
+    $(".botonForm").remove();
+
+
+    $(".noMostar").attr('class', 'mostrar');
+    $("#summitForm").attr('class', 'btn btn-success btn-lg');
+    $(".inputPuntos").attr('disabled', false);
+
+
+
+    $("#tabla_criterios tr td .puntajeCriterio").each(function(){
+         suma += parseInt($(this).text()||0,10);
+    });
+
+
+
+   var formulario = $("#formularioEvaluacion").html();
+
+
+    $("#cuerpoForm").html(formulario);
+
+    formulario = formulario.split("\n").join(""); 
+
+    //$( "#formCrearForm" ).submit();
+
+/*var element = document.getElementById('formularioEvaluacion');
+    var html = element.outerHTML;
+
+    var datos = html.split("\n").join(""); 
+    var data = { html: $.trim(datos) }; 
+
+ 
+
+
+    var json = JSON.stringify(formulario);  
+
+
+
+*/
+
+    /*$( "#formCrearForm" ).submit(function( event ) {
+      alert( "Handler for .submit() called." );
+      event.preventDefault();
+    });
+      */
+  // $("#capa_modal").show();
+   // $("#capa_para_edicion").show();
+
+    //$("#contenido_capa_edicion").html(formulario);
+
+
+
+ 
+    //irarriba();
+
+    /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
+  //  $.get(url, function (resul) {
+   //     $("#contenido_capa_edicion").html(resul); //leccion 10
+ //   })
+
+   $.ajax({
+            type: "POST",
+            url: "/tareas.formulario",
+            data: {formulario:formulario},
+            success: function(data) {
+                //alert(data);
+               // $('form').remove();
+                $("#contenido_capa_edicion").html(data);
+                //$('#contenido_capa_edicion').append('<p>Tu texto se ha guardado correctamente!</p><a href="data.txt" target="_blank">Ver</a>');
+            }
+        });
+
+}
+
