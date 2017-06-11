@@ -488,7 +488,8 @@ function filaActividad(){
 
 function generarFormulario(){
 
-    var suma = 0;  
+    var maxPuntos = 0;
+    var cant_actividades = 0;
     var indicaciones = $("#indicacionesF").val();
 
     $("#indicacionesF").remove();
@@ -504,12 +505,31 @@ function generarFormulario(){
     $("#summitForm").attr('class', 'btn btn-success btn-lg');
     $(".inputPuntos").attr('disabled', false);
 
+    var tarea = $("#tareaAsig").val();
+
+    var curso = $("#cursoIDForm").val();
 
 
-    $("#tabla_criterios tr td .puntajeCriterio").each(function(){
-         suma += parseInt($(this).text()||0,10);
+
+
+    $("#tabla_actividades p").each(function(){
+         cant_actividades += 1;
     });
 
+
+    var mayor = 0;
+     $("#tabla_criterios tr td .puntajeCriterio").each(function(){
+        maxPuntos = parseInt($(this).text()||0,10);
+        
+        if(maxPuntos > mayor){
+            mayor = maxPuntos;
+        }
+         
+    });
+
+
+
+    var suma = mayor * cant_actividades;
 
 
    var formulario = $("#formularioEvaluacion").html();
@@ -562,6 +582,8 @@ function generarFormulario(){
             data: {
                 formulario:formulario,
                 suma:suma,
+                tarea: tarea,
+                curso: curso
             },
             success: function(data) {
                 //alert(data);
@@ -591,7 +613,8 @@ function buscarTareaForm(){
            // alert("No tiene HAGO UNO");
            $("#formularioEvaluacion").attr('class', "");
            $("#formularioGenerar").attr('class', 'btn btn-success btn-lg');
-           $("#codigoVerificar").remove();
+
+           $("#codigoVerificar").attr('hidden', 'hidden');
 
           }else{
             if(data === '1'){

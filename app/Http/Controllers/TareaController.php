@@ -32,14 +32,64 @@ class TareaController extends Controller
 
     	$formulario = $request->input('formulario');
         $suma = $request->input('suma');
-
-	   	$fp = fopen("/var/www/html/Archivos/formulario.blade.php", "w");
-	   	fputs($fp, $formulario);
-	   	fclose($fp);
-
-	   	return $formulario;
+        $tarea = $request->input('tarea');
+        $curso = $request->input('curso');
 
 
+
+        $fileName = rand(11111,99999);
+
+        $destinationPath = $localRepo = realpath('../../../') . "/localRepository";
+        $this->crearRuta($destinationPath);
+
+        $pathRecurso = $destinationPath . "/". $curso ."/formularios/";
+        $this->crearRuta($pathRecurso);
+
+        //$url = Tarea::find($tarea)->id_recurso;
+
+        //dd($url);
+       
+        $iscreated = 0;
+        try {
+        
+            $fp = fopen($pathRecurso . $fileName . ".blade.php", "w");
+            fputs($fp, $formulario);
+            fclose($fp);
+            $iscreated = 1;
+
+         } catch (\Exception $e) {}
+
+
+
+        if ($iscreated == 0) {
+            Alert::error("Error >n<", "No se pudo crear el formulario")->persistent('Close');
+            return redirect()->back();
+        }
+        
+
+        $result = Formulario::create([
+          'id_tarea'=>$tarea,
+          'url'=> $pathRecurso . $fileName . ".blade.php",
+          'totalPuntos' => $suma
+        ]);
+
+
+         if($result){
+
+            return $formulario;
+
+
+         }else{
+            Alert::error("Error >n<", "No se pudo crear el formulario")->persistent('Close');
+            return redirect()->back();
+
+         }
+
+
+
+
+
+	  
 
     }
 

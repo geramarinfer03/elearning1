@@ -291,6 +291,8 @@
                           
                     </div>
                     </div>
+           
+                     <input type="text" hidden="hidden" id="cursoIDForm" value="{{$curso}}" /> 
               
                      <div class="row" style="margin: 5px;">
                      <div class="col-md-12">
