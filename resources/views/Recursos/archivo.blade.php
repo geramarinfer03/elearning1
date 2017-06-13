@@ -1,5 +1,4 @@
-<tr class='normal' id='{{$recurso->id_recurso}}'>
-	<td>
+<!-- 	<td>
 		<p class='tituloP'>{{$recurso->nombre}}</p>
 		<p class='notesP'>{{$recurso->notas}}</p>
 		@if($recurso->isvideo())
@@ -12,20 +11,11 @@
 				
 				Your browser does not support the video tag.
 			</video>
-		    <!--form action="/downloadVideo" method="POST" id="formDownload"-->
-			
-                
 				<input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>"> 
 
                 <input type="hidden" id="urlFiles_{{$recurso->id_recurso}}" name="urlFiles" value="{{$recurso->url}}">
                 <input type="hidden" id="semanaFile_{{$recurso->id_recurso}}" name="semanaFile" value="{{$recurso->semana}}">
-                <!--div class="col-md-1">
-                    <button  style="margin: 10px; margin-left: 18px;" type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-download"></i></button>
-                </div>
-                <div class="col-md-4">
-                    <p class="notesP" style="margin-top: 20px;">Descargar Video</p>
-                </div>
-            </form-->
+
         
         @elseif ($recurso->isimage())
             <img src="/storage/{{$recurso->id_recurso}}/tmp{{$recurso->id_recurso}}.{{$recurso->extencion()}}" id="imagen{{$recurso->id_recurso}}" style="width: 30%;" />
@@ -84,7 +74,7 @@
     </td>
 </tr>
 
-
+-->
 <!-- Esto no se usa, solo para estructurar el codigo, luego se pasa comprimido al metodo de JS-->
 
 

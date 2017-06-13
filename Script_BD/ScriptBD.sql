@@ -41,7 +41,8 @@ nombre VARCHAR(30) NOT NULL,
 duracion INT(10) NOT NULL,
 fecha_inicio DATETIME NOT NULL,
 fecha_final DATETIME NOT NULL,
-estado INT (1) NOT NULL
+estado INT (1) NOT NULL,
+evaluado FLOAT(4,2) UNSIGNED NOT NULL
 );
 
 /*UN curso tiene varias semanas -- agregue secuencia*/
@@ -83,11 +84,64 @@ curso INT(10) UNSIGNED NOT NULL,
 usuario INT(10) UNSIGNED NOT NULL,
 rol INT(10) UNSIGNED NOT NULL,
 fecha_matricula DATETIME NOT NULL,
+promedio_final FLOAT(4,2) UNSIGNED NOT NULL,
+url VARCHAR(255),
 FOREIGN KEY (curso) REFERENCES Curso(id_curso),
 FOREIGN KEY (usuario) REFERENCES Usuario(id),
 FOREIGN KEY (rol) REFERENCES Rol(id_rol)
 );
 
+CREATE TABLE Tarea(
+id_tarea INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+id_recurso INT(10) UNSIGNED NOT NULL,
+id_curso INT(10) UNSIGNED NOT NULL,
+fech_limit_entrega DATETIME NOT NULL,
+fech_limit_evaluacion DATETIME NOT NULL,
+porcentaje FLOAT(4,2) UNSIGNED NOT NULL,
+FOREIGN KEY (id_recurso) REFERENCES Recurso(id_recurso),
+FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
+);
+
+
+CREATE TABLE Formulario(
+id_formulario INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+id_tarea INT(10) UNSIGNED NOT NULL,
+url VARCHAR(255),
+totalPuntos INT(10) UNSIGNED NOT NULL,
+FOREIGN KEY (id_tarea) REFERENCES Tarea(id_tarea)
+);
+
+CREATE TABLE Entrega(
+id_entrega INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+id_tarea INT(10) UNSIGNED NOT NULL,
+id_usuario INT(10) UNSIGNED NOT NULL,
+id_matricula INT(10) UNSIGNED NOT NULL,
+url VARCHAR(255) NOT NULL,
+nota FLOAT(4,2) UNSIGNED NOT NULL,
+FOREIGN KEY (id_tarea) REFERENCES Tarea(id_tarea),
+FOREIGN KEY (id_usuario) REFERENCES Usuario(id),
+FOREIGN KEY (id_matricula) REFERENCES Matricula(id_matricula)
+);
+
+CREATE TABLE Tipo_Colaboracion(
+id_tipo_colaboracion INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+descripcion VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE Colaboracion(
+id_colaboracion INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+id_usuario_califica INT(10) UNSIGNED NOT NULL,
+id_tipo_colaboracion INT(10) UNSIGNED NOT NULL,
+id_entrega INT(10) UNSIGNED NOT NULL,
+id_formulario INT(10) UNSIGNED NOT NULL,
+respuestas JSON,
+nota FLOAT(4,2) UNSIGNED NOT NULL,
+comentario NVARCHAR(255),
+FOREIGN KEY (id_usuario_califica) REFERENCES Usuario(id),
+FOREIGN KEY (id_tipo_colaboracion) REFERENCES Tipo_Colaboracion(id_tipo_colaboracion),
+FOREIGN KEY (id_entrega) REFERENCES Entrega(id_entrega),
+FOREIGN KEY (id_formulario) REFERENCES Formulario(id_formulario)
+);
 
 
 insert into Tipo_Recurso(nombre)
@@ -97,16 +151,18 @@ values
 ('Etiqueta'),
 ('Texto'),
 ('Enlace'),
-('Archivo')
+('Archivo'),
+('Tarea')
 ;
 
 
-insert into Curso(nombre, duracion, fecha_inicio, fecha_final, estado)
+insert into Curso(nombre, duracion, fecha_inicio, fecha_final, estado, evaluado)
 values
-('Programacion Web', 2, '2017-01-14 12:00:00', '2017-06-10 00:00:00', 1),
-('Administracion de Proyectos', 3, '2017-10-12 12:00:00', '2018-04-01 00:00:00', 1),
-('Ingenieria en Sistemas', 2, '2017-10-12 12:00:00', '2018-04-01 00:00:00', 1)
+('Programacion Web', 2, '2017-01-14 12:00:00', '2017-06-10 00:00:00', 1, 0),
+('Administracion de Proyectos', 3, '2017-10-12 12:00:00', '2018-04-01 00:00:00', 1, 0),
+('Ingenieria en Sistemas', 2, '2017-10-12 12:00:00', '2018-04-01 00:00:00', 1, 0)
 ;
+
 
 
 insert into Semana(tema, visible, estado, curso, secuencia)
@@ -145,10 +201,19 @@ values
 /*  Tipo Moderador Password: moderador1234   Usuario: moderador@example.com */ 
 ('Moderador Sistema', 'moderador@example.com', '$2y$10$ll0p0xH0BtPcTfAAPgard..k4jTsF59.P5GSOvAbfOAG53F2rg1Hm', 4, 'femenino', 'Costa Rica', now(), '192.168.1.1', 'Windows', 'Firefox', 'es'),
 /*  Tipo Estudiante Password: estudiante1234   Usuario: estudiante@example.com */ 
-('Estudiante Sistema', 'estudiante@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'femenino', 'Costa Rica', now(), '192.168.1.1', 'Windows', 'Firefox', 'es');
+('Estudiante Sistema', 'estudiante@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'femenino', 'Costa Rica', now(), '192.168.1.1', 'Windows', 'Firefox', 'es'),
 
+('Estudiante Uno', 'estudiante1@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
 
+('Estudiante Dos', 'estudiante2@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
 
+('Estudiante Tres', 'estudiante3@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
+
+('Estudiante Cuatro', 'estudiante4@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
+
+('Estudiante Cinco', 'estudiante5@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es'),
+
+('Estudiante Seis', 'estudiante6@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es');
 
 
 

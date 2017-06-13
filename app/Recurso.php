@@ -33,8 +33,10 @@ class Recurso extends Model
     }
 
     public function extencion(){
+        if($this->url != null){
         list($url, $exten) = explode(".", $this->url); 
         return $exten;
+        }
     }
 
     public function isvideo(){
