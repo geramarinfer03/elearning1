@@ -179,6 +179,7 @@ return [
         // elearning1\Providers\BroadcastServiceProvider::class,
         elearning1\Providers\EventServiceProvider::class,
         elearning1\Providers\RouteServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -235,6 +236,7 @@ return [
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'SoapWrapper' => Artisaninweb\SoapWrapper\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

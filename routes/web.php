@@ -126,3 +126,10 @@ Route::post('cursos_store', 'CursoController@store');*/
 Route::post('tareas.formulario','TareaController@crearFormulario');
 Route::post('tareas.crearTarea','TareaController@crearTarea');
 Route::post('tareas.buscarTarea', 'TareaController@formularioAsignado');
+
+
+// GRUPO A // 
+
+// PDF REPORTER 
+
+Route::get('/generateReport', 'CertificateReporter@generate');
