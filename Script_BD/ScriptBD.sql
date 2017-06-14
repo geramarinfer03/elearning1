@@ -42,7 +42,8 @@ duracion INT(10) NOT NULL,
 fecha_inicio DATETIME NOT NULL,
 fecha_final DATETIME NOT NULL,
 estado INT (1) NOT NULL,
-evaluado FLOAT(4,2) UNSIGNED NOT NULL
+evaluado FLOAT(4,2) UNSIGNED DEFAULT 0,
+creadoPDF INT (1) UNSIGNED DEFAULT 0
 );
 
 /*UN curso tiene varias semanas -- agregue secuencia*/
@@ -86,7 +87,7 @@ rol INT(10) UNSIGNED NOT NULL,
 fecha_matricula DATETIME NOT NULL,
 promedio_final FLOAT(4,2) UNSIGNED DEFAULT 0,
 url VARCHAR(255),
-creado INT (1) UNSIGNED DEFAULT 0,
+generarPDF INT (1) UNSIGNED DEFAULT 0,
 fecha_creado DATETIME,
 FOREIGN KEY (curso) REFERENCES Curso(id_curso),
 FOREIGN KEY (usuario) REFERENCES Usuario(id),
