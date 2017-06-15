@@ -18,4 +18,16 @@ class CertificateReporter extends Controller
         $pdf = \PDF::loadView('reporter.certificate',$data);
         return $pdf->download('test.pdf');
     }
+    public function generatePost(Request $request){
+         $data= [];
+         $dt = date('m-d-Y');
+         $data = [
+        'NOMBRE' => $request->nombre_usuario,
+        'CURSO'   => $request->cursoNombre,
+        'NOTA'=> $request->promedioFinal,
+        'FECHA' => $dt,
+        ];
+        $pdf = \PDF::loadView('reporter.certificate',$data);
+        return $pdf->download('test.pdf');
+    }
 }
