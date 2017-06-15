@@ -156,7 +156,7 @@
 
                          <div class="row" style="margin-top: 5%;">
                          <div class="col-md-12">
-                             <button type="button" class="btn btn-success btn-lg"><i class="fa fa-file"></i>  Realizar Entrega</button>
+                             <button type="button" class="btn btn-success btn-lg" onclick="subirTarea({{$recurso->tarea->id_tarea}},{{$recurso->tarea->id_curso}})"><i class="fa fa-file" ></i>  Realizar Entrega</button>
                             
                          </div>
                          <div class="col-md-12">
