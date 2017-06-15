@@ -32,10 +32,23 @@
                 <li><a href="/misCursos"><i class="fa fa-circle-o"></i> Mis Cursos</a></li>
                 @if($usuario->rol->id_rol == 1)
                  <li><a href="/cursos.create"><i class="fa fa-circle-o"></i>Crear Curso</a></li>
-                @endif
-                     
+                @endif     
               </ul>
             </li>
+
+
+             @if($usuario->rol->id_rol == 1)
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-pencil"></i>
+                <span>Diplomas</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Gestionar Diplomas </a></li>
+              </ul>
+            </li>
+            @endif
            <!-- <li class="treeview">
               <a href="#">
                 <i class="fa fa-shopping-cart"></i>
