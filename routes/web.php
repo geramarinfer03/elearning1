@@ -126,4 +126,3 @@ Route::post('cursos_store', 'CursoController@store');*/
 Route::post('tareas.formulario','TareaController@crearFormulario');
 Route::post('tareas.crearTarea','TareaController@crearTarea');
 Route::post('tareas.buscarTarea', 'TareaController@formularioAsignado');
-Route::get('showCrearForm/{curso}/{tarea}', 'TareaController@showCrearForm');

@@ -125,13 +125,10 @@
                         <div class="row">
                         <div class="col-md-3">
 
-                        <!--   <button id='btnCrearTarea' type='button' onclick='crearTarea()' class='btn btn-success btn-lg'>
+                         <button id='btnCrearTarea' type='button' onclick='crearTarea()' class='btn btn-success btn-lg'>
                                               <i class='fa fa-plus'></i> Crear Espacio Tarea
-                        </button> -->
- -
-                                <button id='btnCrearTarea' type='submit' class='btn btn-success btn-lg'>
-                                              <i class='fa fa-plus'></i> Crear Espacio Tareas
-                                </button>
+                                         </button>
+
                           <!--  {!! Form::submit('Crear Espacio Tarea', ['class'=>'btn btn-success btn-block btn-flat']) !!} -->
                         </div>
                         </div>

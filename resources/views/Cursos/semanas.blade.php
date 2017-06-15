@@ -30,7 +30,7 @@
                     <div class="col-md-12">
 
 
-                        <table id="main_table" class="display table table-hover" >
+                        <table id="main_table" class="display table table-hover" style="border: 1px dotted red;">
 
                             <tbody id="sem{{$semana->id_semana}}_row0" class="main_table_seccion">
 
@@ -81,9 +81,9 @@
                                 <!--@include('Recursos.archivo') -->
                           				@endif
                                 
-                                 @if($recurso->tipo_recurso == 7 ) <!-- Si es una tarea -->
+                                 @if($recurso->tipo_recurso== 7  ) <!-- Si es una tarea -->
 
-                                   <!-- @include('Recursos.archivo') --><!-- Para montar la vista antes de pasarla a texto comprimido -->
+                                    <!--@include('Recursos.archivo') <!-- Para montar la vista antes de pasarla a texto comprimido -->
                                     
                                     <!--
                                      <script type="text/javascript">
@@ -135,9 +135,7 @@
 
                     @unless(!Auth::check())
                       @if(Auth::user()->rol->id_rol == 1 || $isMatriculated < 4 )
-                          <div class="col-md-12">
                        <a style="color:white; margin:5px 20px 5px 5px; float: right;" onclick="crearRecursoSemana({{$semana->id_semana}}, {{$curso->id_curso}})" class="btn btn-success"><i class="fa fa-plus"></i></a>
-                       </div>
                        @endif
 
                   @endunless
