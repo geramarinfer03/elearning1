@@ -215,10 +215,6 @@ values
 
 ('Estudiante Seis', 'estudiante6@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es');
 
-/* Insert tipo de colaboracion (1 colaboracion externa, 2 Autoevaluacion */
-INSERT INTO tipo_colaboracion (id_tipo_colaboracion, descripcion) VALUES (1, 'Autoevaluacion');
-INSERT INTO tipo_colaboracion (id_tipo_colaboracion, descripcion) VALUES (2, 'Colaboracion Externa');
-
 
 
 

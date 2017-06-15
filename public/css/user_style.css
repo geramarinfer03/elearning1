@@ -27,22 +27,6 @@
         filter: alpha(opacity=75);
 }
 
-.capa_modal_formulario{
- /* display: none;*/
-  position: absolute;
-  /*top: 15%;
-  left: 12%;*/
-  width: 100%;
-  height: 95%;
-  padding: 16px;
-  background: #000;
-  color: #fff;
-  z-index:1003;
-  overflow: auto;
-  opacity: 0.8;
-
-}
-
 
 .div_contenido {
  /* background-color: #ecf0f5;
@@ -265,30 +249,4 @@ th{
 
 .mostar{
   display: block;
-}
-
-.box_tarea{
-  width: 95%;
-  background: #e3f4f4;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.tarea_table_seccion {
-  background: #e3f4f4;
-}
-
-.nombreTarea{
-  font-weight: bold;
-}
-.h3Class{
-  text-align: center;
-  font-weight: bold;
-
-}
-
-.tareaInst{
-  width: 90%;
-  margin-right: auto;
-  margin-left: auto;
 }
