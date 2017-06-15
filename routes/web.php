@@ -84,6 +84,7 @@ Route::group(['middleware'=>['profe']], function() {
 	Route::post('recursos.store', 'RecursoController@store');
 	Route::post('recursos.update', 'RecursoController@update');
 	Route::post('recursos.updateArchivo', 'UploadController@UpdateArchivo');
+	Route::post('recursos.tarea', 'RecursoController@tarea');
     
     
 	Route::get('editarRecurso/{id}','RecursoController@edit');
@@ -116,6 +117,13 @@ Route::post('download', 'UploadController@getDownload');
 Route::post('downloadVideo', 'UploadController@downloadVideo');
 
 
+
+
 /*Route::get('cursos', 'CursoController@index');
 Route::get('cursos_create', 'CursoController@create');
 Route::post('cursos_store', 'CursoController@store');*/
+
+Route::post('tareas.formulario','TareaController@crearFormulario');
+Route::post('tareas.crearTarea','TareaController@crearTarea');
+Route::post('tareas.buscarTarea', 'TareaController@formularioAsignado');
+Route::get('showCrearForm/{curso}/{tarea}', 'TareaController@showCrearForm');

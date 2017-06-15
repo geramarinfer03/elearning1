@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Guard;
 use elearning1\Semana;
 use elearning1\Rol;
 use elearning1\Recurso;
+use elearning1\Curso;
 use elearning1\TipoRecurso;
 use Illuminate\Http\Request;
 use Illuminate\HttpResponse;
@@ -36,11 +37,14 @@ class RecursoController extends Controller
         $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->orderBy('id_rol', 'desc')->get()->pluck('nombre','id_rol');
       $tipo_recurso = TipoRecurso::all()->pluck('nombre', 'id_tipo_recurso');
 
+        $evaluado = Curso::find($curso)->porEvaluar();
+
         return view('Recursos.crearRecurso')->with('padre',0)
                                             ->with('semana',$semana)
                                             ->with('roles',$rols_user)
                                             ->with('tipo_recurso', $tipo_recurso)
-                                            ->with('curso', $curso);
+                                            ->with('curso', $curso)
+                                            ->with('evaluado', $evaluado);
     }
     
     public function crearRecurso($id, $curso){
@@ -54,11 +58,15 @@ class RecursoController extends Controller
 
         $tipo_recurso = TipoRecurso::all()->pluck('nombre', 'id_tipo_recurso');
 
+        $evaluado = Curso::find($curso)->evaluado;
+
+
          return view('Recursos.crearRecurso')->with('padre',$id)
                                              ->with('semana',$semana)
                                              ->with('roles',$rols_user)
                                              ->with('tipo_recurso', $tipo_recurso)
-                                             ->with('curso', $curso);
+                                             ->with('curso', $curso)
+                                             ->with('evaluado', $evaluado);
 
     }
 
@@ -343,6 +351,11 @@ class RecursoController extends Controller
         }
          
          
+   }
+
+   public function tarea(Request $request){
+      dd($request);
+
    }  
     
 

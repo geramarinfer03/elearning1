@@ -11,6 +11,7 @@
                 <ul class="nav nav-tabs">
                 <li class="active" id="litab1"><a id="atab1" href="#tab1" data-toggle="tab">Recursos</a></li>
                 <li id="litab2"><a href="#tab2" id="atab2" data-toggle="tab">Subir Archivos</a></li>
+                <li id="litab3"><a href="#tab3" id="atab3" data-toggle="tab">Tarea</a></li>
                 </ul>
                 <div class="tab-content">
 
@@ -122,7 +123,6 @@
                                  @if(Session::has('error'))
                                  <p class="errors">{!! Session::get('msg') !!}</p>
                                 @endif
-                            </span>
                             </div>
 
 
@@ -156,6 +156,13 @@
                      {!! Form::close() !!}
 
                 </div>
+
+                <div class="tab-pane" id="tab3">
+
+                    @include('Recursos.crearTarea')
+                </div>
+                
+
                 </div>
                 </div>
             </div>
