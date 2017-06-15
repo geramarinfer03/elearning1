@@ -192,7 +192,8 @@ class CursoController extends Controller
       //rol 6 -> guess
       $miCurso = 6;
       $rol_nombre = "";
-
+      $miMat2=null;
+      $conGeneradorDiploma = false;
       if($user != NULL){
           $miCurso = Matricula::distinct()->where('Matricula.usuario', '=', $user->id)
                                           ->where('Matricula.curso', '=', $curso->id_curso)->select('Matricula.rol')->get();
@@ -207,15 +208,39 @@ class CursoController extends Controller
             $rol_nombre = "";
           }
           $miCurso = $rol;
-      }
+          
+          
+          ////***************----------------------------------------***************
+          //$miMatricula basado en id del usuario y id del curso
+          $miMatricula = Matricula::where('Matricula.usuario', '=', $user->id)
+                                    ->where('Matricula.curso', '=', $curso->id_curso)->get();
 
+          //Sacamos la matricula del array $miMatricula
+          
+          foreach ($miMatricula as $miMat) {
+            $miMat2 = $miMat;
+          }
+
+          //Verificamos si esta matricula tiene la columna generarPDF en 1
+          if($miMat2 != NULL){
+            if($miMat2->generarPDF == 1){
+            $conGeneradorDiploma = true;
+            }else{
+              $conGeneradorDiploma = false;
+            }
+            
+          }
+          
+      }
 
       
       return view('Cursos.detailAdmin')->with('curso', $curso)
                                        ->with('semanas', $semanas)
                                        ->with('profesores', $profes)
                                        ->with('isMatriculated', $miCurso)
-                                       ->with('nombreRol', $rol_nombre);
+                                       ->with('nombreRol', $rol_nombre)
+                                       ->with('matricula',$miMat2)
+                                       ->with('conGeneradorDiploma',$conGeneradorDiploma);
     }
 
     /**

@@ -51,7 +51,24 @@
                            @endif
                         
                         @endunless
-                        
+
+                        @if($conGeneradorDiploma)
+                          <li class="list-group-item">
+                            <form action="/generateReport" method="post">
+                                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
+                                 @unless(!Auth::check())
+                                 <input type="hidden" name="id_usuario" value="{{Auth::user()->id}}">
+                                 <input type="hidden" name="nombre_usuario" value="{{Auth::user()->nombre}}">  
+                                 @endunless
+                                 <input type="hidden" name="curso_mat" value="{{$curso->id_curso}}">
+                                 <input type="hidden" name="cursoNombre" value="{{$curso->nombre}}">
+                                 <input type="hidden" name="promedioFinal" value="{{$matricula->promedio_final}}"> 
+                                 <input type="hidden" name="roles" value="5"> 
+                                <button type="submit" class="btn btn-block btn-info btn-lg" style="width: 100%; font-weight: bold;">Generar Diploma</button>
+                             </form>
+                          </li>
+                        @endif
+                         
 
                     </ul>
 
