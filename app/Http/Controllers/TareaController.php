@@ -36,8 +36,8 @@ class TareaController extends Controller
         $curso = $request->input('curso');
 
 
-
         $fileName = rand(11111,99999);
+
 
         $destinationPath = $localRepo = realpath('../../../') . "/localRepository";
         $this->crearRuta($destinationPath);
@@ -50,21 +50,21 @@ class TareaController extends Controller
         //dd($url);
        
         $iscreated = 0;
-        try {
+       // try {
         
             $fp = fopen($pathRecurso . $fileName . ".blade.php", "w");
             fputs($fp, $formulario);
             fclose($fp);
             $iscreated = 1;
 
-         } catch (\Exception $e) {}
+       //  } catch (\Exception $e) {}
 
 
 
-        if ($iscreated == 0) {
-            Alert::error("Error >n<", "No se pudo crear el formulario")->persistent('Close');
-            return redirect()->back();
-        }
+        //if ($iscreated == 0) {
+       //     Alert::error("Error >n<", "No se pudo crear el formulario")->persistent('Close');
+       //     return redirect()->back();
+      //  }
         
 
         $result = Formulario::create([
@@ -77,6 +77,7 @@ class TareaController extends Controller
          if($result){
 
             return $formulario;
+          //return ("<h1>HOLAA</h1>");
 
 
          }else{
@@ -95,7 +96,6 @@ class TareaController extends Controller
 
     public function crearTarea(Request $request){
 
-        
           $nombre = $request->input('nombreTarea');
           $notas = $request->input('notasTarea');
           $vis = $request->input('visbl');
@@ -104,6 +104,13 @@ class TareaController extends Controller
           $id_curso = $request->input('cursoF');
           $semana = $request->input('semanaF');
           $rol =  $request->input('rol');
+
+          if($estado == null){
+            $estado = 0;
+          }
+          if($vis == null){
+            $vis = 0;
+          }
 
 
           $porcentaje =  $request->input('porcentaje');
@@ -115,9 +122,12 @@ class TareaController extends Controller
         ini_set('memory_limit', '-1');
         // obteniendo la informacion del archivo
          $file = Input::file('file');
+        //$file = $request->file('tareaupload');
           $url = null;
 
         if($file){
+
+
                 $url = $this->subirArchivosTarea($request);       
 
         }
@@ -157,8 +167,20 @@ class TareaController extends Controller
             ]);
                 if($result){
                       $tareaId = Tarea::all()->max('id_tarea');
+                 
+                     
+/*
+                       return view('Recursos.crearFormulario')
+                                                              ->with('curso', $id_curso)
+                                                              ->with('tareaId', $tareaId)
+                                                              ->with('nombreTarea', $tarea);*/
+                     $newUrl = "/showCrearForm/" . $id_curso . "/" . $tareaId;
 
-                     return $tareaId;
+                     alert()->success("Tarea Creada #" . $tareaId, 'Agregue un formulario de evaluacion')->persistent('Close');
+;
+                     return redirect($newUrl);
+
+                     //return $tareaId; // Si lo hace con el script
                  }
                 else{
                     alert()->success('Error al crear la Tarea');
@@ -178,6 +200,17 @@ class TareaController extends Controller
         return back();
 
         
+    }
+
+    public function showCrearForm($id_curso, $tareaId){
+
+        $tarea = Tarea::find($tareaId)->nombre;
+
+         return view('Recursos.crearFormulario')
+                                                ->with('curso', $id_curso)
+                                                ->with('tareaId', $tareaId)
+                                                ->with('nombreTarea', $tarea);
+
     }
 
     protected function subirArchivosTarea(Request $request){

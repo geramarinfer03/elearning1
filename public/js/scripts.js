@@ -539,6 +539,7 @@ function generarFormulario(){
 
     formulario = formulario.split("\n").join(""); 
 
+
     //$( "#formCrearForm" ).submit();
 
 /*var element = document.getElementById('formularioEvaluacion');
@@ -588,7 +589,9 @@ function generarFormulario(){
             success: function(data) {
                 //alert(data);
                // $('form').remove();
-                $("#contenido_capa_edicion").html(data);
+               $("#capa_modal_formulario").attr('class', 'capa_modal_formulario');
+               $("#FormularioDiv").html(data);
+               // $("#contenido_capa_edicion").html(data);
                 //$('#contenido_capa_edicion').append('<p>Tu texto se ha guardado correctamente!</p><a href="data.txt" target="_blank">Ver</a>');
             }
         });
@@ -652,6 +655,7 @@ function crearTarea(){
         return false;*/
    // }); 
 
+
     var url = "/tareas.crearTarea"; // El script a dónde se realizará la petición.
     var tarea = (-1);
     $.ajax({
@@ -685,6 +689,8 @@ function crearTarea(){
                                
            }
          });
+
+
 
 
 }
