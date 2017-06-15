@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE TRIGGER actualizar_nota_entrega1
+CREATE TRIGGER actualizar_nota_entrega
 AFTER INSERT
    ON elearning2.Colaboracion FOR EACH ROW
 
@@ -9,10 +9,10 @@ BEGIN
 	SET nota= (SELECT SUM(nota)
 			   FROM Colaboracion 
                WHERE id_entrega = NEW.id_entrega)
-	WHERE id_entrega= NEW.id_entrega
+	WHERE id_entrega= NEW.id_entrega;
 
-END; 
+END; $$
 
-DELIMITER $$
+DELIMITER ;
 
 Show triggers
