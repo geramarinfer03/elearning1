@@ -133,3 +133,4 @@ Route::post('tareas.buscarTarea', 'TareaController@formularioAsignado');
 // PDF REPORTER 
 
 Route::get('/generateReport', 'CertificateReporter@generate');
+Route::get('/createReport', 'CertificateReporter@index');

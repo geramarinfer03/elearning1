@@ -18,4 +18,9 @@ class CertificateReporter extends Controller
         $pdf = \PDF::loadView('reporter.certificate',$data);
         return $pdf->download('test.pdf');
     }
+
+    public function index(){
+        $schedule = date('H:i:s'); // Bring this from DB field where indicates the schedule to run the process ]
+        return view('reporter.createCertificates', ['horario'=>$schedule]);
+   }
 }
