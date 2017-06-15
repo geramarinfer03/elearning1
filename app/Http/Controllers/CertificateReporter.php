@@ -28,14 +28,17 @@ class CertificateReporter extends Controller
     public function generatePost(Request $request){
          $data= [];
          $dt = date('m-d-Y');
+         $nota = $request->promedioFinal;
+         $modalidad = ($nota<70)?"Aprovechamiento":"Participación";
          $data = [
         'NOMBRE' => $request->nombre_usuario,
         'CURSO'   => $request->cursoNombre,
-        'NOTA'=> $request->promedioFinal,
+        'NOTA'=> $nota,
         'FECHA' => $dt,
+        'MODALIDAD'=>$modalidad,
         ];
         $pdf = \PDF::loadView('reporter.certificate',$data);
-        return $pdf->download('test.pdf');
+        return $pdf->download('Diploma.pdf');
     }
 
 }
