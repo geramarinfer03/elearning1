@@ -3,21 +3,21 @@ use elearning2;
 DELIMITER //
 CREATE TRIGGER actualizar_nota_entrega
 AFTER INSERT
-   ON colaboracion FOR EACH ROW
+   ON Colaboracion FOR EACH ROW
 
 BEGIN
 
    -- variable declarations --
-   DECLARE vNota float(4,2);
+   DECLARE vNota float(5,2);
    DECLARE countColaboracion int;
-   DECLARE vNotaColaboracion float(4,2);
-   DECLARE vNotaAutoevaluacion float (4,2);
+   DECLARE vNotaColaboracion float(5,2);
+   DECLARE vNotaAutoevaluacion float (5,2);
    
    -- find Nota Entrega by Id --
-   SELECT nota INTO vNota FROM entrega WHERE id_entrega = NEW.id_entrega;
-   SELECT COUNT(id_colaboracion) INTO countColaboracion  FROM colaboracion WHERE id_tipo_colaboracion = 2;
-   SELECT SUM(nota) INTO vNotaColaboracion FROM colaboracion WHERE id_entrega = NEW.id_entrega AND id_tipo_colaboracion = 2;
-   SELECT nota INTO vNotaAutoevaluacion FROM colaboracion WHERE id_entrega = NEW.id_entrega AND id_tipo_colaboracion = 1;
+   SELECT nota INTO vNota FROM Entrega WHERE Entrega.id_entrega = NEW.id_entrega;
+   SELECT COUNT(id_colaboracion) INTO countColaboracion  FROM Colaboracion WHERE Colaboracion.id_tipo_colaboracion = 2;
+   SELECT SUM(nota) INTO vNotaColaboracion FROM Colaboracion WHERE Colaboracion.id_entrega = NEW.id_entrega AND Colaboracion.id_tipo_colaboracion = 2;
+   SELECT nota INTO vNotaAutoevaluacion FROM Colaboracion WHERE Colaboracion.id_entrega = NEW.id_entrega AND Colaboracion.id_tipo_colaboracion = 1;
    
    -- 
    SET @cNota := vNota;

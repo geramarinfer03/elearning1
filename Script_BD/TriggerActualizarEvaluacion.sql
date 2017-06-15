@@ -9,7 +9,7 @@ AFTER INSERT
 BEGIN
 
 	-- variable declarations --
-	DECLARE vCurrentEvaluation FLOAT(4,2);
+	DECLARE vCurrentEvaluation FLOAT(5,2);
 
 	SELECT evaluado INTO vCurrentEvaluation FROM Curso WHERE id_curso = NEW.id_curso;
 

@@ -9,8 +9,8 @@ AFTER INSERT
 BEGIN
 
 	-- variable declarations --
-	DECLARE vValorTarea FLOAT(4,2);	
-	DECLARE vPromedio FLOAT(4,2);
+	DECLARE vValorTarea FLOAT(5,2);	
+	DECLARE vPromedio FLOAT(5,2);
 
 	SELECT porcentaje INTO vValorTarea FROM Tarea WHERE Tarea.id_tarea = NEW.id_tarea;
 	SELECT promedio_final INTO vPromedio FROM Matricula WHERE Matricula.id_matricula = NEW.id_matricula;
@@ -35,9 +35,9 @@ AFTER UPDATE
 BEGIN
 
 	-- variable declarations --
-	DECLARE vValorTarea FLOAT(4,2);	
-	DECLARE vPromedio FLOAT(4,2);    
-	DECLARE vViejaNota FLOAT(4,2);
+	DECLARE vValorTarea FLOAT(5,2);	
+	DECLARE vPromedio FLOAT(5,2);    
+	DECLARE vViejaNota FLOAT(5,2);
     
 	SELECT porcentaje INTO vValorTarea FROM Tarea WHERE Tarea.id_tarea = NEW.id_tarea;
 	SELECT promedio_final INTO vPromedio FROM Matricula WHERE Matricula.id_matricula = NEW.id_matricula;
