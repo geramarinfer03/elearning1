@@ -144,6 +144,19 @@ function crearRecurso(id_padre, curso) {
 
 }
 
+function subirTarea(id_tarea, id_curso) {
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+
+    var url = "/subirTarea/" + id_tarea + "/" + id_curso;
+
+
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul);
+    })
+
+}
+
 
 
 
