@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Matricula extends Model
 {
     protected $fillable = [
-        'id_matricula','periodo', 'ano', 'curso', 'usuario', 'rol', 'fecha_matricula'
+        'id_matricula','periodo', 'ano', 'curso', 'usuario', 'rol', 'fecha_matricula', 'promedio_final'
     ];
 
     
@@ -21,5 +21,7 @@ class Matricula extends Model
     public function cursos(){
     	return $this->belongsTo(Curso::class,'curso');
     }
+
+    
 
 }

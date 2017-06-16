@@ -182,12 +182,15 @@ class CursoController extends Controller
       $curso= Curso::find($id);
       $semanas = $curso->semanas;
       $user = \Auth::user(); //Usuario puede ser NULL
+      $matricula = Matricula::where('Matricula.curso','=',$id)->where('Matricula.usuario','=',$user->id)->first();
 
 
       $profes = Matricula::join('Usuario', 'Usuario.id', '=', 'Matricula.usuario')
                          ->select('Usuario.nombre', 'Usuario.id', 'Matricula.rol')
                          ->where('Matricula.rol','=', '3')
                          ->where('Matricula.curso', '=', $id)->get();
+
+      $nota = $matricula->promedio_final; 
 
       //rol 6 -> guess
       $miCurso = 6;
@@ -215,7 +218,8 @@ class CursoController extends Controller
                                        ->with('semanas', $semanas)
                                        ->with('profesores', $profes)
                                        ->with('isMatriculated', $miCurso)
-                                       ->with('nombreRol', $rol_nombre);
+                                       ->with('nombreRol', $rol_nombre)
+                                       ->with('nota', $nota);
     }
 
     /**

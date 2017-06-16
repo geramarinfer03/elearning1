@@ -51,7 +51,12 @@
                            @endif
                         
                         @endunless
-                        
+                  
+                        @if($curso->limiteCurso() <= 0)
+                          <li class="list-group-item">
+                              <b>Nota Final</b> <a class="pull-right">{{$nota}}</a>
+                          </li>
+                        @endif
 
                     </ul>
 

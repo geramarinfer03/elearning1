@@ -59,7 +59,21 @@ class Tarea extends Model
       return $interval->format('%R%a') + 1;
 
 
-          }
+    }
+
+    public function limiteCurso(){
+
+      $datetime1 = date_create($this->fech_limit_entrega);
+      $date1 = new DateTime("now");
+      $interval = date_diff($date1, $datetime1);
+
+      return $interval->format('%R%a') + 1;
+
+
+
+    } 
+
+
 
 
 
