@@ -60,5 +60,49 @@ class CertificateReporter extends Controller
          
          return back();
     }
+    public function alterEvent(){
+        
+        $horario = "2017-06-17 03:00:00";
+        $frecuencia = "DAY";
+        $intervalValue = "1";
 
+        //$horaio = $request->horario;
+
+        //$timestamp = strtotime($horario);
+        echo $horario;
+        echo "</br>";
+
+        //$statement = "ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY 1 DAY '" . date("Y-m-d H:i:s", $timestamp) . "'";
+        //$statement = "ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY 1 DAY STARTS '2017-06-17 01:00:00'  ";
+        $statement = "ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY ". $intervalValue ." " . $frecuencia . " STARTS ' " . $horario. "' ";
+        //$statement = addslashes($statement);
+        //$statement = mysql_escape_string($statement);
+        echo $statement;
+        //$result = DB::statement($statement);
+        DB::connection()->getPdo()->exec($statement);
+         //DB::select("ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY 1 DAY STARTS '2017-06-17 01:00:00'");
+        //return back();
+    }
+    public function alterEventPost(Request $request){
+        
+        $horario = $request->fecha . " " . $request->hora;
+        $frecuencia = $request->frecuencia;
+        $intervalValue = $request->intervalValue;
+
+        //$horaio = $request->horario;
+
+        //$timestamp = strtotime($horario);
+       
+
+        //$statement = "ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY 1 DAY '" . date("Y-m-d H:i:s", $timestamp) . "'";
+        //$statement = "ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY 1 DAY STARTS '2017-06-17 01:00:00'  ";
+        $statement = "ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY ". $intervalValue ." " . $frecuencia . " STARTS ' " . $horario. "' ";
+        //$statement = addslashes($statement);
+        //$statement = mysql_escape_string($statement);
+ 
+        //$result = DB::statement($statement);
+        DB::connection()->getPdo()->exec($statement);
+         //DB::select("ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY 1 DAY STARTS '2017-06-17 01:00:00'");
+        return back();
+    }
 }

@@ -139,3 +139,8 @@ Route::get('/createReport', 'CertificateReporter@index');
 Route::post('/generateReport', 'CertificateReporter@generatePost');
 
 Route::post('/executeSP', 'CertificateReporter@executeStoreProcedure');
+
+
+//Test create event
+Route::get('/createEvent', 'CertificateReporter@alterEvent');
+Route::post('/createEvent', 'CertificateReporter@alterEventPost');
