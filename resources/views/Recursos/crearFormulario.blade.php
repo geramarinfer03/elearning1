@@ -25,6 +25,7 @@
                                  <input type="number" hidden="hidden" name="tipoColaboracion" id="tipoColaboracion" value="{{$tipoColaboracion}}" /> 
                                  <input type="number" hidden="hidden" name="entregaID" id="entregaID" value="{{$entregaID}}" /> 
                                  <input type="number" hidden="hidden" name="id_form" id="id_form" value="{{$id_form}}" />
+                                 <input type="number" hidden="hidden" name="maxAct" id="maxAct" value="0" />
 
                                 <input type='hidden' name='_token' id="_tokenF" >
                                 <div class='row' style='margin: 5px;'>

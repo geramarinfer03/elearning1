@@ -504,6 +504,8 @@ function generarFormulario(){
 
     var criFilas = $("#tabla_criterios tr .puntajeCriterio").length;
     var actFilas = $("#tabla_actividades tr .actividadesDesc ").length;
+    //var actinp = $("#tabla_actividades tr .inputPuntos ").length;
+   
 
     if(criFilas === 0 || actFilas === 0){
 
@@ -521,6 +523,7 @@ function generarFormulario(){
     $("#indicacionesText").text(indicaciones);
 
 
+
    $(".columinput").remove();
     $(".botonForm").remove();
 
@@ -532,6 +535,7 @@ function generarFormulario(){
     var tarea = $("#tareaAsig").val();
 
     var curso = $("#cursoIDForm").val();
+
 
 
 
@@ -712,7 +716,7 @@ function subirTarea(id_tarea, id_curso) {
     })  
 }
 
-function hola(){
+function cargarNuevosValoresColaboracion(){
     var tokenviejo = $("#_tokenF").val();
 
     var tipoCola = $("#tipoColaboracion2").val();
@@ -720,14 +724,27 @@ function hola(){
     var idForm = $("#id_form2").val();
     var token = $("#_tokenF2").val();
 
+
+    var mayor = 0;
+     $("#tabla_criterios tr td .puntajeCriterio").each(function(){
+        maxPuntos = parseInt($(this).text()||0,10);
+        
+        if(maxPuntos > mayor){
+            mayor = maxPuntos;
+        }
+         
+    });
     
+
 
     $("#tipoColaboracion").val(tipoCola);
     $("#entregaID").val(entregaID);
     $("#id_form").val(idForm);
     $("#_tokenF").val(token);
+    $("#maxAct").val(mayor);
+    
 
-    alert($("#tipoColaboracion").val());
 
+   
 
 }

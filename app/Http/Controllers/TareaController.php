@@ -468,7 +468,7 @@ class TareaController extends Controller
        //$tarea = $request->input('id_tarea');
        $usuario= \Auth::user()->id;
 
-       dd($entrega_id);
+       dd($request);
 
 
     }

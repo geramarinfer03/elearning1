@@ -17,7 +17,7 @@
 		@endphp
 
 		<script type="text/javascript">
-			hola();
+			cargarNuevosValoresColaboracion();
 		</script>
     </div>
  </div>
