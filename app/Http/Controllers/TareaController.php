@@ -357,9 +357,11 @@ class TareaController extends Controller
         $entrega = $this->buscarEntrega($usuario_califica, $idTarea);
 
         $colaboracion = Colaboracion::where('Colaboracion.id_usuario_califica', '=', $usuario_califica)->where('Colaboracion.id_entrega', '=', $entrega->id_entrega)->first();
-     
+
+
       }while($colaboracion != null && $cantidadEntregas != 0);
 
+  
       if($colaboracion == null){
         //no encontre ninguna, se procede a evaluar esta entrega
         $urlTarea = $entrega->url;

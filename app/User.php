@@ -63,4 +63,12 @@ class User extends Authenticatable
 
         return Colaboracion::distinct()->select('Colaboracion.id_colaboracion')->join('Entrega', 'Entrega.id_entrega', 'Colaboracion.id_entrega')->join('Tarea', 'Tarea.id_tarea', 'Entrega.id_tarea')->where('Colaboracion.id_usuario_califica', '=', $this->id)->count();
     }
+
+    public function tieneAutoEvaluacion(){
+
+        $cant = Colaboracion::distinct()->select('Colaboracion.id_colaboracion')->join('Entrega', 'Entrega.id_entrega', 'Colaboracion.id_entrega')->join('Tarea', 'Tarea.id_tarea', 'Entrega.id_tarea')->where('Colaboracion.id_usuario_califica', '=', $this->id)->where('Colaboracion.id_tipo_colaboracion', '=', 1)->count();
+
+        return $cant > 0;
+        
+    }
 }
