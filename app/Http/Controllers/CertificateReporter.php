@@ -4,6 +4,7 @@ namespace elearning1\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Alert;
 
 class CertificateReporter extends Controller
 {
@@ -45,11 +46,17 @@ class CertificateReporter extends Controller
 
     public function executeStoreProcedure (){
 
-        $result = DB::select("CALL pr_update_generate_certificate()");
+       
+         try {
 
-        alert()->success("Ejecutado correctamente"); 
-
-
+             $result = DB::select("CALL pr_update_generate_certificate()");
+              Alert::success("Ejecutado correctamente"); 
+                   
+            } catch (\Exception $e) {
+              
+              Alert::error('Error en el proceso');
+            
+            }
          
          return back();
     }
