@@ -132,7 +132,7 @@ Route::get('api/v1/notas/{id?}', 'NotaController@getNota');
 
 Route::get('subirTareaShow/{id_tarea}/{id_curso}','TareaController@showEntrega');
 
-Route::post('tareas.calicarShow', 'TareaController@showFormColaboracion');
+Route::post('tareas.calificarShow', 'TareaController@showFormColaboracion');
 	
 Route::post('entrega.tarea', 'TareaController@uploadTask');
 

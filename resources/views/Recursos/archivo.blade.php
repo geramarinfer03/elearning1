@@ -161,7 +161,7 @@
                         @if(\Auth::user()->realizoEntrega($recurso->tarea->id_tarea))
                             <!-- Calificar o Colaboracion -->
                             <div class="col-md-3">
-                            <form action="/tareas.calicarShow" method="POST" id="btnFormCalificaShow">
+                            <form action="/tareas.calificarShow" method="POST" id="btnFormCalificaShow">
                             <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>"> 
                             <input type="hidden" name="tareaID" value="{{$recurso->tarea->id_tarea}}"> 
                              <button type="submit" class="btn btn-info btn-lg"><i class="fa fa-check"></i>  Evaluar   Tarea</button>

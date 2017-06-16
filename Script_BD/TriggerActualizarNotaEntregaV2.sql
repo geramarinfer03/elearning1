@@ -28,7 +28,7 @@ BEGIN
 	ELSE
 		SET @cNota := @cNota + ((vNotaAutoevaluacion * 10) / 100);
 	END IF;
-   UPDATE entrega
+   UPDATE Entrega
 	SET nota= @cNota
 	WHERE id_entrega=NEW.id_entrega;
 

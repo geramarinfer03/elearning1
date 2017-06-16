@@ -173,7 +173,6 @@ class TareaController extends Controller
                      $newUrl = "/showCrearForm/" . $id_curso . "/" . $tareaId;
 
                      alert()->success("Tarea Creada #" . $tareaId, 'Agregue un formulario de evaluacion')->persistent('Close');
-;
                      return redirect($newUrl);
 
                      //return $tareaId; // Si lo hace con el script
@@ -349,12 +348,15 @@ class TareaController extends Controller
 
     if($cantidadEntregas > 0){
       do{
+
         $cantidadEntregas -= 1;
         $entrega = $this->buscarEntrega($usuario_califica, $idTarea);
 
         $colaboracion = Colaboracion::where('Colaboracion.id_usuario_califica', '=', $usuario_califica)->where('Colaboracion.id_entrega', '=', $entrega->id_entrega)->first();
+
+        var_dump($cantidadEntregas);
      
-      }while($colaboracion || $cantidadEntregas == 0);
+      }while($colaboracion != null && $cantidadEntregas != 0);
 
       if($colaboracion == null){
         //no encontre ninguna, se procede a evaluar esta entrega
@@ -464,13 +466,51 @@ class TareaController extends Controller
        $tipoColaboracion = $request->input('tipoColaboracion');
        $entrega_id = $request->input('entregaID');
        $id_form = $request->input('id_form');
-       
-       //$tarea = $request->input('id_tarea');
        $usuario= \Auth::user()->id;
+       $coments = $request->input('comentarios');
 
-       dd($request);
+       $maxPuntos = $request->input('maxAct');
+       $Form = Formulario::find($id_form);
+       $id_tarea = $Form->id_tarea;
+
+       $curso = Tarea::find($id_tarea)->id_curso;
 
 
+       $totalPuntosForm = $Form->totalPuntos;
+
+       $cantActiv = $totalPuntosForm / $maxPuntos;
+
+       $respuestas = array();
+
+       $totalPuntos = 0;
+       for($i = 1; $i <= $cantActiv; $i++){
+        $valor =  $request->input('puntos' . $i);
+          array_push($respuestas, $valor);
+          $totalPuntos += $valor;
+
+       }
+
+       $nota= ( $totalPuntos / $totalPuntosForm ) * 100;
+
+        $result = Colaboracion::create([
+          'id_usuario_califica'=>$usuario,
+          'id_tipo_colaboracion'=> $tipoColaboracion,
+          'id_entrega' => $entrega_id,
+          'id_formulario' => $id_form,
+          'respuestas' => json_encode($respuestas),
+          'nota' => $nota,
+          'comentario' => $coments
+        ]);
+
+
+
+       if($result){
+          alert()->success("Gracias", "!Evaluación enviada con éxito!");
+          return redirect('/cursos.show/' . $curso);
+          
+       }
+       
+      
     }
 
 
