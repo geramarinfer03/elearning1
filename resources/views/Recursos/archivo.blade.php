@@ -161,6 +161,8 @@
         
 
                          @if(  (\Auth::user()->cantidadEntregas($recurso->tarea->id_tarea) < 5 && $recurso->tarea->faltaunDia() <= 1 && \Auth::user()->realizoEntrega($recurso->tarea->id_tarea)) || (\Auth::user()->realizoEntrega($recurso->tarea->id_tarea) > 4 &&  \Auth::user()->colaboracionesHechas($recurso->tarea->id_tarea) > 4) )
+
+                         
                             <div class="col-md-3">
                             <form action="/tareas.calificarShow" method="POST" id="btnFormCalificaShow">
                             <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>"> 
