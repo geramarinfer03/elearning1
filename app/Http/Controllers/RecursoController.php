@@ -290,7 +290,8 @@ class RecursoController extends Controller
         'porcentaje' => 'Required'
         
         ]);
-    
+
+     
 
 
         $nombre = $request->input('nombre');
@@ -315,7 +316,7 @@ class RecursoController extends Controller
           $url = null;
 
         if($file){
-            $url = Tarea::subirArchivosTarea($request);       
+            $url = $this->subirArchivosTarea($request);       
         }
 
 
@@ -343,8 +344,8 @@ class RecursoController extends Controller
     
         
         $result2 = $tarea->update([
-             'fecha_limit_entrega' => $fecha_limit,
-             'fecha_limit_evaluacion'=>$fecha_limit_eval,
+             'fech_limit_entrega' => $fecha_limit,
+             'fech_limit_evaluacion'=>$fecha_limit_eval,
              'porcentaje' => $porcentaje
              
          ]); 
@@ -468,6 +469,69 @@ class RecursoController extends Controller
       dd($request);
 
    }  
+
+
+    protected function subirArchivosTarea(Request $request){
+
+        $file = Input::file('file');
+        $id_curso = $request->input('cursoF');
+        $semana = $request->input('semanaF');
+        $mime = $file->getMimeType();
+
+
+
+        list($tipo, $exten) = explode("/", $mime);
+
+        $extension = $file->getClientOriginalExtension();
+        $originalName = $file->getClientOriginalName();
+
+        $folderName = rand(11111,99999);
+
+            if ($extension != "exe") {
+                
+                 $destinationPath = $localRepo = realpath('../../../') . "/localRepository";
+                 $this->crearRuta($destinationPath);
+                 $pathRecurso = $destinationPath . "/". $id_curso ."/tareas/". $folderName . "/";
+                 $this->crearRuta($pathRecurso);
+
+
+                $url =  $pathRecurso . $originalName;
+
+
+
+                Input::file('file')->move($pathRecurso, $originalName);
+
+
+                return $url;
+             }else{
+
+                  Alert::error("NO puedes subir exe >:/", "Intente con otro tipo de archivo")->persistent('Close');
+                    return redirect()->back();
+             }
+    }
+
+     protected function crearRuta($destinationPath){
+
+        if (!file_exists($destinationPath)) {
+        // Si el directorio no ha sido creado
+            if (!file_exists($destinationPath)) {
+                $iscreated = 0;
+                try {
+                //Intenta crearlo, con permisos de escritura
+                   $iscreated = mkdir($destinationPath, 0700, true);
+                } catch (\Exception $e) {
+                }
+
+
+                //Error de creacion de carpeta
+                if ($iscreated == 0) {
+                    Alert::error("Error de permisos", "No se pudo crear la carpeta")->persistent('Close');
+                    return redirect()->back();
+                }
+            }
+        }
+    }
+
     
 
 }

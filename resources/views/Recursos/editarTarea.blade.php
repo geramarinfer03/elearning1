@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="login-box-body">
-                        {!! Form::model($recurso,['url'=>'recursos.updateTarea', 'method'=>'POST', 'class'=>'form-horizontal']) !!}                    
+                        {!! Form::model($recurso,['url'=>'recursos.updateTarea', 'method'=>'POST', 'class'=>'form-horizontal', 'files'=>true]) !!}                    
                         {!! Form::hidden('id_recurso', $recurso->id_recurso) !!}
                         {!! Form::hidden('id_tarea', $tarea->id_tarea) !!}
                         {!! Form::hidden('recurso_padreF', $recurso->recurso_padre) !!} 
@@ -105,7 +105,7 @@
                                     {!! Form::label('file', 'Archivo Instrucciones') !!}
                                     <br />
                                     {!! Form::label('file_anterior', 'Archivo Subido: ' . $url) !!}
-                                    {!! Form::file('file', ['class'=>'fileupload', 'type'=>'file', 'id'=>'tareaupload']) !!}
+                                    {!! Form::file('file', ['class'=>'fileupload', 'type'=>'file', 'id'=>'file']) !!}
                                     <p class="errors">{!!$errors->first('any')!!}</p>
                                         @if(Session::has('error'))
                                             <p class="errors">{!! Session::get('msg') !!}</p>
