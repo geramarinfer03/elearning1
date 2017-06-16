@@ -21,16 +21,19 @@
                             <div class='login-box-body'>
                                 <div class='row'>
 
-                             <form  id='formColaboracion'  method='post'  action='MetodoColaboracionStore'>                
-                                <input type='hidden' name='_token' value='<?php echo csrf_token(); ?>'>
+                             <form  id='formColaboracion'  method='post'  action='colaboracion.calificar'>                
+                                 <input type="number" hidden="hidden" name="tipoColaboracion" id="tipoColaboracion" value="{{$tipoColaboracion}}" /> 
+                                 <input type="number" hidden="hidden" name="entregaID" id="entregaID" value="{{$entregaID}}" /> 
+                                 <input type="number" hidden="hidden" name="id_form" id="id_form" value="{{$id_form}}" />
 
+                                <input type='hidden' name='_token' id="_tokenF" >
                                 <div class='row' style='margin: 5px;'>
                                    <div class='col-md-12'>
                                       <div class='form-group has-feedback'>
                                         <h2 class='noMostar' style='text-align: center;'>Formulario de Evaluación</h2>
                                         <label id='labelIndicaciones' for=''>Indicaciones</label>
                                         <textarea name='indicacionesF' id='indicacionesF' rows='8' style='width: 100%;' placeholder='Escriba las indicaciones generales en este apartado'></textarea>
-                                        <p id='indicacionesText'></p>
+                                        <p id='indicacionesText' style="font-size: 18px; text-align: justify; width: 95%; margin-left: auto; margin-right: auto;"></p>
                                       </div>
                                     </div>
                                 </div>
@@ -134,6 +137,7 @@
 
                                 </div>
 
+
                                 <div class='row' style='margin: 5px;'>
                                    <div class='col-md-12'>
                                      <button id='summitForm' type='summit' class='btn btn-success btn-lg noMostar'>
@@ -142,7 +146,7 @@
 
                                    </div>
                                 </div>
-
+                                
 
                             </form>
                             </div>
@@ -178,6 +182,5 @@
                 </div>
 
 </section>
-
 
 @endsection

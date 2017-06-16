@@ -8,6 +8,7 @@ use elearning1\Semana;
 use elearning1\Tarea;
 use elearning1\Formulario;
 use elearning1\Recurso;
+use elearning1\Colaboracion;
 use DB;
 use Input;
 use Alert;
@@ -86,12 +87,6 @@ class TareaController extends Controller
             return redirect()->back();
 
          }
-
-
-
-
-
-	  
 
     }
 
@@ -210,7 +205,10 @@ class TareaController extends Controller
          return view('Recursos.crearFormulario')
                                                 ->with('curso', $id_curso)
                                                 ->with('tareaId', $tareaId)
-                                                ->with('nombreTarea', $tarea);
+                                                ->with('nombreTarea', $tarea)
+                                                ->with('tipoColaboracion', 0)
+                                                ->with('entregaID', 0)
+                                                ->with('id_form', 0);
 
     }
 
@@ -327,30 +325,71 @@ class TareaController extends Controller
 
     }
 
+    protected function buscarEntrega($usuario, $tarea){
+      $entrega = Entrega::where('Entrega.id_usuario', '!=', $usuario)
+                        ->where('Entrega.id_tarea', '=', $tarea)
+                        ->inRandomOrder()->first();
+      return $entrega;
+
+    }
+
     public function showFormColaboracion(Request $request){
 
       $idTarea = $request->input('tareaID');
       $usuario_califica = \Auth::user()->id;
       $calificada = true;
 
-
-      $entrega = Entrega::where('Entrega.id_usuario', '!=', $usuario_califica)
-                     ->inRandomOrder()->first();
+      $cantidadEntregas  = Entrega::where('Entrega.id_usuario', '!=', $usuario_califica)
+                        ->where('Entrega.id_tarea', '=', $idTarea)
+                        ->inRandomOrder()->count();
 
       
-      if($entrega){
+     //va a buscar una entrega hasta que no hayan mas o hasta que no encuentre
+     // una colaboracion realizada a esa entrega anteriormente
+
+    if($cantidadEntregas > 0){
+      do{
+        $cantidadEntregas -= 1;
+        $entrega = $this->buscarEntrega($usuario_califica, $idTarea);
+
+        $colaboracion = Colaboracion::where('Colaboracion.id_usuario_califica', '=', $usuario_califica)->where('Colaboracion.id_entrega', '=', $entrega->id_entrega)->first();
+     
+      }while($colaboracion || $cantidadEntregas == 0);
+
+      if($colaboracion == null){
+        //no encontre ninguna, se procede a evaluar esta entrega
+        $urlTarea = $entrega->url;
+        $formulario = Formulario::where('Formulario.id_tarea', '=', $idTarea)->first();
+
+        return view('Recursos.calificar')->with('tareaD',$urlTarea)
+                                         ->with('estudiante', $entrega->id_usuario)
+                                         ->with('tipoColaboracion', 2)
+                                         ->with('entregaID', $entrega->id_entrega)
+                                         ->with('formulario', $formulario);
+
+
+      }
+                                         
+    }
+    alert()->error("Nadie mas ha realizado la entraga de esta tarea", "Espera para poder realizar una calificacion");
+    return back();
+
+
+
+
+
+
+
         
 
-      }else{
+
+
+
         //Si no encuentra entregas hace autoevaluacion
-      }
 
-      dd($entrega->id_entrega);
-
-
-
-      return view('Recursos.calificar')->with('tarea',0);
     }
+
+
 
     public function uploadTask(Request $request){
 
@@ -363,9 +402,9 @@ class TareaController extends Controller
                              ->where('Matricula.curso', '=', $id_curso)
                              ->where('Matricula.usuario', '=', $usuario)->first();
 
-      if($Matricula){
+        if($Matricula){
 
-      $id_matricula = $Matricula->id_matricula;
+       $id_matricula = $Matricula->id_matricula;
 
        $extension = $file->getClientOriginalExtension();
 
@@ -413,12 +452,27 @@ class TareaController extends Controller
             Alert::error("NO puedes subir exe >:/", "Intente con otro tipo de archivo")->persistent('Close');
             return redirect()->back();
         }
-       
-      }else{
+        }else{
          Alert::error("Matriculese como estudiante", "Aunque sea Admin NO puede subir tareas sin estar Matriculado")->persistent('Close');
               return redirect()->back();
-      }
+        }
     }
+
+
+    public function crearColaboracion(Request $request){
+
+       $tipoColaboracion = $request->input('tipoColaboracion');
+       $entrega_id = $request->input('entregaID');
+       $id_form = $request->input('id_form');
+       
+       //$tarea = $request->input('id_tarea');
+       $usuario= \Auth::user()->id;
+
+       dd($entrega_id);
+
+
+    }
+
 
 
 

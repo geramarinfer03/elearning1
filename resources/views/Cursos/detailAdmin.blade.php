@@ -5,7 +5,7 @@
 
 
 <!-- Main content -->
-<section class="content">
+<section class="content" id="detalleCursos">
 
     <div class="row">
     @include('modal_usuario')
