@@ -3,7 +3,7 @@
 namespace elearning1;
 
 use Illuminate\Database\Eloquent\Model;
-
+use elearning1\Tarea;
 class Recurso extends Model
 {
     protected $fillable = [
@@ -73,6 +73,21 @@ class Recurso extends Model
         }
         return false;
 
+    }
+
+    public function tarea(){
+
+        return $this->hasOne(Tarea::class, 'id_recurso');
+
+    }
+
+
+    public function nombre(){
+        if($this->url != null){
+        $urlFull = explode("/", $this->url); 
+
+        return array_pop($urlFull); 
+        }
     }
 
     /*public function tipo_recurso(){
