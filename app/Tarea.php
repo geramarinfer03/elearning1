@@ -61,7 +61,7 @@ class Tarea extends Model
 
     }
 
-    public function limiteCurso(){
+    public function limiteTarea(){
 
       $datetime1 = date_create($this->fech_limit_entrega);
       $date1 = new DateTime("now");
