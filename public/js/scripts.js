@@ -734,6 +734,8 @@ function cargarNuevosValoresColaboracion(){
         }
          
     });
+
+     $(".inputPuntos").attr('required', 'required');
     
 
 

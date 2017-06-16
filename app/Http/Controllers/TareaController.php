@@ -335,6 +335,8 @@ class TareaController extends Controller
     public function showFormColaboracion(Request $request){
 
       $idTarea = $request->input('tareaID');
+      $tipoColaboracion = $request->input('tipoCola');
+
       $usuario_califica = \Auth::user()->id;
       $calificada = true;
 
@@ -346,6 +348,8 @@ class TareaController extends Controller
      //va a buscar una entrega hasta que no hayan mas o hasta que no encuentre
      // una colaboracion realizada a esa entrega anteriormente
 
+    if($tipoColaboracion != 1){
+
     if($cantidadEntregas > 0){
       do{
 
@@ -353,8 +357,6 @@ class TareaController extends Controller
         $entrega = $this->buscarEntrega($usuario_califica, $idTarea);
 
         $colaboracion = Colaboracion::where('Colaboracion.id_usuario_califica', '=', $usuario_califica)->where('Colaboracion.id_entrega', '=', $entrega->id_entrega)->first();
-
-        var_dump($cantidadEntregas);
      
       }while($colaboracion != null && $cantidadEntregas != 0);
 
@@ -363,10 +365,17 @@ class TareaController extends Controller
         $urlTarea = $entrega->url;
         $formulario = Formulario::where('Formulario.id_tarea', '=', $idTarea)->first();
 
+
+
+        list($url, $exten) = explode(".", $urlTarea); 
+  
+    
+
         return view('Recursos.calificar')->with('tareaD',$urlTarea)
                                          ->with('estudiante', $entrega->id_usuario)
-                                         ->with('tipoColaboracion', 2)
+                                         ->with('tipoColaboracion', $tipoColaboracion)
                                          ->with('entregaID', $entrega->id_entrega)
+                                         ->with('extension', $exten)
                                          ->with('formulario', $formulario);
 
 
@@ -377,7 +386,21 @@ class TareaController extends Controller
     return back();
 
 
+  }else{
 
+        $entrega = Entrega::where('Entrega.id_usuario', '=', $usuario_califica)
+                        ->where('Entrega.id_tarea', '=', $idTarea)->first();
+
+        $formulario = Formulario::where('Formulario.id_tarea', '=', $idTarea)->first();
+
+        return view('Recursos.calificar')->with('tareaD',null)
+                                         ->with('estudiante', $usuario_califica)
+                                         ->with('tipoColaboracion', $tipoColaboracion)
+                                         ->with('entregaID', $entrega->id_entrega)
+                                         ->with('extension', null)
+                                         ->with('formulario', $formulario);
+
+  }
 
 
 
@@ -491,6 +514,7 @@ class TareaController extends Controller
        }
 
        $nota= ( $totalPuntos / $totalPuntosForm ) * 100;
+
 
         $result = Colaboracion::create([
           'id_usuario_califica'=>$usuario,

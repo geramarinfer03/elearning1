@@ -158,18 +158,42 @@
 
                          <div class="row" style="margin-top: 5%;">
 
+        
+
+                         @if(  (\Auth::user()->cantidadEntregas($recurso->tarea->id_tarea) < 5 && $recurso->tarea->faltaunDia() <= 1 && \Auth::user()->realizoEntrega($recurso->tarea->id_tarea)) || (\Auth::user()->realizoEntrega($recurso->tarea->id_tarea) > 4 &&  \Auth::user()->colaboracionesHechas($recurso->tarea->id_tarea) > 4) )
+                            <div class="col-md-3">
+                            <form action="/tareas.calificarShow" method="POST" id="btnFormCalificaShow">
+                            <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>"> 
+                            <input type="hidden" name="tareaID" value="{{$recurso->tarea->id_tarea}}"> 
+                             <input type="hidden" name="tipoCola" value="1"> 
+                             <button type="submit" class="btn btn-info btn-lg"><i class="fa fa-check"></i>  Autoevaluación</button>
+                            </form>
+                            </div>
+
+
+                         @endif
+
+                         
+
+
+
                         @if(\Auth::user()->realizoEntrega($recurso->tarea->id_tarea))
                             <!-- Calificar o Colaboracion -->
                             <div class="col-md-3">
                             <form action="/tareas.calificarShow" method="POST" id="btnFormCalificaShow">
                             <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>"> 
                             <input type="hidden" name="tareaID" value="{{$recurso->tarea->id_tarea}}"> 
+                            <input type="hidden" name="tipoCola" value="2">
                              <button type="submit" class="btn btn-info btn-lg"><i class="fa fa-check"></i>  Evaluar   Tarea</button>
                             </form>
                             </div>
                             <div class="col-md-6">
                                 <label style="font-size: 18px;">Su calificacion: </label>
                                 <label style="font-size: 18px;">{{$recurso->tarea->tareaEntregaUser()}}</label>
+                            </div>
+                             <div class="col-md-3">
+                                <label style="font-size: 18px;">Calificado a : </label>
+                                <label style="font-size: 18px;">{{\Auth::user()->colaboracionesHechas($recurso->tarea->id_tarea)}}</label>
                             </div>
                            
                         @else

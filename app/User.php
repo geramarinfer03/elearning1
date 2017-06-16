@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use elearning1\Rol;
 use elearning1\Entrega;
+use elearning1\Colaboracion;
 
 class User extends Authenticatable
 {
@@ -49,5 +50,17 @@ class User extends Authenticatable
         $entrega = Entrega::where('Entrega.id_tarea', '=', $id_tarea)
                           ->where('Entrega.id_usuario', '=', $this->id)->count();
         return $entrega;
+    }
+
+    public function cantidadEntregas($id_tarea){
+        return Entrega::where('Entrega.id_tarea', '=', $id_tarea)->count();
+    }
+
+    public function colaboracionesHechas($id_tarea){
+
+        $entrega = Entrega::where('Entrega.id_tarea', '=', $id_tarea)->first()->id_entrega;
+
+
+        return Colaboracion::distinct()->select('Colaboracion.id_colaboracion')->join('Entrega', 'Entrega.id_entrega', 'Colaboracion.id_entrega')->join('Tarea', 'Tarea.id_tarea', 'Entrega.id_tarea')->where('Colaboracion.id_usuario_califica', '=', $this->id)->count();
     }
 }

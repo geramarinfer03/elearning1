@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use elearning1\Formulario;
 use elearning1\Entrega;
+use Carbon;
 
 class Tarea extends Model
 {
@@ -47,6 +48,18 @@ class Tarea extends Model
       }
       return -1;
     }
+
+
+    public function faltaunDia(){
+
+      $datetime1 = date_create($this->fech_limit_evaluacion);
+      $date1 = new DateTime("now");
+      $interval = date_diff($date1, $datetime1);
+
+      return $interval->format('%R%a') + 1;
+
+
+          }
 
 
 
