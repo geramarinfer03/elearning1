@@ -315,3 +315,46 @@ class TareaController extends Controller
 }
 
 
+//Falta metodo que retorne la vista del blade SubirEntrega.blade.php
+//falta crear ese blade, ese blade se inyecta en la modal desde el script subirTarea()
+//revisar metodo crearRecursoSemana en RecursoController a manera de ejemplo
+
+//Este metodo se llama en el summit del form SubirEntrega
+public function uploadTask($id_tarea,$id_curso){
+        /* Metodo de carga de archivo*/
+
+dd("!Tarea");
+
+
+        ini_set('memory_limit', '-1');
+  // obteniendo la informacion del archivo
+        $ext = Input::file('file')->getClientOriginalExtension(); // obtiene la extension del archivo
+        $originalName = Input::file('file')->getClientOriginalName(); //obtiene el nombre original del archivo
+        $file = Input::file('file');
+
+
+        //NO hace falta almacenarlo en stora solo en el localRepository (Gera)
+         /*Storage::put($file->getClientOriginalName(), $file);
+         $filename = $file->store('recursos');
+*/
+
+
+/*
+         $destinationPath = '/Applications/XAMPP/xamppfiles/htdocs/eLearning1/public/docs\\'; // upload path
+
+                 if ($request->file('file')->isValid()) {
+                     $pdf_name   = date('YmdHis'). ".$ext";
+                     $upload_path = 'docs/';
+                     $request->file('file')->move($upload_path, $pdf_name);
+                     return view('Recursos.subirTarea')->with('id_tarea',$id_tarea)
+                                            ->with('id_curso',$id_curso);
+                                            
+                 }
+                 return false;*/
+
+          //Se puede subir cualquier tipo de archivo... como en Recursos,
+                 //Revisar metodo upload del controlador UploadController.
+
+
+
+    }
