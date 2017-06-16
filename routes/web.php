@@ -137,3 +137,5 @@ Route::get('/generateReport', 'CertificateReporter@generate');
 Route::get('/createReport', 'CertificateReporter@index');
 
 Route::post('/generateReport', 'CertificateReporter@generatePost');
+
+Route::post('/executeSP', 'CertificateReporter@executeStoreProcedure');

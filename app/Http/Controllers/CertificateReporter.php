@@ -3,6 +3,7 @@
 namespace elearning1\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class CertificateReporter extends Controller
 {
@@ -39,6 +40,18 @@ class CertificateReporter extends Controller
         ];
         $pdf = \PDF::loadView('reporter.certificate',$data);
         return $pdf->download('Diploma.pdf');
+    }
+
+
+    public function executeStoreProcedure (){
+
+        $result = DB::select("CALL pr_update_generate_certificate()");
+
+        alert()->success("Ejecutado correctamente"); 
+
+
+         
+         return back();
     }
 
 }

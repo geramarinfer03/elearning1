@@ -15,7 +15,9 @@
             {!! Form::submit('Editar',  ['class'=>'btn btn-primary btn-block btn-flat']) !!}
         </div>
         <div class="col-xs-7">
-            {!! Form::submit('Ejecutar ahora',  ['class'=>'btn btn-primary btn-block btn-flat']) !!}
+            {!! Form::open(['url'=>'executeSP','method' => 'post','class'=>'form-horizontal']) !!}
+                {!! Form::submit('Ejecutar ahora',  ['class'=>'btn btn-primary btn-block btn-flat']) !!}
+            {!! Form::close() !!}
         </div>
     </div>
 
