@@ -130,4 +130,8 @@ Route::get('showCrearForm/{curso}/{tarea}', 'TareaController@showCrearForm');
 
 Route::get('api/v1/notas/{id?}', 'NotaController@getNota');
 
-Route::post('subirTarea/{id_tarea}/{id_curso}','TareaController@uploadTask');
+Route::get('subirTareaShow/{id_tarea}/{id_curso}','TareaController@showEntrega');
+
+Route::get('tareas.calicarShow', 'TareaController@showFormColaboracion');
+	
+Route::post('entrega.tarea', 'TareaController@uploadTask');

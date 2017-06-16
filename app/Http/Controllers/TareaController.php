@@ -13,6 +13,7 @@ use Input;
 use Alert;
 use elearning1\Matricula;
 use elearning1\Rol;
+use elearning1\Entrega;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Auth\Guard;
@@ -311,50 +312,117 @@ class TareaController extends Controller
 
     }
 
+    public function showEntrega($id_tarea, $id_curso){
+
+ 
+      $id_recurso = Tarea::find($id_tarea)->id_recurso;
+
+      $recurso = Recurso::find($id_recurso);
+
+
+      return view('Recursos.entrega')->with('curso',$id_curso)
+                                     ->with('tarea_id', $id_tarea)
+                                     ->with('tarea', $recurso);
+     
+
+    }
+
+    public function showFormColaboracion(Request $request){
+
+      $idTarea = $request->input('tareaID');
+      $usuario_califica = \Auth::user()->id;
+      $calificada = true;
+
+
+      $entrega = Entrega::where('Entrega.id_usuario', '!=', $usuario_califica)
+                     ->inRandomOrder()->first();
+
+      
+      if($entrega){
+        
+
+      }else{
+        //Si no encuentra entregas hace autoevaluacion
+      }
+
+      dd($entrega->id_entrega);
+
+
+
+      return view('Recursos.calificar')->with('tarea',0);
+    }
+
+    public function uploadTask(Request $request){
+
+       $file = Input::file('file');
+       $id_curso = $request->input('curso');
+       $tarea = $request->input('id_tarea');
+       $usuario= \Auth::user()->id;
+
+       $Matricula = Matricula::select('Matricula.id_matricula')
+                             ->where('Matricula.curso', '=', $id_curso)
+                             ->where('Matricula.usuario', '=', $usuario)->first();
+
+      if($Matricula){
+
+      $id_matricula = $Matricula->id_matricula;
+
+       $extension = $file->getClientOriginalExtension();
+
+       $nombreEntrega = date('YmdHis') . "." . $extension;
+
+      
+      
+        if ($extension != "exe") {
+                
+          $destinationPath = $localRepo = realpath('../../../') . "/localRepository";
+
+          $pathRecurso = $destinationPath . "/". $id_curso ."/Entregas/". $usuario . "/";
+          $this->crearRuta($pathRecurso);
+
+
+          $url =  $pathRecurso . $nombreEntrega;
+
+
+
+          Input::file('file')->move($pathRecurso, $nombreEntrega);
+
+
+           $result = Entrega::create([
+              'id_tarea'=>$tarea,
+              'id_usuario'=> $usuario,
+              'id_matricula' => $id_matricula,
+              'url' => $url,
+              'nota' => 70
+            ]);
+
+           if($result){
+              alert()->success("Tarea Entregada", "Ahora podrás evaluar otras tareas");
+              return back();
+
+           }else{
+              alert()->error(":c", "¡Ups! NO se subio su tarea");
+              return back();
+
+           }
+
+
+
+          }else{
+
+            Alert::error("NO puedes subir exe >:/", "Intente con otro tipo de archivo")->persistent('Close');
+            return redirect()->back();
+        }
+       
+      }else{
+         Alert::error("Matriculese como estudiante", "Aunque sea Admin NO puede subir tareas sin estar Matriculado")->persistent('Close');
+              return redirect()->back();
+      }
+    }
+
+
 
 }
 
 
-//Falta metodo que retorne la vista del blade SubirEntrega.blade.php
-//falta crear ese blade, ese blade se inyecta en la modal desde el script subirTarea()
-//revisar metodo crearRecursoSemana en RecursoController a manera de ejemplo
 
-//Este metodo se llama en el summit del form SubirEntrega
-public function uploadTask($id_tarea,$id_curso){
-        /* Metodo de carga de archivo*/
-
-dd("!Tarea");
-
-
-        ini_set('memory_limit', '-1');
-  // obteniendo la informacion del archivo
-        $ext = Input::file('file')->getClientOriginalExtension(); // obtiene la extension del archivo
-        $originalName = Input::file('file')->getClientOriginalName(); //obtiene el nombre original del archivo
-        $file = Input::file('file');
-
-
-        //NO hace falta almacenarlo en stora solo en el localRepository (Gera)
-         /*Storage::put($file->getClientOriginalName(), $file);
-         $filename = $file->store('recursos');
-*/
-
-
-/*
-         $destinationPath = '/Applications/XAMPP/xamppfiles/htdocs/eLearning1/public/docs\\'; // upload path
-
-                 if ($request->file('file')->isValid()) {
-                     $pdf_name   = date('YmdHis'). ".$ext";
-                     $upload_path = 'docs/';
-                     $request->file('file')->move($upload_path, $pdf_name);
-                     return view('Recursos.subirTarea')->with('id_tarea',$id_tarea)
-                                            ->with('id_curso',$id_curso);
-                                            
-                 }
-                 return false;*/
-
-          //Se puede subir cualquier tipo de archivo... como en Recursos,
-                 //Revisar metodo upload del controlador UploadController.
-
-
-
-    }

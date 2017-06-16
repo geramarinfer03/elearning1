@@ -146,7 +146,7 @@
                             <input type="hidden" name="extRec" value="{{$recurso->extencion()}}">      
                             <div class="row">
                             <div class="col-md-1">
-                            <button  style="margin: 10px; margin-left: 18px;" type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-download"></i></button>
+                            <button  style="margin: 10px; margin-left: 18px;" type="submit" class="btn btn-primary btn"><i class="fa fa-download"></i></button>
                             </div>
 
                              </div>
@@ -154,15 +154,34 @@
                         </div>
                         @endif
 
+
+
                          <div class="row" style="margin-top: 5%;">
-                         <div class="col-md-12">
+
+                        @if(\Auth::user()->realizoEntrega($recurso->tarea->id_tarea))
+                            <!-- Calificar o Colaboracion -->
+                            <div class="col-md-3">
+                            <form action="/tareas.calicarShow" method="GET" id="btnFormCalificaShow">
+                            <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>"> 
+                            <input type="hidden" name="tareaID" value="{{$recurso->tarea->id_tarea}}"> 
+                             <button type="submit" class="btn btn-info btn-lg"><i class="fa fa-check"></i>  Evaluar   Tarea</button>
+                            </form>
+                            </div>
+                            <div class="col-md-6">
+                                <label style="font-size: 18px;">Su calificacion: </label>
+                                <label style="font-size: 18px;">{{$recurso->tarea->tareaEntregaUser()}}</label>
+                            </div>
+                           
+                        @else
+                            <div class="col-md-12">
                              <button type="button" class="btn btn-success btn-lg" onclick="subirTarea({{$recurso->tarea->id_tarea}},{{$recurso->tarea->id_curso}})"><i class="fa fa-file"></i>  Realizar Entrega</button>
+                             
+                             </div>
                             
-                         </div>
-                         <div class="col-md-12">
-                             <button type="button" class="btn btn-info btn-lg noMostar"><i class="fa fa-check"></i>  Evaluar   Tarea</button>
-                            
-                         </div>
+                        @endif
+                         
+
+                      
                             
                          </div>
               

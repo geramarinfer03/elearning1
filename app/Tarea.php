@@ -5,6 +5,7 @@ use DateTime;
 
 use Illuminate\Database\Eloquent\Model;
 use elearning1\Formulario;
+use elearning1\Entrega;
 
 class Tarea extends Model
 {
@@ -35,6 +36,16 @@ class Tarea extends Model
      public function fech_limit_evaluacion(){
       $fecha=date("d- M -Y",strtotime($this->fech_limit_evaluacion)); 
         return $fecha;
+    }
+
+    public function tareaEntregaUser(){
+      $usuario = \Auth::user()->id;
+      $nota = Entrega::where('Entrega.id_tarea', '=', $this->id_tarea)
+                     ->where('Entrega.id_usuario', '=', $usuario)->first();
+      if($nota){
+        return $nota->nota;
+      }
+      return -1;
     }
 
 
