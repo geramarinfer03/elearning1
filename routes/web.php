@@ -129,3 +129,5 @@ Route::post('tareas.buscarTarea', 'TareaController@formularioAsignado');
 Route::get('showCrearForm/{curso}/{tarea}', 'TareaController@showCrearForm');
 
 Route::get('api/v1/notas/{id?}', 'NotaController@getNota');
+
+Route::post('subirTarea/{id_tarea}/{id_curso}','TareaController@uploadTask');
