@@ -109,7 +109,24 @@ function edicion(id_recurso) {
     $("#capa_para_edicion").show();
 
     var url = "/editarRecurso/" + id_recurso + "";
+    
+    irarriba();
+    $.get(url, function (resul) {
+        $("#contenido_capa_edicion").html(resul);
+    })
 
+}
+
+function edicionTarea(id_recurso) {
+    //funcion para mostrar y etditar la informacion del usuario
+
+    // $("#usuario_seleccionado").val(id_usuario);
+
+    $("#capa_modal").show();
+    $("#capa_para_edicion").show();
+
+    var url = "/editarTarea/" + id_recurso + "";
+    
     irarriba();
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul);
