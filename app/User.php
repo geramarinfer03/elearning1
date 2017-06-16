@@ -5,6 +5,7 @@ namespace elearning1;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use elearning1\Rol;
+use elearning1\Entrega;
 
 class User extends Authenticatable
 {
@@ -42,5 +43,11 @@ class User extends Authenticatable
 
         return $this->hasMany(Matricula::class, 'usuario');
         //$this->belongsTo(Matricula::class, 'usuario');
+    }
+
+    public function realizoEntrega($id_tarea){
+        $entrega = Entrega::where('Entrega.id_tarea', '=', $id_tarea)
+                          ->where('Entrega.id_usuario', '=', $this->id)->count();
+        return $entrega;
     }
 }

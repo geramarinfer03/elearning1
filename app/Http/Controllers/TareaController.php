@@ -8,11 +8,13 @@ use elearning1\Semana;
 use elearning1\Tarea;
 use elearning1\Formulario;
 use elearning1\Recurso;
+use elearning1\Colaboracion;
 use DB;
 use Input;
 use Alert;
 use elearning1\Matricula;
 use elearning1\Rol;
+use elearning1\Entrega;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Auth\Guard;
@@ -85,12 +87,6 @@ class TareaController extends Controller
             return redirect()->back();
 
          }
-
-
-
-
-
-	  
 
     }
 
@@ -209,7 +205,10 @@ class TareaController extends Controller
          return view('Recursos.crearFormulario')
                                                 ->with('curso', $id_curso)
                                                 ->with('tareaId', $tareaId)
-                                                ->with('nombreTarea', $tarea);
+                                                ->with('nombreTarea', $tarea)
+                                                ->with('tipoColaboracion', 0)
+                                                ->with('entregaID', 0)
+                                                ->with('id_form', 0);
 
     }
 
@@ -311,7 +310,173 @@ class TareaController extends Controller
 
     }
 
+    public function showEntrega($id_tarea, $id_curso){
+
+ 
+      $id_recurso = Tarea::find($id_tarea)->id_recurso;
+
+      $recurso = Recurso::find($id_recurso);
+
+
+      return view('Recursos.entrega')->with('curso',$id_curso)
+                                     ->with('tarea_id', $id_tarea)
+                                     ->with('tarea', $recurso);
+     
+
+    }
+
+    protected function buscarEntrega($usuario, $tarea){
+      $entrega = Entrega::where('Entrega.id_usuario', '!=', $usuario)
+                        ->where('Entrega.id_tarea', '=', $tarea)
+                        ->inRandomOrder()->first();
+      return $entrega;
+
+    }
+
+    public function showFormColaboracion(Request $request){
+
+      $idTarea = $request->input('tareaID');
+      $usuario_califica = \Auth::user()->id;
+      $calificada = true;
+
+      $cantidadEntregas  = Entrega::where('Entrega.id_usuario', '!=', $usuario_califica)
+                        ->where('Entrega.id_tarea', '=', $idTarea)
+                        ->inRandomOrder()->count();
+
+      
+     //va a buscar una entrega hasta que no hayan mas o hasta que no encuentre
+     // una colaboracion realizada a esa entrega anteriormente
+
+    if($cantidadEntregas > 0){
+      do{
+        $cantidadEntregas -= 1;
+        $entrega = $this->buscarEntrega($usuario_califica, $idTarea);
+
+        $colaboracion = Colaboracion::where('Colaboracion.id_usuario_califica', '=', $usuario_califica)->where('Colaboracion.id_entrega', '=', $entrega->id_entrega)->first();
+     
+      }while($colaboracion || $cantidadEntregas == 0);
+
+      if($colaboracion == null){
+        //no encontre ninguna, se procede a evaluar esta entrega
+        $urlTarea = $entrega->url;
+        $formulario = Formulario::where('Formulario.id_tarea', '=', $idTarea)->first();
+
+        return view('Recursos.calificar')->with('tareaD',$urlTarea)
+                                         ->with('estudiante', $entrega->id_usuario)
+                                         ->with('tipoColaboracion', 2)
+                                         ->with('entregaID', $entrega->id_entrega)
+                                         ->with('formulario', $formulario);
+
+
+      }
+                                         
+    }
+    alert()->error("Nadie mas ha realizado la entraga de esta tarea", "Espera para poder realizar una calificacion");
+    return back();
+
+
+
+
+
+
+
+        
+
+
+
+
+        //Si no encuentra entregas hace autoevaluacion
+
+    }
+
+
+
+    public function uploadTask(Request $request){
+
+       $file = Input::file('file');
+       $id_curso = $request->input('curso');
+       $tarea = $request->input('id_tarea');
+       $usuario= \Auth::user()->id;
+
+       $Matricula = Matricula::select('Matricula.id_matricula')
+                             ->where('Matricula.curso', '=', $id_curso)
+                             ->where('Matricula.usuario', '=', $usuario)->first();
+
+        if($Matricula){
+
+       $id_matricula = $Matricula->id_matricula;
+
+       $extension = $file->getClientOriginalExtension();
+
+       $nombreEntrega = date('YmdHis') . "." . $extension;
+
+      
+      
+        if ($extension != "exe") {
+                
+          $destinationPath = $localRepo = realpath('../../../') . "/localRepository";
+
+          $pathRecurso = $destinationPath . "/". $id_curso ."/Entregas/". $usuario . "/";
+          $this->crearRuta($pathRecurso);
+
+
+          $url =  $pathRecurso . $nombreEntrega;
+
+
+
+          Input::file('file')->move($pathRecurso, $nombreEntrega);
+
+
+           $result = Entrega::create([
+              'id_tarea'=>$tarea,
+              'id_usuario'=> $usuario,
+              'id_matricula' => $id_matricula,
+              'url' => $url,
+              'nota' => 70
+            ]);
+
+           if($result){
+              alert()->success("Tarea Entregada", "Ahora podrás evaluar otras tareas");
+              return back();
+
+           }else{
+              alert()->error(":c", "¡Ups! NO se subio su tarea");
+              return back();
+
+           }
+
+
+
+          }else{
+
+            Alert::error("NO puedes subir exe >:/", "Intente con otro tipo de archivo")->persistent('Close');
+            return redirect()->back();
+        }
+        }else{
+         Alert::error("Matriculese como estudiante", "Aunque sea Admin NO puede subir tareas sin estar Matriculado")->persistent('Close');
+              return redirect()->back();
+        }
+    }
+
+
+    public function crearColaboracion(Request $request){
+
+       $tipoColaboracion = $request->input('tipoColaboracion');
+       $entrega_id = $request->input('entregaID');
+       $id_form = $request->input('id_form');
+       
+       //$tarea = $request->input('id_tarea');
+       $usuario= \Auth::user()->id;
+
+       dd($request);
+
+
+    }
+
+
+
 
 }
+
 
 

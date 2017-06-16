@@ -42,7 +42,8 @@ duracion INT(10) NOT NULL,
 fecha_inicio DATETIME NOT NULL,
 fecha_final DATETIME NOT NULL,
 estado INT (1) NOT NULL,
-evaluado FLOAT(4,2) UNSIGNED NOT NULL
+evaluado FLOAT(5,2) UNSIGNED NOT NULL,
+creadoPDF INT (1) UNSIGNED DEFAULT 0
 );
 
 /*UN curso tiene varias semanas -- agregue secuencia*/
@@ -84,8 +85,10 @@ curso INT(10) UNSIGNED NOT NULL,
 usuario INT(10) UNSIGNED NOT NULL,
 rol INT(10) UNSIGNED NOT NULL,
 fecha_matricula DATETIME NOT NULL,
-promedio_final FLOAT(4,2) UNSIGNED NOT NULL,
+promedio_final FLOAT(5,2) UNSIGNED DEFAULT 0,
 url VARCHAR(255),
+generarPDF INT (1) UNSIGNED DEFAULT 0,
+fecha_creado DATETIME,
 FOREIGN KEY (curso) REFERENCES Curso(id_curso),
 FOREIGN KEY (usuario) REFERENCES Usuario(id),
 FOREIGN KEY (rol) REFERENCES Rol(id_rol)
@@ -216,8 +219,8 @@ values
 ('Estudiante Seis', 'estudiante6@example.com', '$2y$10$qP5VcIVXeeg9ppIbvBuWveMaLa52iocF2Jc3Mhll8d6XwUNuDO9Fu', 5, 'masculino', 'Costa Rica', now(), '192.168.1.1', 'Linux', 'Chrome', 'es');
 
 /* Insert tipo de colaboracion (1 colaboracion externa, 2 Autoevaluacion */
-INSERT INTO tipo_colaboracion (id_tipo_colaboracion, descripcion) VALUES (1, 'Autoevaluacion');
-INSERT INTO tipo_colaboracion (id_tipo_colaboracion, descripcion) VALUES (2, 'Colaboracion Externa');
+INSERT INTO Tipo_Colaboracion (id_tipo_colaboracion, descripcion) VALUES (1, 'Autoevaluacion');
+INSERT INTO Tipo_Colaboracion (id_tipo_colaboracion, descripcion) VALUES (2, 'Colaboracion Externa');
 
 
 

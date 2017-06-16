@@ -127,3 +127,13 @@ Route::post('tareas.formulario','TareaController@crearFormulario');
 Route::post('tareas.crearTarea','TareaController@crearTarea');
 Route::post('tareas.buscarTarea', 'TareaController@formularioAsignado');
 Route::get('showCrearForm/{curso}/{tarea}', 'TareaController@showCrearForm');
+
+Route::get('api/v1/notas/{id?}', 'NotaController@getNota');
+
+Route::get('subirTareaShow/{id_tarea}/{id_curso}','TareaController@showEntrega');
+
+Route::post('tareas.calicarShow', 'TareaController@showFormColaboracion');
+	
+Route::post('entrega.tarea', 'TareaController@uploadTask');
+
+Route::post('colaboracion.calificar', 'TareaController@crearColaboracion');

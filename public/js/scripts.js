@@ -386,6 +386,16 @@ function borrarUltimaFila(){
 
 }
 
+function borrarUltimaFilaActividad(){
+   var nFilas = $("#tabla_actividades tr").length;
+   var actual = nFilas -1;
+   if(actual > 0){
+    $("#actividad"+actual).remove();
+    }
+
+
+}
+
 function filaCriterio(){
    // var nextRow = fila + 1;
     
@@ -462,7 +472,7 @@ function filaActividad(){
 
       if(area !== ''){
          var newContent =  "<td class='criterioColumn'> "+
-                            "<p  id='actividadesDesc"+actual+"'>"+area+"</p>"+
+                            "<p class='actividadesDesc' id='actividadesDesc"+actual+"'>"+area+"</p>"+
                             "</td> "+
                              "<td  class='puntajeColumn' style='width: 10px;'>"+
                              "<input disabled='disabled' min='0' type='number' class='inputPuntos' name='puntos"+actual+"' id='puntos"+actual+"' />"+
@@ -492,11 +502,28 @@ function generarFormulario(){
     var cant_actividades = 0;
     var indicaciones = $("#indicacionesF").val();
 
+    var criFilas = $("#tabla_criterios tr .puntajeCriterio").length;
+    var actFilas = $("#tabla_actividades tr .actividadesDesc ").length;
+    //var actinp = $("#tabla_actividades tr .inputPuntos ").length;
+   
+
+    if(criFilas === 0 || actFilas === 0){
+
+        swal(
+          'Complete las tablas de criterios y actividades',
+          'luego podra continuar',
+          'error'
+        )
+    }else{
+
+
+
     $("#indicacionesF").remove();
 
     $("#indicacionesText").text(indicaciones);
 
-   // $("#tabla_criterios input, #tabla_criterios textarea").remove();
+
+
    $(".columinput").remove();
     $(".botonForm").remove();
 
@@ -508,6 +535,7 @@ function generarFormulario(){
     var tarea = $("#tareaAsig").val();
 
     var curso = $("#cursoIDForm").val();
+
 
 
 
@@ -527,6 +555,8 @@ function generarFormulario(){
          
     });
 
+    $(".inputPuntos").attr('max', mayor+"");
+
 
 
     var suma = mayor * cant_actividades;
@@ -539,43 +569,6 @@ function generarFormulario(){
 
     formulario = formulario.split("\n").join(""); 
 
-
-    //$( "#formCrearForm" ).submit();
-
-/*var element = document.getElementById('formularioEvaluacion');
-    var html = element.outerHTML;
-
-    var datos = html.split("\n").join(""); 
-    var data = { html: $.trim(datos) }; 
-
- 
-
-
-    var json = JSON.stringify(formulario);  
-
-
-
-*/
-
-    /*$( "#formCrearForm" ).submit(function( event ) {
-      alert( "Handler for .submit() called." );
-      event.preventDefault();
-    });
-      */
-  // $("#capa_modal").show();
-   // $("#capa_para_edicion").show();
-
-    //$("#contenido_capa_edicion").html(formulario);
-
-
-
- 
-    //irarriba();
-
-    /*$("#contenido_capa_edicion").html($("#cargador_empresa").html());  //leccion 10*/
-  //  $.get(url, function (resul) {
-   //     $("#contenido_capa_edicion").html(resul); //leccion 10
- //   })
 
    $.ajax({
             type: "POST",
@@ -595,13 +588,25 @@ function generarFormulario(){
                 //$('#contenido_capa_edicion').append('<p>Tu texto se ha guardado correctamente!</p><a href="data.txt" target="_blank">Ver</a>');
             }
         });
+    }
 
 }
 
+function iraForm(){
+    var tareas = $("#tareaAsig").val();
+    var curso = $("#cursoIDForm").val();
 
+    var url = "/showCrearForm/" + curso + "/" + tareas;
+
+   $(location).attr('href',url);
+
+
+
+}
 function buscarTareaForm(){
     var url = "/tareas.buscarTarea";
     var tareas = $("#tareaAsig").val();
+    var curso = $("#cursoIDForm").val();
     $.ajax({
         type: "POST",
         url: url,
@@ -614,10 +619,15 @@ function buscarTareaForm(){
           if(data === "0"){
 
            // alert("No tiene HAGO UNO");
-           $("#formularioEvaluacion").attr('class', "");
+
+
+           /*$("#formularioEvaluacion").attr('class', "");
            $("#formularioGenerar").attr('class', 'btn btn-success btn-lg');
 
-           $("#codigoVerificar").attr('hidden', 'hidden');
+           $("#codigoVerificar").attr('hidden', 'hidden');*/
+           $("#confirmarTarea").attr('class', 'btn btn-info btn-flat');
+
+
 
           }else{
             if(data === '1'){
@@ -698,9 +708,43 @@ function crearTarea(){
 function subirTarea(id_tarea, id_curso) {  
     $("#capa_modal").show();    
     $("#capa_para_edicion").show();
-    var url = "/subirTarea/" + id_tarea + "/" + id_curso;
+    
+    var url = "/subirTareaShow/" + id_tarea + "/" + id_curso;
+    
     $.get(url, function (resul) {
         $("#contenido_capa_edicion").html(resul);
     })  
 }
 
+function cargarNuevosValoresColaboracion(){
+    var tokenviejo = $("#_tokenF").val();
+
+    var tipoCola = $("#tipoColaboracion2").val();
+    var entregaID = $("#entregaID2").val();
+    var idForm = $("#id_form2").val();
+    var token = $("#_tokenF2").val();
+
+
+    var mayor = 0;
+     $("#tabla_criterios tr td .puntajeCriterio").each(function(){
+        maxPuntos = parseInt($(this).text()||0,10);
+        
+        if(maxPuntos > mayor){
+            mayor = maxPuntos;
+        }
+         
+    });
+    
+
+
+    $("#tipoColaboracion").val(tipoCola);
+    $("#entregaID").val(entregaID);
+    $("#id_form").val(idForm);
+    $("#_tokenF").val(token);
+    $("#maxAct").val(mayor);
+    
+
+
+   
+
+}
