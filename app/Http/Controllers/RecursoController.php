@@ -7,6 +7,7 @@ use elearning1\Semana;
 use elearning1\Rol;
 use elearning1\Recurso;
 use elearning1\Curso;
+use elearning1\Tarea;
 use elearning1\TipoRecurso;
 use Illuminate\Http\Request;
 use Illuminate\HttpResponse;
@@ -178,10 +179,33 @@ class RecursoController extends Controller
         $usuario = \Auth::user();
         $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->pluck('nombre','id_rol');
         $recurso = Recurso::find($id);
+        
         return view('Recursos.editarRecurso')->with('recurso',$recurso)
                                              ->with('roles',$rols_user);
     }
 
+
+    public function editTarea($id)
+    {
+        
+        $usuario = \Auth::user();
+        $tarea = Tarea::find($id);
+        //$rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->pluck('nombre','id_rol');
+        $rols_user = Rol::where('id_rol','>=',$usuario->rol->id_rol)->orderBy('id_rol', 'desc')->get()->pluck('nombre','id_rol');
+        $recurso = Recurso::find($tarea->id_recurso);
+        
+        $fecha_limit = date('Y-m-d', strtotime($tarea->fech_limit_entrega));
+        $fecha_limit_eval = date('Y-m-d', strtotime($tarea->fech_limit_evaluacion));
+
+        $url = explode("/",$recurso->url);
+
+        return view('Recursos.editarTarea')->with('recurso',$recurso)
+                                             ->with('tarea',$tarea)
+                                             ->with('roles',$rols_user)
+                                             ->with('fech_limit',$fecha_limit)
+                                             ->with('fech_limit_eval',$fecha_limit_eval)
+                                             ->with('url',array_pop($url));
+    }
 
     public function editArchivo($id)
     {
@@ -248,6 +272,93 @@ class RecursoController extends Controller
     }
 
 
+/**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateTarea(Request $request)
+    {
+    
+        $this->validate($request, [
+        'nombre'=>'Required',
+        'notas'=>'Required',
+        /*'url' => 'Required' */
+        'rol' => 'Required',
+        'porcentaje' => 'Required'
+        
+        ]);
+    
+
+
+        $nombre = $request->input('nombre');
+        $notas = $request->input('notas');
+        //$url = $request->input('url');
+        $vis = $request->input('visibl');
+        $estado = $request->input('estado');
+        $id = $request->input('id_recurso');
+        $id_tarea = $request->input('id_tarea');
+        $rol =  $request->input('rol');
+        $fecha_limit =  $request->input('fecha_limite');
+        $fecha_limit_eval =  $request->input('fecha_limite_eval');
+        $porcentaje = $request->input('porcentaje');
+    
+        $recurso = Recurso::find($id); 
+        $tarea = Tarea::find($id_tarea); 
+
+        ini_set('memory_limit', '-1');
+        // obteniendo la informacion del archivo
+         $file = Input::file('file');
+        //$file = $request->file('tareaupload');
+          $url = null;
+
+        if($file){
+            $url = Tarea::subirArchivosTarea($request);       
+        }
+
+
+        if($url){
+            $result = $recurso->update([
+             'nombre' => $nombre,
+             'notas'=>$notas,
+             'url' => $url,
+             'visibl' => $vis,
+             'estado' => $estado,
+             'rol' => $rol
+             
+            ]);
+        }
+        else{
+            $result = $recurso->update([
+             'nombre' => $nombre,
+             'notas'=>$notas,
+             'visibl' => $vis,
+             'estado' => $estado,
+             'rol' => $rol
+             
+            ]);
+        }
+    
+        
+        $result2 = $tarea->update([
+             'fecha_limit_entrega' => $fecha_limit,
+             'fecha_limit_evaluacion'=>$fecha_limit_eval,
+             'porcentaje' => $porcentaje
+             
+         ]); 
+
+         if($result && $result2){
+             alert()->success('Tarea modificada exitosamente');
+         }
+        else{
+            alert()->success('Error al modificar tarea');
+        }
+                
+         return back();
+       
+    }
 
     
 

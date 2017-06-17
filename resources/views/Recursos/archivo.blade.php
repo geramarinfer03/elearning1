@@ -98,7 +98,7 @@
                      <h5 class="box-title">{{$recurso->tarea->fech_limit_entrega()}}</h5>
                 </div>
                                 <div class="col-md-1">
-                 <button id='btn_activar_edicion_tarea' style='color:blue; margin:5px;' onclick='edicion(<?= $recurso->id_recurso; ?>)' class='btn btn-default hiddenclass'><i class='fa fa-edit'></i>
+                 <button id='btn_activar_edicion_tarea' style='color:blue; margin:5px;' onclick='edicionTarea(<?= $recurso->tarea->id_tarea; ?>)' class='btn btn-default hiddenclass'><i class='fa fa-edit'></i>
                  </button>
                 </div>
 
