@@ -29,7 +29,7 @@ class CertificateReporter extends Controller
 
     public function generatePost(Request $request){
          $data= [];
-         $dt = date('m-d-Y');
+         $dt = date('d-m-Y');
          $nota = $request->promedioFinal;
          $modalidad = ($nota<70)?"Aprovechamiento":"Participación";
          $data = [
@@ -103,6 +103,7 @@ class CertificateReporter extends Controller
         //$result = DB::statement($statement);
         DB::connection()->getPdo()->exec($statement);
          //DB::select("ALTER EVENT Actualizar_Estado_PDF ON SCHEDULE EVERY 1 DAY STARTS '2017-06-17 01:00:00'");
+        Alert::success("Ejecutado correctamente"); 
         return back();
     }
 }
