@@ -24,7 +24,7 @@ class CertificateReporter extends Controller
 
     public function index(){
         $schedule = date('H:i:s'); // Bring this from DB field where indicates the schedule to run the process ]
-        return view('reporter.createCertificates', ['horario'=>$schedule]);
+        return view('reporter.createCertificates');
    }
 
     public function generatePost(Request $request){

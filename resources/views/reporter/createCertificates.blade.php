@@ -6,10 +6,6 @@
         <a href="#"><b>Elearning - </b>Generación de Diplomas </a>
     </div>
     <div class="login-box-body">
-       <div class="form-group has-feedback">
-            <span style="font-size:25px"><i>El proceso automatizado se ejecuta a las: <b>{{$horario}}</b> </i></span>
-       </div>
-
     
 
      <div class="row">
