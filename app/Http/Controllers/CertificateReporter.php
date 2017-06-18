@@ -36,6 +36,7 @@ class CertificateReporter extends Controller
         'NOMBRE' => $request->nombre_usuario,
         'CURSO'   => $request->cursoNombre,
         'NOTA'=> $nota,
+        'DURACION'=>$request->duracion,
         'FECHA' => $dt,
         'MODALIDAD'=>$modalidad,
         ];

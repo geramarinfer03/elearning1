@@ -21,7 +21,9 @@
             <span style="font-size:30px"></span>{{$CURSO}} <br/><br/>
             <span style="font-size:20px">Con la nota de: <b>{{$NOTA}}%</b></span> <br/><br/><br/><br/>
             <span style="font-size:25px"><i>Fecha:</i></span><br/>
-            <span style="font-size:30px">{{$FECHA}}</span><br/><br/><br/><br/><br/><br/><br/><br/>
+            <span style="font-size:30px">{{$FECHA}}</span><br/><br/>
+            <span style="font-size:25px"><i>Duracion:</i></span><br/>
+            <span style="font-size:30px">{{$DURACION}} semanas</span><br/><br/><br/><br/><br/>
 
             <span style="font-size:30px">Firma: </span>
 

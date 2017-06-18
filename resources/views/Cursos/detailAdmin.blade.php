@@ -62,6 +62,8 @@
                                  @endunless
                                  <input type="hidden" name="curso_mat" value="{{$curso->id_curso}}">
                                  <input type="hidden" name="cursoNombre" value="{{$curso->nombre}}">
+                                 <input type="hidden" name="duracion" value="{{$curso->duracion}}">
+                                 
                                  <input type="hidden" name="promedioFinal" value="{{$matricula->promedio_final}}"> 
                                  <input type="hidden" name="roles" value="5"> 
                                 <button type="submit" class="btn btn-block btn-info btn-lg" style="width: 100%; font-weight: bold;">Generar Diploma</button>
